@@ -1,0 +1,5 @@
+.footer {
+    height: 10rem;
+    background-color: var(--color-primary);
+    color: #f3f3f3;
+}

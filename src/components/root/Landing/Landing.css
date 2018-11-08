@@ -1,0 +1,44 @@
+.landing {
+    padding: 15rem 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left {
+    flex: 0 0 45%;
+    display: flex;
+    justify-content: center;
+    background-color: #eee;
+}
+
+.right {
+    flex: 0 0 45%;
+    display: flex;
+    justify-content: center;
+    background-color: #eee;
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.text-input {
+    box-sizing: border-box;
+    border: none;
+    border: 2px solid var(--color-primary);
+    border-radius: 5px;
+    padding: 1.5rem 4rem;
+    width: 80%;
+    font-size: 2rem;
+}
