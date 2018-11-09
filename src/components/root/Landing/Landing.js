@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
 import './Landing.css';
 import logo from '../../../img/Logo-3.png';
+import FormText from '../../Forms/FormText/FormText';
 
 class Landing extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            username: "",
+            password1: "",
+            password2: ""
+        }
+    }
+
+    onChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
     render() {
         const count = 1;
         return (
@@ -60,7 +77,31 @@ class Landing extends Component {
 
                 {/* Right side - register */}
                 <div className="landing__register">
-                    Register
+                    <h1 className="landing__heading-1 landing__heading-1--reverse">
+                        Sign up for an account
+                    </h1>
+                    <div className="landing__form">
+                        <FormText type="email" name="email" placeholder="Email Address" onChange={this.onChange} value={this.state.email} errors={this.props.errors}  />
+                        <FormText type="text" name="username" placeholder="Username" onChange={this.onChange} value={this.state.username} errors={this.props.errors}  />
+                        <FormText type="password" name="password1" placeholder="Password" onChange={this.onChange} value={this.state.password1} errors={this.props.errors}  />
+                        <FormText type="password" name="password2" placeholder="Password" onChange={this.onChange} value={this.state.password2} errors={this.props.errors}  />
+                    </div>
+                    <h2 className="landing__heading-2">
+                        Or use one of our public accounts
+                    </h2>
+                    <div className="landing__public">
+                        <div className="landing__account">
+                            <img className="landing__account-img" src="https://robohash.org/harper/?200x200" />
+                        </div>
+
+                        <div className="landing__account">
+                            <img className="landing__account-img" src="https://robohash.org/harpette/?200x200" />
+                        </div>
+
+                        <div className="landing__account">
+                            <img className="landing__account-img" src="https://robohash.org/jason/?200x200" />
+                        </div>
+                    </div>
                 </div>
             </section>
         );

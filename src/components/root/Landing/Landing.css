@@ -8,14 +8,14 @@
 /* Left column */
 .landing__info {
     flex: 1;
-    padding: 5rem;
+    padding: 5rem 5rem 8rem 5rem;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-/* Left column headings */
+/* Headings */
 .landing__heading-1 {
     font-weight: 700;
     font-size: 4rem;
@@ -25,6 +25,10 @@
     color: transparent;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.landing__heading-1--reverse {
+    background-image: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-light));
 }
 
 .landing__heading-2 {
@@ -87,10 +91,42 @@
 /* Right column */
 .landing__register {
     flex: 1;
-    padding: 5rem;
+    padding: 5rem 5rem 8rem 5rem;
     background-color: var(--color-white-darker);
 
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.landing__form {
+    margin-bottom: 4rem;
+}
+
+.landing__form > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+
+
+.landing__public {
+    margin-top: 1rem;
+    width: 50rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.landing__account {
+    flex: 0 0 30%;
+    text-align: center;
+}
+
+.landing__account-img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-color: var(--color-white-darker);
+    border: 2px solid var(--color-text-dark);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+    cursor: pointer;
 }
