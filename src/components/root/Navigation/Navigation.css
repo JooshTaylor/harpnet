@@ -1,5 +1,70 @@
+/* Parent element */
 .nav {
-    height: 10rem;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.2);
+    padding: 3rem;
+    font-size: 1.4rem;
+    letter-spacing: .5px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+/* Entire list parent */
+.nav__list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+
+/* Individual list items */
+.nav__item {
+    margin-right: 1rem;
+    transition: all .2s;
+}
+
+.nav__item--home {
+    margin-right: auto;
+}
+
+.nav__item:hover {
+    transform: translateY(-3px);
+}
+
+.nav__item:active {
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 2rem rgba(0,0,0,0.1);
+}
+
+
+
+/* Links nested within list items */
+.nav__link {
+    border: 2px solid var(--color-text-light);
+    border-radius: 5px;
+    padding: 1rem 3rem;
+    color: var(--color-white);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav__link:hover {
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+}
+
+.nav__link--home {
+    border: 2px solid var(--color-primary);
     background-color: var(--color-primary);
-    color: #f3f3f3;
+}
+
+
+
+/* Logo */
+.nav__logo {
+    width: 7rem;
+    height: 5rem;
 }

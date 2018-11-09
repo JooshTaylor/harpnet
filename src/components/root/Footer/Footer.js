@@ -4,7 +4,9 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer className="footer">
-      Footer
+      <h3 className="copyright">
+        Copyright &copy; {new Date().getFullYear()} Harpnet
+      </h3>
     </footer>
   )
 }

@@ -1,44 +1,96 @@
+/* Parent element */
 .landing {
-    padding: 15rem 0;
+    display: flex;
+    background-color: var(--color-white);
 }
 
-.flex {
+
+/* Left column */
+.landing__info {
+    flex: 1;
+    padding: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Left column headings */
+.landing__heading-1 {
+    font-weight: 700;
+    font-size: 4rem;
+    align-self: center;
+    background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.landing__heading-2 {
+    font-weight: 700;
+    line-height: 1;
+    /* margin: 2rem 0 1rem; */
+    margin-top: 2rem;
+}
+
+
+/* Feature cards */
+.landing__features {
+    list-style: none;
+    align-self: center;
     display: flex;
     justify-content: space-between;
+    transform: translateX(-2rem);
 }
 
-.left {
-    flex: 0 0 45%;
-    display: flex;
-    justify-content: center;
-    background-color: #eee;
+.landing__feature {
+    padding: 2rem 1rem;
+    flex: 0 0 28%;
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+    border-radius: 3px;
+    text-align: center;
+    transition: all .2s;
+    opacity: 0.85;
 }
 
-.right {
-    flex: 0 0 45%;
-    display: flex;
-    justify-content: center;
-    background-color: #eee;
+.feature-icon {
+    font-size: 6rem;
+    color: var(--color-primary);
 }
 
-.login-box {
+.feature-heading {
+    font-weight: 700;
+    line-height: 1;
+    margin: 3rem 0 2rem;
+    padding: 0;
+}
+
+.feature-info {
+    color: var(--color-text-light);
+    margin: 0;
+    padding: 0;
+}
+
+.landing__feature:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1.5rem 4rem rgba(0,0,0,0.2);
+    opacity: 1;
+}
+
+
+
+
+
+
+
+/* Right column */
+.landing__register {
+    flex: 1;
+    padding: 5rem;
+    background-color: var(--color-white-darker);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.text-input {
-    box-sizing: border-box;
-    border: none;
-    border: 2px solid var(--color-primary);
-    border-radius: 5px;
-    padding: 1.5rem 4rem;
-    width: 80%;
-    font-size: 2rem;
 }

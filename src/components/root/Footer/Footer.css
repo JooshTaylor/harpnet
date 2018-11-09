@@ -1,5 +1,10 @@
 .footer {
-    height: 10rem;
-    background-color: var(--color-primary);
-    color: #f3f3f3;
+    padding: 1rem;
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    text-align: center;
+}
+
+.copyright {
+    font-weight: 400;
 }

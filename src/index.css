@@ -1,11 +1,20 @@
+/* Setting variables */
 :root {
-  --color-white: #fffcfc;
+  --color-white: #f0f1f1;
+  --color-white-darker: #E8E9E9;
   
-  --color-primary: #444e59;
+  --color-bg: #444f57;
 
+  --color-primary-light: #41DBAA;
+  --color-primary: #27c190;
+  --color-primary-dark: #0EA877;
+
+  --color-text-dark: #333;
   --color-text: #525252;
+  --color-text-light: #777;
 }
 
+/* Changing the root font size so that 1rem = 10px instead of 16px */
 html {
   font-size: 62.5%;
 }
