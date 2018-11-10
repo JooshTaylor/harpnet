@@ -55,9 +55,8 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        user: action.payload.data.user[0],
-        profile: action.payload.data.user[1],
-        isLoggedIn: true
+        user: (action.payload.data ? action.payload.data.user[0] : {}),
+        isLoggedIn: (action.payload.data ? true : false)
       }
   }
 }

@@ -11,17 +11,21 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //Tracking input values
       userOrEmail: "",
       password: ""
     }
   }
 
+  //Updating input value states
   onChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      //For cases where the input is not password, it will be converted to lowercase for DB storing. This makes input fields case insensitive (except for the passwords)
+      [e.target.name]: [e.target.name].toString() === "password" ? e.target.value : e.target.value.toLowerCase()
     })
   }
 
+  //Runs on form submission
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -30,19 +34,19 @@ class Login extends Component {
       password: this.state.password
     }
 
-    console.log(loginData);
-
+    //Redux action for logging users in. Takes form data and browser history.
     this.props.loginUser(loginData, this.props.history);
   }
 
   render() {
+    //If a users is logged in, they cannot access this page and are redirected to their feed.
     if (this.props.auth.isLoggedIn) {
       return (<Redirect to='/feed' />)
     } else {
       return (
         <section className="login">
           <h1 className="login__heading-1">
-              Login
+              Login To Your account
           </h1>
           <form noValidate onSubmit={this.onSubmit} className="login__form">
               <FormText type="text" name="userOrEmail" placeholder="Email Address or Username" onChange={this.onChange} value={this.state.userOrEmail} errors={this.props.errors} />

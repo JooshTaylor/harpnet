@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 class Landing extends Component {
     constructor(props) {
         super(props);
+        //This component as well as the official register page allows for registration. The state tracks input values.
         this.state = {
             email: "",
             username: "",
@@ -23,16 +24,21 @@ class Landing extends Component {
         }
     }
 
+    //Tracking input value changes
     onChange = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            //For cases where the input is not password, it will be converted to lowercase for DB storing. This makes input fields case insensitive (except for the passwords)
+            [e.target.name]: [e.target.name].toString() === "password1" || [e.target.name] === "password2" ? e.target.value : e.target.value.toLowerCase()
         })
     }
 
+    //Runs on form submission
     onSubmit = (e) => {
         e.preventDefault();
 
         const { email, username, password1, password2 } = this.state;
+
+        //If a date dropdown field was not entered, its value is converted to an empty string to be detected invalid by the backend form validation. Otherwise, converted to DD-MM-YYYY format
         const dob = this.state.day === "" || this.state.month === "" || this.state.year === "" ?
             "" :
             `${this.state.day}-${this.state.month}-${this.state.year}`;
@@ -45,11 +51,13 @@ class Landing extends Component {
             dob
         }
 
+        //Redux action for registering users. Takes form data and browser history.
         this.props.registerUser(userData, this.props.history);
     }
 
     render() {
         const count = 1; //temporary
+        //If a users is logged in, they cannot access this page and are redirected to their feed.
         if (this.props.auth.isLoggedIn) {
             return (<Redirect to='/feed' />)
         } else {
