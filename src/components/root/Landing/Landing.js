@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Landing.css';
-import logo from '../../../img/Logo-3.png';
 import FormText from '../../Forms/FormText/FormText';
+import { withRouter } from 'react-router-dom';
+import { registerUser } from '../../../actions';
+
+import { connect } from 'react-redux';
 
 class Landing extends Component {
     constructor(props) {
@@ -20,8 +24,22 @@ class Landing extends Component {
         })
     }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+
+        const { email, username, password1, password2 } = this.state;
+        const userData = {
+            email,
+            username,
+            password1,
+            password2
+        }
+
+        this.props.registerUser(userData, this.props.history);
+    }
+
     render() {
-        const count = 1;
+        const count = 1; //temporary
         return (
             <section className="landing">
                 {/* Left side - information */}
@@ -80,12 +98,12 @@ class Landing extends Component {
                     <h1 className="landing__heading-1 landing__heading-1--reverse">
                         Sign up for an account
                     </h1>
-                    <div className="landing__form">
-                        <FormText type="email" name="email" placeholder="Email Address" onChange={this.onChange} value={this.state.email} errors={this.props.errors}  />
-                        <FormText type="text" name="username" placeholder="Username" onChange={this.onChange} value={this.state.username} errors={this.props.errors}  />
-                        <FormText type="password" name="password1" placeholder="Password" onChange={this.onChange} value={this.state.password1} errors={this.props.errors}  />
-                        <FormText type="password" name="password2" placeholder="Password" onChange={this.onChange} value={this.state.password2} errors={this.props.errors}  />
-                    </div>
+                    <form noValidate onSubmit={this.onSubmit} className="landing__form">
+                        <FormText type="email" name="email" placeholder="Email Address" onChange={this.onChange} value={this.state.email} errors={this.props.errors} />
+                        <FormText type="text" name="username" placeholder="Username" onChange={this.onChange} value={this.state.username} errors={this.props.errors} />
+                        <FormText type="password" name="password1" placeholder="Password" onChange={this.onChange} value={this.state.password1} errors={this.props.errors} />
+                        <FormText type="password" name="password2" placeholder="Password" onChange={this.onChange} value={this.state.password2} errors={this.props.errors} />
+                    </form>
                     <h2 className="landing__heading-2">
                         Or use one of our public accounts
                     </h2>
@@ -108,4 +126,15 @@ class Landing extends Component {
     }
 }
 
-export default Landing;
+Landing.propTypes = {
+    errors: PropTypes.object.isRequired,
+    registerUser: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => {
+    return {
+        errors: state.errors
+    }
+}
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Landing));

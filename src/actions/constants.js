@@ -1,1 +1,7 @@
 export const GET_ERRORS = 'GET_ERRORS';
+
+export const REGISTER_PENDING = 'REGISTER_PENDING';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+
+export const LOGIN_PENDING = 'LOGIN_PENDING';
+export const SET_USER = 'SET_USER';
