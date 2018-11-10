@@ -2,6 +2,7 @@
 .landing {
     display: flex;
     background-color: var(--color-white);
+    color: var(--color-text);
 }
 
 
@@ -100,33 +101,41 @@
 }
 
 .landing__form {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .landing__form > *:not(:last-child) {
     margin-bottom: 1.5rem;
 }
 
-
-
-.landing__public {
-    margin-top: 1rem;
-    width: 50rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.landing__account {
-    flex: 0 0 30%;
-    text-align: center;
-}
-
-.landing__account-img {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
-    background-color: var(--color-white-darker);
-    border: 2px solid var(--color-text-dark);
-    box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+.landing__form-btn {
+    margin-top: 2rem;
+    border: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    text-transform: uppercase;
     cursor: pointer;
+    color: currentColor;
+    font-weight: 700;
+    background-color: var(--color-white-darker);
+    transition: all .2s;
+}
+
+.landing__form-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+}
+
+.landing__form-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 2rem rgba(0,0,0,0.1);
+}
+
+.landing__form-btn:focus {
+    outline: none;
 }

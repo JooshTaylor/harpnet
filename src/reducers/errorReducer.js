@@ -1,4 +1,4 @@
-import { GET_ERRORS } from '../actions/constants';
+import { GET_ERRORS, CLEAR_ERRORS } from '../actions/constants';
 
 const initialState = {}
 
@@ -10,5 +10,7 @@ export const errorReducer = (state = initialState, action) => {
             return {
                 errors: action.payload
             }
+        case CLEAR_ERRORS:
+            return {}
     }
 }

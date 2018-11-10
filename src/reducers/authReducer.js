@@ -1,4 +1,4 @@
-import { REGISTER_PENDING, REGISTER_SUCCESS, LOGIN_PENDING, SET_USER } from "../actions/constants";
+import { REGISTER_PENDING, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAIL, SET_USER } from "../actions/constants";
 
 const initialState = {
   loading: false,
@@ -7,7 +7,7 @@ const initialState = {
   isLoggedIn: false
 }
 
-const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
@@ -24,6 +24,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
+    
+    case REGISTER_FAIL:
+      return {
+        ...state,
+        loading: false
+      }
 
     // Runs when a user submits a login form
     case LOGIN_PENDING:
@@ -32,13 +38,25 @@ const authReducer = (state = initialState, action) => {
         loading: true
       }
 
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      }
+    
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        loading: false
+      }
+
     // Runs when a user successfully logs in
     case SET_USER:
       return {
         ...state,
         loading: false,
-        user: action.payload[0],
-        profile: action.payload[1],
+        user: action.payload.data.user[0],
+        profile: action.payload.data.user[1],
         isLoggedIn: true
       }
   }

@@ -24,20 +24,10 @@
 /* Individual list items */
 .nav__item {
     margin-right: 1rem;
-    transition: all .2s;
 }
 
 .nav__item--home {
     margin-right: auto;
-}
-
-.nav__item:hover {
-    transform: translateY(-3px);
-}
-
-.nav__item:active {
-    transform: translateY(-1px);
-    box-shadow: 0 .5rem 2rem rgba(0,0,0,0.1);
 }
 
 
@@ -50,15 +40,25 @@
     color: var(--color-white);
     text-decoration: none;
     text-transform: uppercase;
+    transition: all .2s;
+    font-size: 1.6rem; 
 }
 
 .nav__link:hover {
-    box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+    border: 2px solid var(--color-white);
+    background-color: var(--color-white);
+    color: var(--color-text-light);
 }
 
 .nav__link--home {
     border: 2px solid var(--color-primary);
     background-color: var(--color-primary);
+}
+
+.nav__link--home:hover {
+    border: 2px solid var(--color-primary-dark);
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
 }
 
 
