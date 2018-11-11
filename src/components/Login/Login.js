@@ -21,7 +21,7 @@ class Login extends Component {
   onChange = (e) => {
     this.setState({
       //For cases where the input is not password, it will be converted to lowercase for DB storing. This makes input fields case insensitive (except for the passwords)
-      [e.target.name]: [e.target.name].toString() === "password" ? e.target.value : e.target.value.toLowerCase()
+      [e.target.name]: e.target.value
     })
   }
 
@@ -30,7 +30,7 @@ class Login extends Component {
     e.preventDefault();
 
     const loginData = {
-      userOrEmail: this.state.userOrEmail,
+      userOrEmail: this.state.userOrEmail.toLowerCase(),
       password: this.state.password
     }
 
@@ -46,15 +46,15 @@ class Login extends Component {
       return (
         <section className="login">
           <h1 className="login__heading-1">
-              Login To Your account
+            Login To Your account
           </h1>
           <form noValidate onSubmit={this.onSubmit} className="login__form">
-              <FormText type="text" name="userOrEmail" placeholder="Email Address or Username" onChange={this.onChange} value={this.state.userOrEmail} errors={this.props.errors} />
-              <FormText type="password" name="password" placeholder="Password" onChange={this.onChange} value={this.state.password} errors={this.props.errors} />
-              <input type="submit" className="login__form-btn" value="Login" />
+            <FormText type="text" name="userOrEmail" placeholder="Email Address or Username" onChange={this.onChange} value={this.state.userOrEmail} errors={this.props.errors} />
+            <FormText type="password" name="password" placeholder="Password" onChange={this.onChange} value={this.state.password} errors={this.props.errors} />
+            <input type="submit" className="login__form-btn" value="Login" />
           </form>
           <h2 className="login__heading-2">
-              Or login to one of our public accounts
+            Or login to one of our public accounts
           </h2>
           <PubAcc />
         </section>

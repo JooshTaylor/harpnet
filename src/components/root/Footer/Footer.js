@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <h3 className="copyright">
-        Copyright &copy; {new Date().getFullYear()} Harpnet
+        Copyright &copy; {new Date().getFullYear()} Joshua Taylor
       </h3>
     </footer>
   )

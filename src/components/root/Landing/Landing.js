@@ -28,7 +28,7 @@ class Landing extends Component {
     onChange = (e) => {
         this.setState({
             //For cases where the input is not password, it will be converted to lowercase for DB storing. This makes input fields case insensitive (except for the passwords)
-            [e.target.name]: [e.target.name].toString() === "password1" || [e.target.name] === "password2" ? e.target.value : e.target.value.toLowerCase()
+            [e.target.name]: e.target.value
         })
     }
 
@@ -44,8 +44,8 @@ class Landing extends Component {
             `${this.state.day}-${this.state.month}-${this.state.year}`;
 
         const userData = {
-            email,
-            username,
+            email: email.toLowerCase(),
+            username: username.toLowerCase(),
             password1,
             password2,
             dob
@@ -87,33 +87,32 @@ class Landing extends Component {
                                 <i className="feature-icon fas fa-scroll"></i>
                                 <h3 className="feature-heading">Feed</h3>
                                 <p className="feature-info">
-                                    View the latest posts made by your friends!
+                                    Follow or other people to see their posts and gain followers who can view yours!
                                 </p>
                             </li>
                             <li className="landing__feature">
                                 <i className="feature-icon fas fa-comments"></i>
                                 <h3 className="feature-heading">Messages</h3>
                                 <p className="feature-info">
-                                    Send messages to anybody on your friends list!
+                                    Send instant messages to anybody that you want to talk to!
                                 </p>
                             </li>
                         </ul>
-    
+
                         <h2 className="landing__heading-2">
                             What this actually is
                         </h2>
                         <p className="landing__paragraph">
-                            This website is actually just a development playground. It functions as a normal social media website with the features listed above, but
-                            its primary purpose is for practicing web development skills.
+                            This website is actually just a development playground. It functions as a normal social media website with the features listed above and can be used for that purpose, but its primary purpose is for practicing web development skills.
                         </p>
                         <p className="landing__paragraph">
-                            There are 3 dummy accounts that you can access to interact with all of the features, or you can make your own account. If you use a public account, feel free to make or delete posts, comments, friends and messages.
+                            There are 3 dummy accounts that you can access to interact with all of the features, or you can make your own account. If you use a public account, feel free to make or delete posts and comments, follow/unfollow accounts, and send messages.
                             We have a messenger bot called "Harpy" that sends a randomized response when you send it messages if you would like to test the messaging functionality.
                         </p>
                     </div>
-    
-    
-    
+
+
+
                     {/* Right side - register */}
                     <div className="landing__register">
                         <h1 className="landing__heading-1 landing__heading-1--reverse">

@@ -25,11 +25,11 @@ class Navigation extends Component {
     })
 
     //Each menu button in the dropdown both toggles it and has an additional function. They are distinguished by their name value
-    switch(e.target.name) {
+    switch (e.target.name) {
       default:
         return null;
 
-      case "logout": 
+      case "logout":
         this.logout();
         break;
 
@@ -47,7 +47,7 @@ class Navigation extends Component {
 
   render() {
     // The navigation bar will change depending on whether the user is logged in or not.
-    const navItems = (!this.props.auth.isLoggedIn) ? 
+    const navItems = (!this.props.auth.isLoggedIn) ?
       (
         <ul className="nav__list">
           <li className="nav__item nav__item--home">
@@ -74,25 +74,25 @@ class Navigation extends Component {
             <Link className="nav__link" to="/notifications">Notifications</Link>
           </li>
           <li className="nav__item nav__item--logout">
-            <button onClick={this.toggleDropdown} name="dropdown" className="nav__link nav__link--logout" type="button"><i class="nav__link--icon fas fa-cogs"></i></button>
+            <button onClick={this.toggleDropdown} name="dropdown" className="nav__link nav__link--logout" type="button"><i className="nav__link--icon fas fa-cogs"></i></button>
           </li>
         </ul>
       )
-    ;
+      ;
 
     //The nav dropdown will only show for users that are logged in and when the dropDown state is true
-    const navDropdown = (this.props.auth.isLoggedIn && this.state.dropDown) ? 
-    (
-      <ul className="nav__dropdown">
+    const navDropdown = (this.props.auth.isLoggedIn && this.state.dropDown) ?
+      (
+        <ul className="nav__dropdown">
           <li className="nav__dropdown-item">
             <button onClick={this.toggleDropdown} name="settings" className="nav__dropdown-link">Settings</button>
           </li>
           <li className="nav__dropdown-item">
             <button onClick={this.toggleDropdown} name="logout" className="nav__dropdown-link">Logout</button>
           </li>
-      </ul>
-    ) :
-    null;
+        </ul>
+      ) :
+      null;
 
     return (
       <nav className="nav">
