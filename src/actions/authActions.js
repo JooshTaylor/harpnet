@@ -40,6 +40,8 @@ export const loginUser = (data, history) => dispatch => {
     .then(res => {
 
       //store token in redis db
+
+      
       dispatch({
         type: LOGIN_SUCCESS
       })
