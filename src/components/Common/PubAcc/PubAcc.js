@@ -1,22 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './PubAcc.css';
+import { loginUser } from '../../../actions/authActions';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-const PubAcc = () => {
-    return (
-        <div className="public">
-            <div className="account">
-                <img className="account-img" src="https://robohash.org/harper/?200x200" alt="user1" />
-            </div>
+class PubAcc extends Component {
+    publicAccount = (e) => {
+        const botInfo = {};
 
-            <div className="account">
-                <img className="account-img" src="https://robohash.org/harpette/?200x200" alt="user2" />
-            </div>
+        switch (e) {
+            default:
+                return null;
+                break;
+            case "account-1":
+                botInfo.userOrEmail = "Harper";
+                botInfo.password = "harperpassword";
+                break;
+            case "account-2":
+                botInfo.userOrEmail = "Harphene";
+                botInfo.password = "harphenepassword";
+                break;
+            case "account-3":
+                botInfo.userOrEmail = "Bailey";
+                botInfo.password = "baileypassword";
+                break;
+        }
 
-            <div className="account">
-                <img className="account-img" src="https://robohash.org/jason/?200x200" alt="user3" />
+        this.props.loginUser(botInfo, this.props.history);
+    }
+
+    render() {
+        return (
+            <div className="public" >
+                <div className="account">
+                    <button onClick={() => this.publicAccount("account-1")} type="button" className="account-link">
+                        <img className="account-img" src="https://robohash.org/harper/?200x200" alt="user1" />
+                    </button>
+                </div>
+
+                <div className="account">
+                    <button onClick={() => this.publicAccount("account-2")} type="button" className="account-link">
+                        <img className="account-img" src="https://robohash.org/harpette/?200x200" alt="user2" />
+                    </button>
+                </div>
+
+                <div className="account">
+                    <button onClick={() => this.publicAccount("account-3")} type="button" className="account-link">
+                        <img className="account-img" src="https://robohash.org/bailey/?200x200" alt="user3" />
+                    </button>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
-export default PubAcc;
+export default connect(null, { loginUser })(withRouter(PubAcc));

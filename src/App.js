@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { authenticateUser } from './actions/authActions';
+import { getProfile } from './actions/profileActions';
 
 import PrivateRoute from './components/Common/PrivateRoute/PrivateRoute';
 
@@ -32,8 +33,8 @@ class App extends Component {
       })
         .then(res => {
           if (res) {
-            console.log(res.data);
             this.props.authenticateUser(res.data);
+            this.props.getProfile(res.data.user_id);
           }
         })
         .catch(console.log(0));
@@ -60,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, { authenticateUser })(App);
+export default connect(null, { authenticateUser, getProfile })(App);

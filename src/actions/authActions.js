@@ -1,4 +1,4 @@
-import { REGISTER_PENDING, REGISTER_SUCCESS, REGISTER_FAIL, GET_ERRORS, LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAIL, SET_USER, CLEAR_ERRORS, GET_PROFILE, AUTHENTICATE_USER } from "./constants";
+import { REGISTER_PENDING, REGISTER_SUCCESS, REGISTER_FAIL, GET_ERRORS, LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAIL, SET_USER, CLEAR_ERRORS, GET_PROFILE, AUTHENTICATE_USER, CLEAR_PROFILE } from "./constants";
 import axios from 'axios';
 
 export const registerUser = (user, history) => dispatch => {
@@ -71,9 +71,13 @@ export const authenticateUser = (data) => {
   }
 }
 
-export const logoutUser = () => {
-  return {
+export const logoutUser = () => dispatch => {
+  dispatch({
     type: SET_USER,
     payload: {}
-  }
+  });
+
+  dispatch({
+    type: CLEAR_PROFILE
+  })
 }

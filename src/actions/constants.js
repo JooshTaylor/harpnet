@@ -19,7 +19,8 @@ export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 
 
 // Profile constants
-export const GET_PROFILE = 'GET_PROFILE';
+export const SET_PROFILE = 'SET_PROFILE';
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 
 
 
