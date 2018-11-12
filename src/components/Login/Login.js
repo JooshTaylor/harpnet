@@ -17,6 +17,12 @@ class Login extends Component {
     }
   }
 
+  componentWillMount() {
+    if (this.props.auth.isLoggedIn) {
+      return (<Redirect to='/feed' />)
+    }
+  }
+
   //Updating input value states
   onChange = (e) => {
     this.setState({

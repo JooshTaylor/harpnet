@@ -1,4 +1,4 @@
-import { GET_FOLLOW_PROMPT } from '../actions/constants';
+import { SUGGEST_FOLLOWERS } from '../actions/constants';
 
 const initialState = {
     following: [],
@@ -7,8 +7,13 @@ const initialState = {
 }
 
 export const followsReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         default:
             return state;
+        case SUGGEST_FOLLOWERS:
+            return {
+                ...state,
+                followPrompt: action.payload
+            }
     }
 }

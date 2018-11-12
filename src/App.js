@@ -27,14 +27,13 @@ class App extends Component {
     if (token) {
       axios.get('http://localhost:5000/api/auth/authenticate', {
         headers: {
-          // "Authorization": `Bearer ${token}`
           "Authorization": token
         }
       })
         .then(res => {
           if (res) {
             this.props.authenticateUser(res.data);
-            this.props.getProfile(res.data.user_id);
+            this.props.getProfile(res.data.user_id, token);
           }
         })
         .catch(console.log(0));

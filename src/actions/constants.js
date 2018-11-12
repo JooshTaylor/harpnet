@@ -26,4 +26,4 @@ export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 
 
 // Follows constants
-export const GET_FOLLOW_PROMPT = 'GET_FOLLOW_PROMPT';
+export const SUGGEST_FOLLOWERS = 'SUGGEST_FOLLOWERS';
