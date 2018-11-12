@@ -1,4 +1,4 @@
-import { REGISTER_PENDING, REGISTER_SUCCESS, REGISTER_FAIL, GET_ERRORS, LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAIL, SET_USER, CLEAR_ERRORS, GET_PROFILE } from "./constants";
+import { REGISTER_PENDING, REGISTER_SUCCESS, REGISTER_FAIL, GET_ERRORS, LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAIL, SET_USER, CLEAR_ERRORS, GET_PROFILE, AUTHENTICATE_USER } from "./constants";
 import axios from 'axios';
 
 export const registerUser = (user, history) => dispatch => {
@@ -38,29 +38,21 @@ export const loginUser = (data, history) => dispatch => {
 
   axios.post('http://localhost:5000/api/auth/login', data)
     .then(res => {
-
-      //store token in redis db
-
-      
       dispatch({
         type: LOGIN_SUCCESS
       })
+
+      //Store our token in session storage in the user's browser
+      window.localStorage.setItem("token", res.data.token);
 
       dispatch({
         type: SET_USER,
         payload: res
       })
 
-      dispatch({
-        type: GET_PROFILE,
-        payload: res
-      })
-
       history.push('/');
     })
     .catch(err => {
-      console.log(err);
-
       dispatch({
         type: LOGIN_FAIL
       })
@@ -70,6 +62,13 @@ export const loginUser = (data, history) => dispatch => {
         payload: err.response.data
       })
     })
+}
+
+export const authenticateUser = (data) => {
+  return {
+    type: AUTHENTICATE_USER,
+    payload: data
+  }
 }
 
 export const logoutUser = () => {

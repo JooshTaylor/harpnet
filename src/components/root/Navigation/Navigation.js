@@ -42,6 +42,7 @@ class Navigation extends Component {
   //Will log a user out and redirect them to the homepage
   logout = (e) => {
     this.props.logoutUser();
+    window.localStorage.removeItem('token');
     this.props.history.push('/');
   }
 

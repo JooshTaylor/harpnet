@@ -30,7 +30,7 @@ class Login extends Component {
     e.preventDefault();
 
     const loginData = {
-      userOrEmail: this.state.userOrEmail.toLowerCase(),
+      userOrEmail: this.state.userOrEmail,
       password: this.state.password
     }
 

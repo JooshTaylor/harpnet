@@ -44,7 +44,7 @@ class Register extends Component {
 
     const userData = {
       email: email.toLowerCase(),
-      username: username.toLowerCase(),
+      username: username,
       password1,
       password2,
       dob

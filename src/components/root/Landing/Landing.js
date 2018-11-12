@@ -45,7 +45,7 @@ class Landing extends Component {
 
         const userData = {
             email: email.toLowerCase(),
-            username: username.toLowerCase(),
+            username,
             password1,
             password2,
             dob

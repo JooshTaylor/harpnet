@@ -1,9 +1,8 @@
-import { REGISTER_PENDING, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAIL, SET_USER } from "../actions/constants";
+import { REGISTER_PENDING, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_FAIL, SET_USER, AUTHENTICATE_USER } from "../actions/constants";
 
 const initialState = {
   loading: false,
   user: {},
-  profile: {},
   isLoggedIn: false
 }
 
@@ -24,7 +23,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
-    
+
     case REGISTER_FAIL:
       return {
         ...state,
@@ -43,7 +42,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
-    
+
     case LOGIN_FAIL:
       return {
         ...state,
@@ -57,6 +56,13 @@ export const authReducer = (state = initialState, action) => {
         loading: false,
         user: (action.payload.data ? action.payload.data.user[0] : {}),
         isLoggedIn: (action.payload.data ? true : false)
+      }
+
+    case AUTHENTICATE_USER:
+      return {
+        ...state,
+        user: action.payload,
+        isLoggedIn: true
       }
   }
 }

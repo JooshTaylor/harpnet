@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import { authenticateUser } from './actions/authActions';
+
 import PrivateRoute from './components/Common/PrivateRoute/PrivateRoute';
 
 import Login from './components/Login/Login';
@@ -14,6 +19,27 @@ import Navigation from './components/root/Navigation/Navigation';
 import './App.css';
 
 class App extends Component {
+
+  //Validating the auth token
+  componentDidMount() {
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      axios.get('http://localhost:5000/api/auth/authenticate', {
+        headers: {
+          // "Authorization": `Bearer ${token}`
+          "Authorization": token
+        }
+      })
+        .then(res => {
+          if (res) {
+            console.log(res.data);
+            this.props.authenticateUser(res.data);
+          }
+        })
+        .catch(console.log(0));
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -34,4 +60,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, { authenticateUser })(App);
