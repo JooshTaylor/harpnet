@@ -1,14 +1,77 @@
 import React, { Component } from 'react';
-import './FeedViewPosts';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getFeed } from '../../../../actions/postActions';
+import './FeedViewPosts.css';
 
 class FeedViewPosts extends Component {
+
+  //When this component mounts, we fetch the user's feed from the DB based on who they are following
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    const data = {
+      following: this.props.follows.following,
+      id: this.props.auth.user.user_id
+    }
+    this.props.getFeed(data, token);
+  }
+
   render() {
+    //Posts is an array of 20 posts made by the users followers ordered from latest to earliest.
+    const { auth, post } = this.props;
+
+    const deletePost = (
+      <button className="post__delete">X</button>
+    );
+
+    const posts = post.posts.map(post => {
+      return (
+        <li className="post">
+          <div className="post__details">
+            <div className="post__details-img-box">
+              <img className="post__details-img" src={`https://robohash.org/${post.creator_username}/?200x200`} alt={post.creator_username} />
+            </div>
+            <div className="post__details-text-box">
+              <h2 className="post__details-username">
+                {post.creator_username}
+              </h2>
+              <h3 className="post__details-date">
+                {post.post_date}
+              </h3>
+            </div>
+            {post.creator_id === auth.user.user_id ? deletePost : null}
+          </div>
+          <div className="post__content-box">
+            <p className="post__content">{post.content}</p>
+          </div>
+          <div className="post__features-box">
+            Score
+          </div>
+        </li>
+      );
+    });
+
     return (
-      <div>
-        
-      </div>
+      <ul className="feed">
+        {posts}
+      </ul>
     )
   }
 }
 
-export default FeedViewPosts;
+FeedViewPosts.propTypes = {
+  getFeed: PropTypes.func.isRequired,
+  follows: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    follows: state.follows,
+    post: state.post
+  }
+}
+
+export default connect(mapStateToProps, { getFeed })(FeedViewPosts);

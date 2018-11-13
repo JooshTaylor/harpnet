@@ -51,6 +51,10 @@
     color: var(--color-text-light);
 }
 
+.nav__link:focus {
+    outline: none;
+}
+
 .nav__link--home {
     border: 2px solid var(--color-primary);
     background-color: var(--color-primary);
@@ -95,6 +99,30 @@
     clip-path: polygon(0 1rem, 70% 1rem, 75% 0, 80% 1rem, 100% 1rem, 100% 100%, 0 100%);
     box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
     z-index: 3;
+}
+
+@media screen and (min-width: 2000px) {
+    .nav__dropdown {
+        right: 12rem;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .nav__dropdown {
+        right: 8rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .nav__dropdown {
+        right: 6rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .nav__dropdown {
+        right: 4rem;
+    }
 }
 
 .nav__dropdown-item {

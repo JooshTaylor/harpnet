@@ -34,19 +34,19 @@ class PubAcc extends Component {
             <div className="public" >
                 <div className="account">
                     <button onClick={() => this.publicAccount("account-1")} type="button" className="account-link">
-                        <img className="account-img" src="https://robohash.org/harper/?200x200" alt="user1" />
+                        <img className="account-img" src="https://robohash.org/Harper/?200x200" alt="user1" />
                     </button>
                 </div>
 
                 <div className="account">
                     <button onClick={() => this.publicAccount("account-2")} type="button" className="account-link">
-                        <img className="account-img" src="https://robohash.org/harpette/?200x200" alt="user2" />
+                        <img className="account-img" src="https://robohash.org/Harphene/?200x200" alt="user2" />
                     </button>
                 </div>
 
                 <div className="account">
                     <button onClick={() => this.publicAccount("account-3")} type="button" className="account-link">
-                        <img className="account-img" src="https://robohash.org/bailey/?200x200" alt="user3" />
+                        <img className="account-img" src="https://robohash.org/Bailey/?200x200" alt="user3" />
                     </button>
                 </div>
             </div>

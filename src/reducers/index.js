@@ -3,12 +3,12 @@ import { errorReducer } from './errorReducer';
 import { authReducer } from './authReducer';
 import { profileReducer } from './profileReducer';
 import { followsReducer } from './followsReducer';
-import { feedReducer } from './feedReducer';
+import { postReducer } from './postReducer';
 
 export default combineReducers({
     errors: errorReducer,
     auth: authReducer,
     profile: profileReducer,
     follows: followsReducer,
-    feed: feedReducer
+    post: postReducer
 });

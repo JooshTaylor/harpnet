@@ -105,11 +105,11 @@ class Feed extends Component {
 
 Feed.propTypes = {
   followPrompt: PropTypes.func.isRequired,
+  followUser: PropTypes.func.isRequired,
   getProfile: PropTypes.func.isRequired,
   getFollowData: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  feed: PropTypes.object.isRequired,
   follows: PropTypes.object.isRequired
 }
 
@@ -117,9 +117,15 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     profile: state.profile,
-    feed: state.feed,
     follows: state.follows
   }
 }
 
-export default connect(mapStateToProps, { followPrompt, getProfile, getFollowData, followUser })(withRouter(Feed));
+export default connect
+  (
+  mapStateToProps,
+  {
+    followPrompt, getProfile, getFollowData, followUser
+  }
+  )
+  (withRouter(Feed));

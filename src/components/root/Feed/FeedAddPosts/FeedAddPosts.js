@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './FeedAddPosts.css';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { makePost } from '../../../../actions/postActions';
 
 class FeedAddPosts extends Component {
   constructor(props) {
@@ -13,9 +16,13 @@ class FeedAddPosts extends Component {
     e.preventDefault();
 
     const postData = {
+      creator_id: this.props.auth.user.user_id,
+      creator_username: this.props.profile.profile.username,
       content: this.state.post,
-
+      post_date: Date.now().toString()
     }
+
+    this.props.makePost(postData, localStorage.getItem('token'));
   }
 
   onChange = (e) => {
@@ -34,4 +41,15 @@ class FeedAddPosts extends Component {
   }
 }
 
-export default FeedAddPosts;
+FeedAddPosts.propTypes = {
+  makePost: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    profile: state.profile
+  }
+}
+
+export default connect(mapStateToProps, { makePost })(FeedAddPosts);
