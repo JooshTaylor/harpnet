@@ -19,7 +19,7 @@ class FeedAddPosts extends Component {
       creator_id: this.props.auth.user.user_id,
       creator_username: this.props.profile.profile.username,
       content: this.state.post,
-      post_date: Date.now().toString()
+      post_date: new Date().toString().split(' ').slice(1, 5).join(' ')
     }
 
     this.props.makePost(postData, localStorage.getItem('token'));
@@ -42,7 +42,9 @@ class FeedAddPosts extends Component {
 }
 
 FeedAddPosts.propTypes = {
-  makePost: PropTypes.func.isRequired
+  makePost: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {

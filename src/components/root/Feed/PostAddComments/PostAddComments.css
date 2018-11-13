@@ -1,0 +1,56 @@
+.comment-form {
+  background-color: var(--color-white-darker);
+  border-radius: 10px;
+  width: 67rem;
+}
+
+.comment-field {
+  width: 55rem;
+  padding: 0.8rem;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 1.4rem;
+  box-sizing: border-box;
+  transition: all .2s;
+}
+
+.comment-btn {
+  background-color: var(--color-primary-light);
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 0.8rem;
+  cursor: pointer;
+  width: 8rem;
+  font-size: 1.4rem;
+  transition: all .2s;
+  box-sizing: border-box;
+}
+
+.comment-field:focus {
+  outline: none;
+  border-top: 2px solid var(--color-bg);
+  border-left: 2px solid var(--color-bg);
+  border-bottom: 2px solid var(--color-bg);
+  border-right: 1px solid var(--color-bg);
+}
+
+.comment-field:focus + .comment-btn {
+  background-color: var(--color-primary-light);
+  border-top: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  border-left: 1px solid var(--color-primary);
+}
+
+.comment-btn:focus {
+  outline: none;
+}
+
+.comment-user-pic {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  transform: translate(-0.5rem, 1rem);
+}

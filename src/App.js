@@ -36,7 +36,6 @@ class App extends Component {
             this.props.getProfile(res.data.user_id, token);
           }
         })
-        .catch(console.log(0));
     }
   }
 

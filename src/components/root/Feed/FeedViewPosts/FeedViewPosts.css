@@ -9,12 +9,15 @@
   background-color: #fff;
   box-shadow: 0 0.2rem 1rem rgba(0,0,0,0.25);
   border-radius: 5px;
-  padding: 1.5rem;
   text-align: left;
 }
 
 .post:not(:last-child) {
   margin-bottom: 1rem;
+}
+
+.post__top {
+  padding: 1.5rem;
 }
 
 .post__details {
@@ -73,8 +76,19 @@
 
 
 .post__content-box {
+  margin-left: 2rem;
 }
 
 .post__content {
   font-size: 1.8rem;
+}
+
+
+
+.post__bottom {
+  background-color: var(--color-white-darker);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 1.5rem;
+  padding-top: 0;
 }

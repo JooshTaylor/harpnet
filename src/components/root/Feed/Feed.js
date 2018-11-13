@@ -56,7 +56,7 @@ class Feed extends Component {
   }
 
   render() {
-    const { auth, profile, feed, follows } = this.props;
+    const { follows } = this.props;
 
     //Follow prompt is a list of suggest users for accounts that do not follow any users.
     const followPrompt = this.state.followPrompt.length > 0 ?
@@ -121,11 +121,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect
-  (
-  mapStateToProps,
+export default connect(mapStateToProps,
   {
     followPrompt, getProfile, getFollowData, followUser
   }
-  )
-  (withRouter(Feed));
+)(withRouter(Feed));

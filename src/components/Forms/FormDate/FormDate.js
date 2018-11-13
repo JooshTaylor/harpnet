@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './FormDate.css';
 
 const FormDate = (props) => {
     const { errors, onChange } = props;
-    
+
     let days = [];
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     let years = [];
-    for (let i = 1; i < (2020-1905); i++) {
-        years.push(i+1904);
+    for (let i = 1; i < (2020 - 1905); i++) {
+        years.push(i + 1904);
         if (i < 32) {
             days.push(i);
         }
@@ -40,6 +41,11 @@ const FormDate = (props) => {
             {Object.keys(errors).length > 0 && (<small className="form-date__errors">{errors.errors.dob}</small>)}
         </div>
     )
+}
+
+FormDate.propTypes = {
+    errors: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired
 }
 
 export default FormDate;

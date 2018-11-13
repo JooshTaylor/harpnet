@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { getFeed } from '../../../../actions/postActions';
 import './FeedViewPosts.css';
 
+import PostAddComments from '../PostAddComments/PostAddComments';
+import PostViewComments from '../PostViewComments/PostViewComments';
+
 class FeedViewPosts extends Component {
 
   //When this component mounts, we fetch the user's feed from the DB based on who they are following
@@ -24,28 +27,37 @@ class FeedViewPosts extends Component {
       <button className="post__delete">X</button>
     );
 
+    const comments = null;
+
     const posts = post.posts.map(post => {
       return (
-        <li className="post">
-          <div className="post__details">
-            <div className="post__details-img-box">
-              <img className="post__details-img" src={`https://robohash.org/${post.creator_username}/?200x200`} alt={post.creator_username} />
+        <li key={post.post_id} className="post">
+          <div className="post__top">
+            <div className="post__details">
+              <div className="post__details-img-box">
+                <img className="post__details-img" src={`https://robohash.org/${post.creator_username}/?200x200`} alt={post.creator_username} />
+              </div>
+              <div className="post__details-text-box">
+                <h2 className="post__details-username">
+                  {post.creator_username}
+                </h2>
+                <h3 className="post__details-date">
+                  {post.post_date.split(' ').slice(0, 3).join(' ')}<br />
+                  {post.post_date.split(' ').slice(3, 4).toString().split(':').slice(0, 2).join(':')}
+                </h3>
+              </div>
+              {post.creator_id === auth.user.user_id ? deletePost : null}
             </div>
-            <div className="post__details-text-box">
-              <h2 className="post__details-username">
-                {post.creator_username}
-              </h2>
-              <h3 className="post__details-date">
-                {post.post_date}
-              </h3>
+            <div className="post__content-box">
+              <p className="post__content">{post.content}</p>
             </div>
-            {post.creator_id === auth.user.user_id ? deletePost : null}
+            <div className="post__features-box">
+              Score
+            </div>
           </div>
-          <div className="post__content-box">
-            <p className="post__content">{post.content}</p>
-          </div>
-          <div className="post__features-box">
-            Score
+          <div className="post__bottom">
+            <PostAddComments post_id={post.post_id} />
+            <PostViewComments />
           </div>
         </li>
       );

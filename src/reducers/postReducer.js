@@ -1,7 +1,8 @@
-import { SET_POSTS, CLEAR_POSTS } from '../actions/constants';
+import { SET_POSTS, CLEAR_POSTS, GET_COMMENTS } from '../actions/constants';
 
 const initialState = {
-    posts: []
+    posts: [],
+    comments: []
 }
 
 export const postReducer = (state = initialState, action) => {
@@ -14,5 +15,17 @@ export const postReducer = (state = initialState, action) => {
                 ...state,
                 posts: action.payload
             }
+
+        case CLEAR_POSTS:
+            return {
+                ...state,
+                posts: []
+            }
+
+        // case GET_COMMENTS:
+        //     return {
+        //         ...state,
+        //         comments: action.payload
+        //     }
     }
 }

@@ -42,3 +42,12 @@
 .account:active {
     transform: scale(1.02);
 }
+
+.account-name {
+    color: var(--color-primary-dark);
+    transform: translateY(-1rem);
+}
+
+.account-link:hover ~ .account-name {
+    text-shadow: 0 1.5rem 4rem rgba(0,0,0,0.2);
+}

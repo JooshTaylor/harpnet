@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     padding: 8rem 0 15rem;
+    text-align: center;
 }
 
 .login__heading-1 {
