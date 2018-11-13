@@ -28,3 +28,11 @@ export const getFollowData = (id, token) => dispatch => {
             })
         })
 }
+
+export const followUser = (follower_id, following_id, token) => dispatch => {
+    axios.post(`http://localhost:5000/api/follows/follow/${following_id}`, follower_id, {
+        headers: {
+            "Authorization": token
+        }
+    });
+}

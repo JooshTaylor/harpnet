@@ -1,4 +1,4 @@
-import { SUGGEST_FOLLOWERS, SET_FOLLOWS, CLEAR_FOLLOWS } from '../actions/constants';
+import { SUGGEST_FOLLOWERS, SET_FOLLOWS, CLEAR_FOLLOWS, FOLLOW_USER } from '../actions/constants';
 
 const initialState = {
     following: [],

@@ -94,6 +94,7 @@
     padding-bottom: 1.5rem;
     clip-path: polygon(0 1rem, 70% 1rem, 75% 0, 80% 1rem, 100% 1rem, 100% 100%, 0 100%);
     box-shadow: 0 1rem 2rem rgba(0,0,0,0.2);
+    z-index: 3;
 }
 
 .nav__dropdown-item {

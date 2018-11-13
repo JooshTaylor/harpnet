@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { getProfile } from '../../../actions/profileActions';
-import { followPrompt, getFollowData } from '../../../actions/followsActions';
+import { followPrompt, getFollowData, followUser } from '../../../actions/followsActions';
 
 import './Feed.css';
 
@@ -49,8 +49,13 @@ class Feed extends Component {
     })
   }
 
-  render() {
+  followUser = (id) => {
+    // console.log(this.state.token);
+    this.props.followUser({ follower_id: this.props.auth.user.user_id }, id, this.state.token);
+    this.props.getFollowData(this.props.auth.user.user_id, this.state.token);
+  }
 
+  render() {
     const { auth, profile, feed, follows } = this.props;
 
     //Follow prompt is a list of suggest users for accounts that do not follow any users.
@@ -117,4 +122,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { followPrompt, getProfile, getFollowData })(withRouter(Feed));
+export default connect(mapStateToProps, { followPrompt, getProfile, getFollowData, followUser })(withRouter(Feed));
