@@ -1,4 +1,4 @@
-import { SUGGEST_FOLLOWERS } from './constants';
+import { SUGGEST_FOLLOWERS, SET_FOLLOWS } from './constants';
 import axios from 'axios';
 
 export const followPrompt = (id, token) => dispatch => {
@@ -10,6 +10,20 @@ export const followPrompt = (id, token) => dispatch => {
         .then(res => {
             dispatch({
                 type: SUGGEST_FOLLOWERS,
+                payload: res.data
+            })
+        })
+}
+
+export const getFollowData = (id, token) => dispatch => {
+    axios.get(`http://localhost:5000/api/follows/get/${id}`, {
+        headers: {
+            "Authorization": token
+        }
+    })
+        .then(res => {
+            dispatch({
+                type: SET_FOLLOWS,
                 payload: res.data
             })
         })

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { getProfile } from '../../../actions/profileActions';
-import { followPrompt } from '../../../actions/followsActions';
+import { followPrompt, getFollowData } from '../../../actions/followsActions';
 
 import './Feed.css';
 
@@ -15,7 +15,8 @@ class Feed extends Component {
     super(props);
     this.state = {
       token: "",
-      followPrompt: []
+      followPrompt: [],
+      propsReceivedCount: 0 //This facilitates the process for checking whether the followPrompt action is dispatched or not.
     }
   }
 
@@ -26,13 +27,25 @@ class Feed extends Component {
         followPrompt: nextProps.follows.followPrompt
       })
     }
+
+    //Ugly way of checking if the user is following anybody or not. By the third time props are received regarding the following array, it should contain the appropriate data. If by this point it is empty, it is safe to call the followPrompt action.
+    if (nextProps.follows.following) {
+      if (this.state.propsReceivedCount === 0) {
+        this.setState({ propsReceivedCount: 1 })
+      } else if (this.state.propsReceivedCount === 1) {
+        this.setState({ propsReceivedCount: 2 })
+      } else if (this.state.propsReceivedCount === 2 && this.props.follows.following.length === 0) {
+        this.setState({ propsReceivedCount: 3 })
+        this.props.followPrompt(this.props.auth.user.user_id, this.state.token);
+      }
+    }
   }
 
   //When the feed page is loaded, we set the token to our state for accessibility, then call 2 functions to retrieve data.
   componentDidMount() {
     this.setState({ token: localStorage.getItem('token') }, () => {
       this.props.getProfile(this.props.auth.user.user_id, this.state.token);
-      this.props.followPrompt(this.props.auth.user.user_id, this.state.token);
+      this.props.getFollowData(this.props.auth.user.user_id, this.state.token);
     })
   }
 
@@ -88,6 +101,7 @@ class Feed extends Component {
 Feed.propTypes = {
   followPrompt: PropTypes.func.isRequired,
   getProfile: PropTypes.func.isRequired,
+  getFollowData: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   feed: PropTypes.object.isRequired,
@@ -103,4 +117,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { followPrompt, getProfile })(withRouter(Feed));
+export default connect(mapStateToProps, { followPrompt, getProfile, getFollowData })(withRouter(Feed));
