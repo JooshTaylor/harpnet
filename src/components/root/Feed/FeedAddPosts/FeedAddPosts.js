@@ -22,7 +22,13 @@ class FeedAddPosts extends Component {
       post_date: new Date().toString().split(' ').slice(1, 5).join(' ')
     }
 
-    this.props.makePost(postData, localStorage.getItem('token'));
+    const reloadData = {
+      following: this.props.follows.following,
+      id: this.props.auth.user.user_id
+    }
+
+    this.props.makePost(postData, localStorage.getItem('token'), reloadData);
+    this.setState({ post: "" })
   }
 
   onChange = (e) => {
@@ -44,13 +50,15 @@ class FeedAddPosts extends Component {
 FeedAddPosts.propTypes = {
   makePost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  follows: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    profile: state.profile
+    profile: state.profile,
+    follows: state.follows
   }
 }
 

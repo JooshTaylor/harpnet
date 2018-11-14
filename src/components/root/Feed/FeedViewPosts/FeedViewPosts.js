@@ -11,12 +11,21 @@ class FeedViewPosts extends Component {
 
   //When this component mounts, we fetch the user's feed from the DB based on who they are following
   componentDidMount() {
-    const token = localStorage.getItem('token');
     const data = {
       following: this.props.follows.following,
       id: this.props.auth.user.user_id
     }
-    this.props.getFeed(data, token);
+    this.props.getFeed(data, localStorage.getItem('token'));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.post.reload && nextProps.post.reload === true) {
+      const data = {
+        following: this.props.follows.following,
+        id: this.props.auth.user.user_id
+      }
+      this.props.getFeed(data, localStorage.getItem('token'));
+    }
   }
 
   render() {
@@ -26,8 +35,6 @@ class FeedViewPosts extends Component {
     const deletePost = (
       <button className="post__delete">X</button>
     );
-
-    const comments = null;
 
     const posts = post.posts.map(post => {
       return (
@@ -57,7 +64,25 @@ class FeedViewPosts extends Component {
           </div>
           <div className="post__bottom">
             <PostAddComments post_id={post.post_id} />
-            <PostViewComments />
+            {/* If the post has comments, it will render the PostViewComments component */}
+            {this.props.post.comments
+              ?
+              this.props.post.comments.filter(comment => {
+                return comment.post_id === post.post_id
+              }).length !== 0
+                ?
+                (
+                  <PostViewComments
+                    comments={this.props.post.comments.filter(comment => {
+                      return comment.post_id === post.post_id
+                    })}
+                  />
+                )
+                :
+                null
+              :
+              null
+            }
           </div>
         </li>
       );

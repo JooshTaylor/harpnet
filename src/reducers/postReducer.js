@@ -1,8 +1,9 @@
-import { SET_POSTS, CLEAR_POSTS, GET_COMMENTS } from '../actions/constants';
+import { GET_POSTS, CLEAR_POSTS, GET_COMMENTS, RELOAD_TRUE } from '../actions/constants';
 
 const initialState = {
     posts: [],
-    comments: []
+    comments: [],
+    reload: false
 }
 
 export const postReducer = (state = initialState, action) => {
@@ -10,22 +11,32 @@ export const postReducer = (state = initialState, action) => {
         default:
             return state;
 
-        case SET_POSTS:
+        case GET_POSTS:
             return {
                 ...state,
-                posts: action.payload
+                posts: action.payload,
+                reload: false
             }
 
         case CLEAR_POSTS:
             return {
                 ...state,
-                posts: []
+                posts: [],
+                comments: [],
+                reload: false
             }
 
-        // case GET_COMMENTS:
-        //     return {
-        //         ...state,
-        //         comments: action.payload
-        //     }
+        case GET_COMMENTS:
+            return {
+                ...state,
+                comments: action.payload,
+                reload: false
+            }
+
+        case RELOAD_TRUE:
+            return {
+                ...state,
+                reload: true
+            }
     }
 }

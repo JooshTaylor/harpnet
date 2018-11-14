@@ -23,7 +23,13 @@ class PostAddComments extends Component {
       comment_date: new Date().toString().split(' ').slice(1, 5).join(' ')
     }
 
-    this.props.makeComment(commentData, localStorage.getItem('token'));
+    const reloadData = {
+      following: this.props.follows.following,
+      id: this.props.auth.user.user_id
+    }
+
+    this.props.makeComment(commentData, localStorage.getItem('token'), reloadData);
+    this.setState({ comment: "" })
   }
 
   onChange = (e) => {
@@ -47,13 +53,15 @@ PostAddComments.propTypes = {
   makeComment: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  post_id: PropTypes.number.isRequired
+  post_id: PropTypes.number.isRequired,
+  follows: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    profile: state.profile
+    profile: state.profile,
+    follows: state.follows
   }
 }
 

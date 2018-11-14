@@ -34,8 +34,10 @@ class Feed extends Component {
         this.setState({ propsReceivedCount: 1 })
       } else if (this.state.propsReceivedCount === 1) {
         this.setState({ propsReceivedCount: 2 })
-      } else if (this.state.propsReceivedCount === 2 && this.props.follows.following.length === 0) {
+      } else if (this.state.propsReceivedCount === 2) {
         this.setState({ propsReceivedCount: 3 })
+      } else if (this.state.propsReceivedCount === 3 && this.props.follows.following.length === 0) {
+        this.setState({ propsReceivedCount: 4 })
         this.props.followPrompt(this.props.auth.user.user_id, this.state.token);
       }
     }

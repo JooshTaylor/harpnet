@@ -34,6 +34,7 @@ export const CLEAR_FOLLOWS = 'CLEAR_FOLLOWS';
 
 
 // Post constants
-export const SET_POSTS = 'SET_POSTS';
+export const GET_POSTS = 'SET_POSTS';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const GET_COMMENTS = 'GET_COMMENTS';
+export const RELOAD_TRUE = 'RELOAD_TRUE';
