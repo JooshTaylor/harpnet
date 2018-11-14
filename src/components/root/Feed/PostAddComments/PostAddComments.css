@@ -1,15 +1,15 @@
 .comment-form {
   background-color: var(--color-white-darker);
   border-radius: 10px;
-  width: 67rem;
+  width: 57rem;
 }
 
 .comment-field {
-  width: 55rem;
+  width: 45rem;
   padding: 0.8rem;
   border: none;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
   font-size: 1.4rem;
   box-sizing: border-box;
   transition: all .2s;
@@ -18,8 +18,8 @@
 .comment-btn {
   background-color: var(--color-primary-light);
   border: none;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
   padding: 0.8rem;
   cursor: pointer;
   width: 8rem;

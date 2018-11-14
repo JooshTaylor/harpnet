@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getFeed } from '../../../../actions/postActions';
+import { getFeed, deletePost } from '../../../../actions/postActions';
 import './FeedViewPosts.css';
 
 import PostAddComments from '../PostAddComments/PostAddComments';
 import PostViewComments from '../PostViewComments/PostViewComments';
 
 class FeedViewPosts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showDeletePrompt: false,
+      deleteSubject: -1 //The delete subject when not -1 holds the value of the post potentially being deleted
+    }
+  }
 
   //When this component mounts, we fetch the user's feed from the DB based on who they are following
   componentDidMount() {
@@ -28,14 +35,43 @@ class FeedViewPosts extends Component {
     }
   }
 
+  toggleDeletePrompt = (e) => {
+    if (!this.state.showDeletePrompt) {
+      this.setState({
+        showDeletePrompt: true,
+        deleteSubject: [e.target.name]
+      })
+    } else {
+      this.setState({
+        showDeletePrompt: false,
+        deleteSubject: -1
+      })
+    }
+  }
+
+  deletePost = (e) => {
+    this.props.deletePost([e.target.name], localStorage.getItem('token'));
+    this.toggleDeletePrompt();
+  }
+
   render() {
-    //Posts is an array of 20 posts made by the users followers ordered from latest to earliest.
     const { auth, post } = this.props;
 
-    const deletePost = (
-      <button className="post__delete">X</button>
-    );
+    const deletePrompt = this.state.showDeletePrompt ?
+      (
+        <div className="delete-prompt">
+          <h1 className="delete-prompt__heading">Are you sure you want to delete this post?</h1>
+          <p className="delete-prompt__note">Once you hit delete, this post can never be recovered!</p>
+          <button onClick={this.toggleDeletePrompt} className="delete-prompt__keep" type="button">
+            Keep
+          </button>
+          <button onClick={this.deletePost} name={this.state.deleteSubject} className="delete-prompt__delete" type="button">
+            Delete
+          </button>
+        </div>
+      ) : null;
 
+    //Posts is an array of 30 posts made by the accounts that the user is following ordered from latest to earliest.
     const posts = post.posts.map(post => {
       return (
         <li key={post.post_id} className="post">
@@ -53,13 +89,17 @@ class FeedViewPosts extends Component {
                   {post.post_date.split(' ').slice(3, 4).toString().split(':').slice(0, 2).join(':')}
                 </h3>
               </div>
-              {post.creator_id === auth.user.user_id ? deletePost : null}
+              {post.creator_id === auth.user.user_id ?
+                (
+                  <button onClick={this.toggleDeletePrompt} name={post.post_id} className="post__delete">&times;</button>
+                ) :
+                null}
             </div>
             <div className="post__content-box">
               <p className="post__content">{post.content}</p>
             </div>
             <div className="post__features-box">
-              Score
+              {post.score} points
             </div>
           </div>
           <div className="post__bottom">
@@ -90,6 +130,7 @@ class FeedViewPosts extends Component {
 
     return (
       <ul className="feed">
+        {deletePrompt}
         {posts}
       </ul>
     )
@@ -98,6 +139,7 @@ class FeedViewPosts extends Component {
 
 FeedViewPosts.propTypes = {
   getFeed: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
   follows: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
@@ -111,4 +153,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getFeed })(FeedViewPosts);
+export default connect(mapStateToProps, { getFeed, deletePost })(FeedViewPosts);

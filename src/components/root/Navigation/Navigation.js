@@ -96,9 +96,11 @@ class Navigation extends Component {
       null;
 
     return (
-      <nav className="nav">
-        {navItems}
-        {navDropdown}
+      <nav className="nav-fixed">
+        <div className="nav">
+          {navItems}
+          {navDropdown}
+        </div>
       </nav>
     )
   }

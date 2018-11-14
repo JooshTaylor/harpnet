@@ -1,9 +1,10 @@
-import { GET_POSTS, CLEAR_POSTS, GET_COMMENTS, RELOAD_TRUE } from '../actions/constants';
+import { GET_POSTS, CLEAR_POSTS, GET_COMMENTS, RELOAD_TRUE, DELETE_DECLINE } from '../actions/constants';
 
 const initialState = {
     posts: [],
     comments: [],
-    reload: false
+    reload: false,
+    deleteState: false
 }
 
 export const postReducer = (state = initialState, action) => {

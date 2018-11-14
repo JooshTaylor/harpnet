@@ -1,9 +1,18 @@
+.nav-fixed {
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
 /* Parent element */
 .nav {
     background-color: var(--color-bg);
     color: var(--color-white);
     box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.2);
-    padding: 3rem;
+    padding: 2rem 3rem;
     font-size: 1.4rem;
     letter-spacing: .5px;
     font-family: 'Open Sans', sans-serif;
@@ -37,7 +46,7 @@
 .nav__link {
     border: 2px solid var(--color-text-light);
     border-radius: 5px;
-    padding: 1rem 3rem;
+    padding: .7rem 2.5rem;
     color: var(--color-white);
     text-decoration: none;
     text-transform: uppercase;

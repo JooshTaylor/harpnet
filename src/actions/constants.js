@@ -38,3 +38,5 @@ export const GET_POSTS = 'SET_POSTS';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const RELOAD_TRUE = 'RELOAD_TRUE';
+export const DELETE_DECLINE = 'DELETE_DECLINE';
+export const DELETE_PENDING = 'DELETE_PENDING';

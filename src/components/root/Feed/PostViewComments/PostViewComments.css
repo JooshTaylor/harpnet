@@ -27,6 +27,7 @@
   background-color: #fff;
   border-radius: 2.25rem;
   padding: 0 .8rem;
+  width: 100%;
 }
 
 .comments__name {
@@ -35,6 +36,7 @@
   margin-right: .5rem;
   align-self: flex-start;
   margin-top: .8rem;
+  flex: 0
 }
 
 .comments__text {
@@ -42,4 +44,23 @@
   margin: 0;
   padding: .8rem;
   align-self: flex-end;
+  flex: 1
+}
+
+.comments__delete {
+  font-size: 1.5rem;
+  padding: 0 1.2rem 0 .55rem;
+  margin: 0;
+  margin-left: .5rem;
+  align-self: flex-start;
+  margin-top: .8rem;
+  flex: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--color-bg);
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  color: #fff;
 }

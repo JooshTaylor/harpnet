@@ -2,10 +2,13 @@
   margin-top: 2rem;
   list-style: none;
   transform: translateX(-2rem);
+  position: relative;
 }
 
+
+
 .post {
-  width: 70rem;
+  width: 60rem;
   background-color: #fff;
   box-shadow: 0 0.2rem 1rem rgba(0,0,0,0.25);
   border-radius: 5px;

@@ -9,7 +9,7 @@
 /* Left column */
 .landing__info {
     flex: 1;
-    padding: 5rem 5rem 8rem 5rem;
+    padding: 8rem 5rem 8rem 5rem;
 
     display: flex;
     flex-direction: column;
@@ -92,7 +92,7 @@
 /* Right column */
 .landing__register {
     flex: 1;
-    padding: 5rem 5rem 8rem 5rem;
+    padding: 8rem 5rem;
     background-color: var(--color-white-darker);
 
     display: flex;
