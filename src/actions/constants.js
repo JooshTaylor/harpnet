@@ -37,6 +37,14 @@ export const CLEAR_FOLLOWS = 'CLEAR_FOLLOWS';
 export const GET_POSTS = 'SET_POSTS';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const GET_COMMENTS = 'GET_COMMENTS';
-export const RELOAD_TRUE = 'RELOAD_TRUE';
+export const FEED_RELOAD_TRUE = 'FEED_RELOAD_TRUE';
 export const DELETE_DECLINE = 'DELETE_DECLINE';
 export const DELETE_PENDING = 'DELETE_PENDING';
+
+
+
+
+// Search constants
+export const SEARCH_LOADING = 'SEARCH_LOADING';
+export const SEARCH_COMPLETE = 'SEARCH_COMPLETE';
+export const RESET_SEARCH = 'RESET_SEARCH';

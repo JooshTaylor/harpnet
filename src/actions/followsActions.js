@@ -36,3 +36,11 @@ export const followUser = (follower_id, following_id, token) => dispatch => {
         }
     });
 }
+
+export const unfollowUser = (unfollower_id, unfollowing_id, token) => dispatch => {
+    axios.post(`http://localhost:5000/api/follows/unfollow/${unfollowing_id}`, unfollower_id, {
+        headers: {
+            "Authorization": token
+        }
+    });
+}

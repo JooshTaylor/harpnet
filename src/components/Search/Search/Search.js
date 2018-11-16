@@ -1,0 +1,84 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import './Search.css';
+import { connect } from 'react-redux';
+import { resetSearch } from '../../../actions/searchActions';
+import { followUser, unfollowUser } from '../../../actions/followsActions';
+import UserSearchInfo from '../UserSearchInfo/UserSearchInfo';
+
+class Search extends Component {
+  componentWillUnmount() {
+    this.props.resetSearch();
+  }
+
+  handleFollow = (e) => {
+    const id = this.props.auth.user.user_id; // Follower ID
+    const id2 = [e.target.name]; // Followee ID
+
+    this.props.followUser(id, id2, localStorage.getItem('token'));
+  }
+
+  handleUnfollow = (e) => {
+    const id = this.props.auth.user.user_id; // Unfollower ID
+    const id2 = [e.target.name]; // Unfollowee ID
+
+    this.props.unfollowUser(id, id2, localStorage.getItem('token'));
+  }
+
+  handleViewProfile = (e) => {
+    // Action to get user profile - send with router
+  }
+
+  render() {
+    const { search, auth, follows } = this.props;
+
+    const searchResults = search.searchResults
+      .filter(user => user.user_id !== auth.user.user_id)
+      .map(result => {
+        return (
+          <li key={result.user_id} className="search__result">
+            <figure className="search__img-box">
+              <img className="search__img" src={`https://robohash.org/${result.username}/?200x200`} alt="profile" />
+              <figcaption className="search__img-caption">
+                <h2 className="search__username">{result.username}</h2>
+              </figcaption>
+            </figure>
+            <div className="search__info">
+              <UserSearchInfo fname={result.first_name} lname={result.last_name} bio={result.biography} />
+            </div>
+            <div className="search__options">
+              {
+                follows.following.includes(result.user_id)
+                  ?
+                  (<button name={result.user_id} onClick={this.handleUnfollow} className="search__btn search__btn--unfollow">Unfollow</button>)
+                  :
+                  (<button name={result.user_id} onClick={this.handleFollow} className="search__btn search__btn--follow">Follow</button>)
+              }
+              <button name={result.user_id} className="search__btn">View Profile</button>
+            </div>
+          </li>
+        );
+      })
+
+    return (
+      <div className="search">
+        <div className="search__for-box">
+          <h1 className="search__for">Showing {search.searchResults.length} search results for: <span>{search.searchField}</span></h1>
+        </div>
+        <ul className="search__results">
+          {searchResults}
+        </ul>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    search: state.search,
+    auth: state.auth,
+    follows: state.follows
+  }
+}
+
+export default connect(mapStateToProps, { followUser, unfollowUser, resetSearch })(Search);

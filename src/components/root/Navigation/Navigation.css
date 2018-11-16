@@ -36,8 +36,17 @@
     margin-right: 1rem;
 }
 
-.nav__item--home {
+.nav__item--home-1 {
     margin-right: auto;
+}
+
+.nav__item--home-2 {
+    margin-right: 8rem;
+}
+
+.nav__item--search {
+    margin-right: auto;
+    width: 40%;
 }
 
 

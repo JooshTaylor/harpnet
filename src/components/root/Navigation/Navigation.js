@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../actions/authActions';
+import SearchBar from '../../Search/SearchBar/SearchBar';
 
 import './Navigation.css';
 
@@ -51,7 +52,7 @@ class Navigation extends Component {
     const navItems = (!this.props.auth.isLoggedIn) ?
       (
         <ul className="nav__list">
-          <li className="nav__item nav__item--home">
+          <li className="nav__item nav__item--home-1">
             <Link className="nav__link nav__link--home" to="/">Home</Link>
           </li>
           <li className="nav__item">
@@ -65,8 +66,11 @@ class Navigation extends Component {
       :
       (
         <ul className="nav__list">
-          <li className="nav__item nav__item--home">
+          <li className="nav__item nav__item--home-2">
             <Link className="nav__link nav__link--home" to="/">Home</Link>
+          </li>
+          <li className="nav__item nav__item--search">
+            <SearchBar />
           </li>
           <li className="nav__item">
             <Link className="nav__link" to="/messages">Messages</Link>

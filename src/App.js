@@ -17,6 +17,8 @@ import Footer from './components/root/Footer/Footer';
 import Landing from './components/root/Landing/Landing';
 import Navigation from './components/root/Navigation/Navigation';
 
+import Search from './components/Search/Search/Search';
+
 import './App.css';
 
 class App extends Component {
@@ -50,6 +52,7 @@ class App extends Component {
             <Route exact path='/register' component={Register} />
             <Switch>
               <PrivateRoute exact path='/feed' component={Feed} />
+              <PrivateRoute exact path='/search' component={Search} />
             </Switch>
           </main>
           <Footer />

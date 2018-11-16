@@ -1,4 +1,4 @@
-import { GET_POSTS, CLEAR_POSTS, GET_COMMENTS, RELOAD_TRUE, DELETE_DECLINE } from '../actions/constants';
+import { GET_POSTS, CLEAR_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE } from '../actions/constants';
 
 const initialState = {
     posts: [],
@@ -34,7 +34,7 @@ export const postReducer = (state = initialState, action) => {
                 reload: false
             }
 
-        case RELOAD_TRUE:
+        case FEED_RELOAD_TRUE:
             return {
                 ...state,
                 reload: true

@@ -51,7 +51,7 @@ class FeedViewPosts extends Component {
 
   deletePost = (e) => {
     this.props.deletePost([e.target.name], localStorage.getItem('token'));
-    this.toggleDeletePrompt();
+    // this.toggleDeletePrompt();
   }
 
   render() {
@@ -62,9 +62,9 @@ class FeedViewPosts extends Component {
         <div className="delete-prompt">
           <h1 className="delete-prompt__heading">Are you sure you want to delete this post?</h1>
           <p className="delete-prompt__note">Once you hit delete, this post can never be recovered!</p>
-          <button onClick={this.toggleDeletePrompt} className="delete-prompt__keep" type="button">
+          <a href={`#${this.state.deleteSubject}`} onClick={this.toggleDeletePrompt} className="delete-prompt__keep" type="button">
             Keep
-          </button>
+          </a>
           <button onClick={this.deletePost} name={this.state.deleteSubject} className="delete-prompt__delete" type="button">
             Delete
           </button>
@@ -74,7 +74,7 @@ class FeedViewPosts extends Component {
     //Posts is an array of 30 posts made by the accounts that the user is following ordered from latest to earliest.
     const posts = post.posts.map(post => {
       return (
-        <li key={post.post_id} className="post">
+        <li key={post.post_id} id={post.post_id} className="post">
           <div className="post__top">
             <div className="post__details">
               <div className="post__details-img-box">
@@ -91,7 +91,7 @@ class FeedViewPosts extends Component {
               </div>
               {post.creator_id === auth.user.user_id ?
                 (
-                  <button onClick={this.toggleDeletePrompt} name={post.post_id} className="post__delete">&times;</button>
+                  <a href="#" onClick={this.deletePost} name={post.post_id} className="post__delete">&times;</a>
                 ) :
                 null}
             </div>

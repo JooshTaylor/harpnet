@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_COMMENTS, RELOAD_TRUE, DELETE_DECLINE } from './constants';
+import { GET_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE } from './constants';
 
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ export const makePost = (data, token, reloadData) => dispatch => {
   })
     .then(res => {
       dispatch({
-        type: RELOAD_TRUE
+        type: FEED_RELOAD_TRUE
       })
     });
 }
@@ -46,7 +46,7 @@ export const makeComment = (data, token, reloadData) => dispatch => {
   })
     .then(res => {
       dispatch({
-        type: RELOAD_TRUE
+        type: FEED_RELOAD_TRUE
       })
     });
 }
@@ -59,7 +59,20 @@ export const deletePost = (id, token = null) => dispatch => {
   })
     .then(res => {
       dispatch({
-        type: RELOAD_TRUE
+        type: FEED_RELOAD_TRUE
+      })
+    })
+}
+
+export const deleteComment = (id, token = null) => dispatch => {
+  axios.delete(`http://localhost:5000/api/posts/comment/${id}`, {
+    headers: {
+      "Authorization": token
+    }
+  })
+    .then(res => {
+      dispatch({
+        type: FEED_RELOAD_TRUE
       })
     })
 }
