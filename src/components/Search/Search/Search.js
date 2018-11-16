@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import './Search.css';
 import { connect } from 'react-redux';
 import { resetSearch, searchUsers } from '../../../actions/searchActions';
-import { followUser, unfollowUser } from '../../../actions/followsActions';
+import { followUser, unfollowUser, getFollowData } from '../../../actions/followsActions';
 import UserSearchInfo from '../UserSearchInfo/UserSearchInfo';
 
 class Search extends Component {
 
   componentWillReceiveProps(nextProps) {
-    const { search } = this.props;
+    const { search, auth } = this.props;
 
     if (nextProps.search.reload) {
+      this.props.getFollowData(auth.user.user_id, localStorage.getItem('token'));
       this.props.searchUsers(search.searchField, localStorage.getItem('token'))
     }
   }
@@ -96,7 +97,8 @@ Search.propTypes = {
   searchUsers: PropTypes.func.isRequired,
   followUser: PropTypes.func.isRequired,
   unfollowUser: PropTypes.func.isRequired,
-  resetSearch: PropTypes.func.isRequired
+  resetSearch: PropTypes.func.isRequired,
+  getFollowData: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, { searchUsers, followUser, unfollowUser, resetSearch })(Search);
+export default connect(mapStateToProps, { getFollowData, searchUsers, followUser, unfollowUser, resetSearch })(Search);

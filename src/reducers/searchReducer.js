@@ -16,7 +16,8 @@ export const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        searchField: action.payload
+        searchField: action.payload,
+        reload: false
       }
 
     case SEARCH_COMPLETE:

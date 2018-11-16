@@ -6,6 +6,7 @@ export const searchUsers = (params, token, history = null) => dispatch => {
     type: SEARCH_LOADING,
     payload: params
   })
+
   if (history) {
     history.push('/search');
   }
