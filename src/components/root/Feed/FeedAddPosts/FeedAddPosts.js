@@ -38,10 +38,12 @@ class FeedAddPosts extends Component {
   }
 
   render() {
+    const { errors } = this.props;
     return (
       <form className="post-form" onSubmit={this.onSubmit} noValidate>
         <input type="text" className="post-field" name="post" placeholder="Write a post.." onChange={this.onChange} value={this.state.post} />
         <input type="submit" className="post-btn" value="Submit" />
+        {Object.keys(errors).length > 0 ? (<small className="post-errors">{errors.errors.post}</small>) : null}
       </form>
     )
   }
@@ -51,14 +53,16 @@ FeedAddPosts.propTypes = {
   makePost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  follows: PropTypes.object.isRequired
+  follows: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
   return {
     auth: state.auth,
     profile: state.profile,
-    follows: state.follows
+    follows: state.follows,
+    errors: state.errors
   }
 }
 

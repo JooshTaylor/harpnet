@@ -48,3 +48,9 @@
 .post-btn:focus {
   outline: none;
 }
+
+.post-errors {
+  color: red;
+  text-align: left;
+  padding-right: 35rem;
+}

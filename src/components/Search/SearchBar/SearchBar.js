@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './SearchBar.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { search } from '../../../actions/searchActions';
+import { searchUsers } from '../../../actions/searchActions';
 import { withRouter } from 'react-router-dom';
 
 class SearchBar extends Component {
@@ -20,7 +20,7 @@ class SearchBar extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    this.props.search(this.state.searchfield, localStorage.getItem('token'), this.props.history);
+    this.props.searchUsers(this.state.searchfield, localStorage.getItem('token'), this.props.history);
 
     this.setState({ searchfield: "" })
   }
@@ -35,4 +35,4 @@ class SearchBar extends Component {
   }
 }
 
-export default connect(null, { search })(withRouter(SearchBar));
+export default connect(null, { searchUsers })(withRouter(SearchBar));

@@ -53,7 +53,7 @@ class Feed extends Component {
 
   followUser = (id) => {
     // console.log(this.state.token);
-    this.props.followUser({ follower_id: this.props.auth.user.user_id }, id, this.state.token);
+    this.props.followUser({ follower_id: this.props.auth.user.user_id }, id, this.state.token, "prompt");
     this.props.getFollowData(this.props.auth.user.user_id, this.state.token);
   }
 

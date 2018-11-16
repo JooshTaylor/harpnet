@@ -1,13 +1,14 @@
 import { SEARCH_LOADING, SEARCH_COMPLETE, RESET_SEARCH } from './constants';
 import axios from 'axios';
 
-export const search = (params, token, history) => dispatch => {
+export const searchUsers = (params, token, history = null) => dispatch => {
   dispatch({
     type: SEARCH_LOADING,
     payload: params
   })
-
-  history.push('/search');
+  if (history) {
+    history.push('/search');
+  }
 
   axios.get(`http://localhost:5000/api/search/${params}`, {
     headers: {

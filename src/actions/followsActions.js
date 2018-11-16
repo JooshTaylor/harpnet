@@ -1,4 +1,4 @@
-import { SUGGEST_FOLLOWERS, SET_FOLLOWS } from './constants';
+import { SUGGEST_FOLLOWERS, SET_FOLLOWS, RELOAD_SEARCH } from './constants';
 import axios from 'axios';
 
 export const followPrompt = (id, token) => dispatch => {
@@ -29,12 +29,27 @@ export const getFollowData = (id, token) => dispatch => {
         })
 }
 
-export const followUser = (follower_id, following_id, token) => dispatch => {
+export const followUser = (follower_id, following_id, token, location) => dispatch => {
     axios.post(`http://localhost:5000/api/follows/follow/${following_id}`, follower_id, {
         headers: {
             "Authorization": token
         }
-    });
+    })
+        .then(res => {
+            switch (location) {
+                default: return null;
+                case "search":
+                    dispatch({
+                        type: RELOAD_SEARCH
+                    })
+
+                //case for profiles
+
+                //case for follow prompt
+
+                //case for feed
+            }
+        })
 }
 
 export const unfollowUser = (unfollower_id, unfollowing_id, token) => dispatch => {

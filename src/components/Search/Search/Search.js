@@ -2,20 +2,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Search.css';
 import { connect } from 'react-redux';
-import { resetSearch } from '../../../actions/searchActions';
+import { resetSearch, searchUsers } from '../../../actions/searchActions';
 import { followUser, unfollowUser } from '../../../actions/followsActions';
 import UserSearchInfo from '../UserSearchInfo/UserSearchInfo';
 
 class Search extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    const { search } = this.props;
+
+    if (nextProps.search.reload) {
+      this.props.searchUsers(search.searchField, localStorage.getItem('token'))
+    }
+  }
+
   componentWillUnmount() {
     this.props.resetSearch();
   }
 
   handleFollow = (e) => {
-    const id = this.props.auth.user.user_id; // Follower ID
-    const id2 = [e.target.name]; // Followee ID
-
-    this.props.followUser(id, id2, localStorage.getItem('token'));
+    const arg1 = { follower_id: this.props.auth.user.user_id }; // Follower ID
+    const arg2 = [e.target.name]; // Followee ID
+    this.props.followUser(arg1, Number(arg2[0]), localStorage.getItem('token'), "search");
   }
 
   handleUnfollow = (e) => {
@@ -63,7 +71,7 @@ class Search extends Component {
     return (
       <div className="search">
         <div className="search__for-box">
-          <h1 className="search__for">Showing {search.searchResults.length} search results for: <span>{search.searchField}</span></h1>
+          <h1 className="search__for">Showing {searchResults.length} search results for: <span>{search.searchField}</span></h1>
         </div>
         <ul className="search__results">
           {searchResults}
@@ -81,4 +89,14 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { followUser, unfollowUser, resetSearch })(Search);
+Search.propTypes = {
+  search: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  follows: PropTypes.object.isRequired,
+  searchUsers: PropTypes.func.isRequired,
+  followUser: PropTypes.func.isRequired,
+  unfollowUser: PropTypes.func.isRequired,
+  resetSearch: PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, { searchUsers, followUser, unfollowUser, resetSearch })(Search);

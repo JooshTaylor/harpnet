@@ -1,18 +1,14 @@
-import { GET_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE } from './constants';
+import { GET_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE, GET_ERRORS, CLEAR_ERRORS } from './constants';
 
 import axios from 'axios';
 
-export const getFeed = (data, token, test = 0) => dispatch => {
+export const getFeed = (data, token) => dispatch => {
   axios.post('http://localhost:5000/api/posts/get/', data, {
     headers: {
       "Authorization": token
     }
   })
     .then(res => {
-      if (test === 1) {
-        console.log('hi');
-      }
-
       dispatch({
         type: GET_POSTS,
         payload: res.data.posts
@@ -25,7 +21,7 @@ export const getFeed = (data, token, test = 0) => dispatch => {
     })
 }
 
-export const makePost = (data, token, reloadData) => dispatch => {
+export const makePost = (data, token) => dispatch => {
   axios.post('http://localhost:5000/api/posts/new', data, {
     headers: {
       "Authorization": token
@@ -35,10 +31,19 @@ export const makePost = (data, token, reloadData) => dispatch => {
       dispatch({
         type: FEED_RELOAD_TRUE
       })
-    });
+      dispatch({
+        type: CLEAR_ERRORS
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    })
 }
 
-export const makeComment = (data, token, reloadData) => dispatch => {
+export const makeComment = (data, token) => dispatch => {
   axios.post(`http://localhost:5000/api/posts/comment`, data, {
     headers: {
       "Authorization": token
@@ -51,7 +56,7 @@ export const makeComment = (data, token, reloadData) => dispatch => {
     });
 }
 
-export const deletePost = (id, token = null) => dispatch => {
+export const deletePost = (id, token) => dispatch => {
   axios.delete(`http://localhost:5000/api/posts/${id}`, {
     headers: {
       "Authorization": token
@@ -64,7 +69,7 @@ export const deletePost = (id, token = null) => dispatch => {
     })
 }
 
-export const deleteComment = (id, token = null) => dispatch => {
+export const deleteComment = (id, token) => dispatch => {
   axios.delete(`http://localhost:5000/api/posts/comment/${id}`, {
     headers: {
       "Authorization": token
