@@ -13,7 +13,7 @@ class FeedViewPosts extends Component {
     this.state = {
       showDeletePrompt: false,
       deleteSubject: -1, //The delete subject when not -1 holds the value of the post potentially being deleted
-      iteration: 2
+      iteration: 1
     }
   }
 
@@ -62,7 +62,7 @@ class FeedViewPosts extends Component {
       following: this.props.follows.following,
       id: this.props.auth.user.user_id
     }
-    this.props.getFeed(data, Number([e.target.name]), localStorage.getItem('token'))
+    this.props.getFeed(data, Number([e.target.name]) + 1, localStorage.getItem('token'))
   }
 
   render() {

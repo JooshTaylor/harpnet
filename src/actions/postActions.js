@@ -23,12 +23,12 @@ export const getFeed = (data, iteration, token) => dispatch => {
 
       else if (iteration > 1) {
         dispatch({
-          type: ADD_EXTRA_POSTS,
+          type: GET_POSTS,
           payload: res.data
         })
 
         dispatch({
-          type: ADD_EXTRA_COMMENTS,
+          type: GET_COMMENTS,
           payload: res.data.comments
         })
       }
