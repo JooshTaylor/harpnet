@@ -1,19 +1,5 @@
-import { SUGGEST_FOLLOWERS, SET_FOLLOWS, RELOAD_SEARCH } from './constants';
+import { SET_FOLLOWS, RELOAD_SEARCH } from './constants';
 import axios from 'axios';
-
-export const followPrompt = (id, token) => dispatch => {
-    axios.get(`https://lit-citadel-92787.herokuapp.com/api/profile/prompt/${id}`, {
-        headers: {
-            'Authorization': token
-        }
-    })
-        .then(res => {
-            dispatch({
-                type: SUGGEST_FOLLOWERS,
-                payload: res.data
-            })
-        })
-}
 
 export const getFollowData = (id, token) => dispatch => {
     axios.get(`https://lit-citadel-92787.herokuapp.com/api/follows/get/${id}`, {
