@@ -12,7 +12,7 @@
     background-color: var(--color-bg);
     color: var(--color-white);
     box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.2);
-    padding: 2rem 3rem;
+    padding: 1rem 3rem;
     font-size: 1.4rem;
     letter-spacing: .5px;
     font-family: 'Open Sans', sans-serif;
@@ -27,6 +27,10 @@
     align-items: center;
     width: 90%;
     margin: 0 auto;
+}
+
+.nav__list--nologin {
+    padding: 1rem 0;
 }
 
 
@@ -55,7 +59,7 @@
 .nav__link {
     border: 2px solid var(--color-text-light);
     border-radius: 5px;
-    padding: .7rem 2.5rem;
+    padding: .7rem 1.5rem;
     color: var(--color-white);
     text-decoration: none;
     text-transform: uppercase;
@@ -87,8 +91,21 @@
 .nav__link--logout {
     background-color: var(--color-bg);
     cursor: pointer;
-    padding: 1rem 2rem;
     font-size: 2rem;
+}
+
+.nav__link--icon {
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.nav__link--profile {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    padding-right: 1.5rem;
 }
 
 
@@ -99,14 +116,22 @@
     height: 5rem;
 }
 
+.nav__img {
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+    margin-right: .3rem;
+    transform: translateY(-.3rem);
+}
+
 
 
 /* Settings dropdown */
 .nav__dropdown {
     position: absolute;
-    top: 6.2rem;
+    top: 3.7rem;
     right: 12rem;
-    background-color: var(--color-white);
+    background-color: var(--color-white-darker);
     list-style: none;
     display: flex;
     flex-direction: column;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './FeedAddPosts.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { makePost } from '../../../../actions/postActions';
+import { makePost } from '../../../actions/postActions';
 
 class FeedAddPosts extends Component {
   constructor(props) {

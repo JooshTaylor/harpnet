@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../../actions/authActions';
-import SearchBar from '../../Search/SearchBar/SearchBar';
+import { logoutUser } from '../../actions/authActions';
+import SearchBar from '../Search/SearchBar/SearchBar';
 
 import './Navigation.css';
 
@@ -48,10 +48,12 @@ class Navigation extends Component {
   }
 
   render() {
+    const { profile, auth } = this.props;
+
     // The navigation bar will change depending on whether the user is logged in or not.
-    const navItems = (!this.props.auth.isLoggedIn) ?
+    const navItems = (!auth.isLoggedIn) ?
       (
-        <ul className="nav__list">
+        <ul className="nav__list nav__list--nologin">
           <li className="nav__item nav__item--home-1">
             <Link className="nav__link nav__link--home" to="/">Home</Link>
           </li>
@@ -73,10 +75,15 @@ class Navigation extends Component {
             <SearchBar />
           </li>
           <li className="nav__item">
-            <Link className="nav__link" to="/messages">Messages</Link>
+            <Link className="nav__link nav__link--profile" to="/profile">
+              <img src={`https://robohash.org/${profile.profile.username}/?200x200`} className="nav__img" alt="profile" /> {profile.profile.username}
+            </Link>
           </li>
           <li className="nav__item">
-            <Link className="nav__link" to="/notifications">Notifications</Link>
+            <Link className="nav__link" to="/messages"><i className="nav__link--icon fas fa-envelope"></i></Link>
+          </li>
+          <li className="nav__item">
+            <Link className="nav__link" to="/notifications"><i className="nav__link--icon fas fa-bell"></i></Link>
           </li>
           <li className="nav__item nav__item--logout">
             <button onClick={this.toggleDropdown} name="dropdown" className="nav__link nav__link--logout" type="button"><i className="nav__link--icon fas fa-cogs"></i></button>
@@ -86,7 +93,7 @@ class Navigation extends Component {
       ;
 
     //The nav dropdown will only show for users that are logged in and when the dropDown state is true
-    const navDropdown = (this.props.auth.isLoggedIn && this.state.dropDown) ?
+    const navDropdown = (auth.isLoggedIn && this.state.dropDown) ?
       (
         <ul className="nav__dropdown">
           <li className="nav__dropdown-item">
@@ -112,12 +119,14 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
   auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
   logoutUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    profile: state.profile
   }
 }
 

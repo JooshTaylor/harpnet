@@ -1,23 +1,37 @@
-import { GET_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE, GET_ERRORS, CLEAR_ERRORS } from './constants';
+import { GET_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE, GET_ERRORS, CLEAR_ERRORS, ADD_EXTRA_POSTS, ADD_EXTRA_COMMENTS } from './constants';
 
 import axios from 'axios';
 
-export const getFeed = (data, token) => dispatch => {
-  axios.post('http://localhost:5000/api/posts/get/', data, {
+export const getFeed = (data, iteration, token) => dispatch => {
+  axios.post(`http://localhost:5000/api/posts/get/${iteration}`, data, {
     headers: {
       "Authorization": token
     }
   })
     .then(res => {
-      dispatch({
-        type: GET_POSTS,
-        payload: res.data.posts
-      })
+      if (iteration === 1) {
+        dispatch({
+          type: GET_POSTS,
+          payload: res.data
+        })
 
-      dispatch({
-        type: GET_COMMENTS,
-        payload: res.data.comments
-      })
+        dispatch({
+          type: GET_COMMENTS,
+          payload: res.data.comments
+        })
+      }
+
+      else if (iteration > 1) {
+        dispatch({
+          type: ADD_EXTRA_POSTS,
+          payload: res.data
+        })
+
+        dispatch({
+          type: ADD_EXTRA_COMMENTS,
+          payload: res.data.comments
+        })
+      }
     })
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './PostAddComments.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { makeComment } from '../../../../actions/postActions';
+import { makeComment } from '../../../actions/postActions';
 
 class PostAddComments extends Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class PostAddComments extends Component {
       id: this.props.auth.user.user_id
     }
 
+    console.log(this.state.comment);
     this.props.makeComment(commentData, localStorage.getItem('token'), reloadData);
     this.setState({ comment: "" })
   }

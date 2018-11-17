@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Landing.css';
-import FormText from '../../Forms/FormText/FormText';
-import FormDate from '../../Forms/FormDate/FormDate';
-import PubAcc from '../../Common/PubAcc/PubAcc';
+import FormText from '../Forms/FormText/FormText';
+import FormDate from '../Forms/FormDate/FormDate';
+import PubAcc from '../Common/PubAcc/PubAcc';
 import { withRouter, Redirect } from 'react-router-dom';
-import { registerUser } from '../../../actions/authActions';
+import { registerUser } from '../../actions/authActions';
 
 import { connect } from 'react-redux';
 

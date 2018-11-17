@@ -12,10 +12,10 @@ import Login from './components/Login/Login';
 
 import Register from './components/Register/Register';
 
-import Feed from './components/root/Feed/Feed';
-import Footer from './components/root/Footer/Footer';
-import Landing from './components/root/Landing/Landing';
-import Navigation from './components/root/Navigation/Navigation';
+import Feed from './components/Feed/Feed';
+import Footer from './components/Footer/Footer';
+import Landing from './components/Landing/Landing';
+import Navigation from './components/Navigation/Navigation';
 
 import Search from './components/Search/Search/Search';
 

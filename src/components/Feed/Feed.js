@@ -5,8 +5,8 @@ import FeedAddPosts from './FeedAddPosts/FeedAddPosts';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getProfile } from '../../../actions/profileActions';
-import { followPrompt, getFollowData, followUser } from '../../../actions/followsActions';
+import { getProfile } from '../../actions/profileActions';
+import { followPrompt, getFollowData, followUser } from '../../actions/followsActions';
 
 import './Feed.css';
 

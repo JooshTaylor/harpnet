@@ -97,3 +97,20 @@
   padding: 1.5rem;
   padding-top: 0;
 }
+
+
+.posts__showmore {
+  border: none;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+  padding: 1rem 2.5rem;
+  font-size: 1.6rem;
+  color: var(--color-white);
+  transition: all .2s;
+  cursor: pointer;
+  margin: 3rem 0 2rem;
+}
+
+.posts__showmore:hover {
+  background-color: var(--color-primary-dark);
+}

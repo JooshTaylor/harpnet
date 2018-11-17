@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getFeed, deletePost } from '../../../../actions/postActions';
+import { getFeed, deletePost } from '../../../actions/postActions';
 import './FeedViewPosts.css';
 
 import PostAddComments from '../PostAddComments/PostAddComments';
@@ -12,7 +12,8 @@ class FeedViewPosts extends Component {
     super(props);
     this.state = {
       showDeletePrompt: false,
-      deleteSubject: -1 //The delete subject when not -1 holds the value of the post potentially being deleted
+      deleteSubject: -1, //The delete subject when not -1 holds the value of the post potentially being deleted
+      iteration: 2
     }
   }
 
@@ -22,7 +23,7 @@ class FeedViewPosts extends Component {
       following: this.props.follows.following,
       id: this.props.auth.user.user_id
     }
-    this.props.getFeed(data, localStorage.getItem('token'));
+    this.props.getFeed(data, 1, localStorage.getItem('token'));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,7 +32,7 @@ class FeedViewPosts extends Component {
         following: this.props.follows.following,
         id: this.props.auth.user.user_id
       }
-      this.props.getFeed(data, localStorage.getItem('token'));
+      this.props.getFeed(data, this.state.iteration, localStorage.getItem('token'));
     }
   }
 
@@ -52,6 +53,16 @@ class FeedViewPosts extends Component {
   deletePost = (e) => {
     this.props.deletePost([e.target.name], localStorage.getItem('token'));
     // this.toggleDeletePrompt();
+  }
+
+  showMorePosts = (e) => {
+    let currentIteration = this.state.iteration;
+    this.setState({ iteration: currentIteration += 1 })
+    const data = {
+      following: this.props.follows.following,
+      id: this.props.auth.user.user_id
+    }
+    this.props.getFeed(data, Number([e.target.name]), localStorage.getItem('token'))
   }
 
   render() {
@@ -132,6 +143,7 @@ class FeedViewPosts extends Component {
       <ul className="feed">
         {deletePrompt}
         {posts}
+        {post.morePosts ? (<button name={this.state.iteration} type="button" onClick={this.showMorePosts} className="posts__showmore">Show More</button>) : null}
       </ul>
     )
   }
