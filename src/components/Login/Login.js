@@ -3,6 +3,7 @@ import './Login.css';
 import PropTypes from 'prop-types';
 import FormText from '../Forms/FormText/FormText';
 import PubAcc from '../Common/PubAcc/PubAcc';
+import Spinner from '../Common/Spinner';
 import { loginUser } from '../../actions/authActions';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -17,9 +18,9 @@ class Login extends Component {
     }
   }
 
-  componentWillMount() {
-    if (this.props.auth.isLoggedIn) {
-      return (<Redirect to='/feed' />)
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isLoggedIn) {
+      this.props.history.push('/feed');
     }
   }
 
@@ -45,27 +46,28 @@ class Login extends Component {
   }
 
   render() {
+    const { auth } = this.props;
     //If a users is logged in, they cannot access this page and are redirected to their feed.
-    if (this.props.auth.isLoggedIn) {
+    if (auth.isLoggedIn) {
       return (<Redirect to='/feed' />)
-    } else {
-      return (
-        <section className="login">
-          <h1 className="login__heading-1">
-            Login To Your account
-          </h1>
-          <form noValidate onSubmit={this.onSubmit} className="login__form">
-            <FormText type="text" name="userOrEmail" placeholder="Email Address or Username" onChange={this.onChange} value={this.state.userOrEmail} errors={this.props.errors} />
-            <FormText type="password" name="password" placeholder="Password" onChange={this.onChange} value={this.state.password} errors={this.props.errors} />
-            <input type="submit" className="login__form-btn" value="Login" />
-          </form>
-          <h2 className="login__heading-2">
-            Or login to one of our public accounts
-          </h2>
-          <PubAcc />
-        </section>
-      )
     }
+
+    return (
+      <section className="login">
+        <h1 className="login__heading-1">
+          Login To Your account
+          </h1>
+        <form noValidate onSubmit={this.onSubmit} className="login__form">
+          <FormText type="text" name="userOrEmail" placeholder="Email Address or Username" onChange={this.onChange} value={this.state.userOrEmail} errors={this.props.errors} />
+          <FormText type="password" name="password" placeholder="Password" onChange={this.onChange} value={this.state.password} errors={this.props.errors} />
+          <input type="submit" className="login__form-btn" value="Login" />
+        </form>
+        <h2 className="login__heading-2">
+          Or login to one of our public accounts
+          </h2>
+        <PubAcc />
+      </section>
+    )
   }
 }
 

@@ -52,6 +52,8 @@ class App extends Component {
             <Route exact path='/register' component={Register} />
             <Switch>
               <PrivateRoute exact path='/feed' component={Feed} />
+            </Switch>
+            <Switch>
               <PrivateRoute exact path='/search' component={Search} />
             </Switch>
           </main>

@@ -1,7 +1,11 @@
-import { SET_FOLLOWS, RELOAD_SEARCH } from './constants';
+import { SET_FOLLOWS, RELOAD_SEARCH, FOLLOWS_LOADING } from './constants';
 import axios from 'axios';
 
 export const getFollowData = (id, token) => dispatch => {
+    dispatch({
+        type: FOLLOWS_LOADING
+    })
+
     axios.get(`https://lit-citadel-92787.herokuapp.com/api/follows/get/${id}`, {
         headers: {
             "Authorization": token

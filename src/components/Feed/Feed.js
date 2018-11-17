@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FeedViewPosts from './FeedViewPosts/FeedViewPosts';
 import FeedAddPosts from './FeedAddPosts/FeedAddPosts';
+import Spinner from '../Common/Spinner';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -35,17 +36,12 @@ class Feed extends Component {
   render() {
     const { follows } = this.props;
 
-    //Checks if the user is following any other users or not
-    const postsCheck = follows.following.length !== 0 ?
-      //If the user is following other users, they will see the user(s) post(s)
-      (
-        <ul className="view__following">
-          <FeedAddPosts />
-          <FeedViewPosts />
-        </ul>
-      ) :
-      //If the user is not following anybody, they will be prompted to follow some randomly suggested accounts
-      (
+    let postsCheck;
+
+    if (follows.following.length === 0 && follows.loading) {
+      postsCheck = <Spinner />
+    } else if (follows.following.length === 0 && !follows.loading) {
+      postsCheck = (
         <div className="view__no-following">
           <h1 className="view__heading-1">Uh Oh! It looks like you haven't followed anybody yet</h1>
           <div className="view__box">
@@ -53,6 +49,14 @@ class Feed extends Component {
           </div>
         </div>
       );
+    } else {
+      postsCheck = (
+        <ul className="view__following">
+          <FeedAddPosts />
+          <FeedViewPosts />
+        </ul>
+      );
+    }
 
     return (
       <section className="feed">

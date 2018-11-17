@@ -4,6 +4,7 @@ import './Search.css';
 import { connect } from 'react-redux';
 import { resetSearch, searchUsers } from '../../../actions/searchActions';
 import { followUser, unfollowUser, getFollowData } from '../../../actions/followsActions';
+import Spinner from '../../Common/Spinner';
 import UserSearchInfo from '../UserSearchInfo/UserSearchInfo';
 
 class Search extends Component {
@@ -13,7 +14,7 @@ class Search extends Component {
 
     if (nextProps.search.reload) {
       this.props.getFollowData(auth.user.user_id, localStorage.getItem('token'));
-      this.props.searchUsers(search.searchField, localStorage.getItem('token'))
+      this.props.searchUsers(search.searchField, localStorage.getItem('token'));
     }
   }
 
@@ -40,6 +41,10 @@ class Search extends Component {
 
   render() {
     const { search, auth, follows } = this.props;
+
+    if (search.loading & search.searchResults.length === 0) {
+      return (<Spinner />);
+    }
 
     const searchResults = search.searchResults
       .filter(user => user.user_id !== auth.user.user_id)

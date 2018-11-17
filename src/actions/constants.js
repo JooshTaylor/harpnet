@@ -28,6 +28,7 @@ export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 // Follows constants
 export const SET_FOLLOWS = 'SET_FOLLOWS';
 export const CLEAR_FOLLOWS = 'CLEAR_FOLLOWS';
+export const FOLLOWS_LOADING = 'FOLLOWS_LOADING';
 
 
 

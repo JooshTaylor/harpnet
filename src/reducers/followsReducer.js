@@ -1,8 +1,9 @@
-import { SUGGEST_FOLLOWERS, SET_FOLLOWS, CLEAR_FOLLOWS } from '../actions/constants';
+import { FOLLOWS_LOADING, SET_FOLLOWS, CLEAR_FOLLOWS } from '../actions/constants';
 
 const initialState = {
     following: [],
-    followers: []
+    followers: [],
+    loading: false
 }
 
 export const followsReducer = (state = initialState, action) => {
@@ -10,11 +11,18 @@ export const followsReducer = (state = initialState, action) => {
         default:
             return state;
 
+        case FOLLOWS_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
+
         case CLEAR_FOLLOWS:
             return {
                 ...state,
                 following: [],
-                followers: []
+                followers: [],
+                loading: false
             }
 
         case SET_FOLLOWS:
