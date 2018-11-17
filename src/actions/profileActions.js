@@ -2,7 +2,7 @@ import { SET_PROFILE, GET_ERRORS } from './constants';
 import axios from 'axios';
 
 export const getProfile = (id, token) => dispatch => {
-  axios.get(`http://localhost:5000/api/profile/get/${id}`, {
+  axios.get(`https://lit-citadel-92787.herokuapp.com/api/profile/get/${id}`, {
     headers: {
       "Authorization": token
     }

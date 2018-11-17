@@ -6,7 +6,7 @@ export const registerUser = (user, history) => dispatch => {
     type: REGISTER_PENDING
   });
 
-  axios.post('http://localhost:5000/api/auth/register', user)
+  axios.post('https://lit-citadel-92787.herokuapp.com/api/auth/register', user)
     .then(res => {
 
       dispatch({
@@ -36,7 +36,7 @@ export const loginUser = (data, history) => dispatch => {
     type: LOGIN_PENDING
   });
 
-  axios.post('http://localhost:5000/api/auth/login', data)
+  axios.post('https://lit-citadel-92787.herokuapp.com/api/auth/login', data)
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS

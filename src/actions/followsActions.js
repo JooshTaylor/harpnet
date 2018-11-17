@@ -2,7 +2,7 @@ import { SUGGEST_FOLLOWERS, SET_FOLLOWS, RELOAD_SEARCH } from './constants';
 import axios from 'axios';
 
 export const followPrompt = (id, token) => dispatch => {
-    axios.get(`http://localhost:5000/api/profile/prompt/${id}`, {
+    axios.get(`https://lit-citadel-92787.herokuapp.com/api/profile/prompt/${id}`, {
         headers: {
             'Authorization': token
         }
@@ -16,7 +16,7 @@ export const followPrompt = (id, token) => dispatch => {
 }
 
 export const getFollowData = (id, token) => dispatch => {
-    axios.get(`http://localhost:5000/api/follows/get/${id}`, {
+    axios.get(`https://lit-citadel-92787.herokuapp.com/api/follows/get/${id}`, {
         headers: {
             "Authorization": token
         }
@@ -30,7 +30,7 @@ export const getFollowData = (id, token) => dispatch => {
 }
 
 export const followUser = (follower_id, following_id, token, location) => dispatch => {
-    axios.post(`http://localhost:5000/api/follows/${following_id}`, follower_id, {
+    axios.post(`https://lit-citadel-92787.herokuapp.com/api/follows/${following_id}`, follower_id, {
         headers: {
             "Authorization": token
         }
@@ -53,7 +53,7 @@ export const followUser = (follower_id, following_id, token, location) => dispat
 }
 
 export const unfollowUser = (unfollower_id, unfollowing_id, token, location) => dispatch => {
-    axios.delete(`http://localhost:5000/api/follows/${unfollower_id}/${unfollowing_id}`, {
+    axios.delete(`https://lit-citadel-92787.herokuapp.com/api/follows/${unfollower_id}/${unfollowing_id}`, {
         headers: {
             "Authorization": token
         }

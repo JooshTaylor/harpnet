@@ -11,7 +11,7 @@ export const searchUsers = (params, token, history = null) => dispatch => {
     history.push('/search');
   }
 
-  axios.get(`http://localhost:5000/api/search/${params}`, {
+  axios.get(`https://lit-citadel-92787.herokuapp.com/api/search/${params}`, {
     headers: {
       "Authorization": token
     }

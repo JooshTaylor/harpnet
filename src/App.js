@@ -27,7 +27,7 @@ class App extends Component {
   componentDidMount() {
     const token = window.localStorage.getItem('token');
     if (token) {
-      axios.get('http://localhost:5000/api/auth/authenticate', {
+      axios.get('https://lit-citadel-92787.herokuapp.com/api/auth/authenticate', {
         headers: {
           "Authorization": token
         }

@@ -75,7 +75,14 @@ class Feed extends Component {
       null;
 
     //Checks if the user is following any other users or not
-    const postsCheck = follows.following.length === 0 ?
+    const postsCheck = follows.following.length !== 0 ?
+      //If the user is following other users, they will see the user(s) post(s)
+      (
+        <ul className="view__following">
+          <FeedAddPosts />
+          <FeedViewPosts />
+        </ul>
+      ) :
       //If the user is not following anybody, they will be prompted to follow some randomly suggested accounts
       (
         <div className="view__no-following">
@@ -88,13 +95,6 @@ class Feed extends Component {
             </ul>
           </div>
         </div>
-      ) :
-      //If the user is following other users, they will see the user(s) post(s)
-      (
-        <ul className="view__following">
-          <FeedAddPosts />
-          <FeedViewPosts />
-        </ul>
       );
 
     return (
