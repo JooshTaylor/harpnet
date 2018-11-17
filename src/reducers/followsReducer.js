@@ -29,7 +29,8 @@ export const followsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 following: action.payload.following,
-                followers: action.payload.followers
+                followers: action.payload.followers,
+                loading: false
             }
     }
 }
