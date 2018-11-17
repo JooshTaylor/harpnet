@@ -23,15 +23,15 @@ class Search extends Component {
 
   handleFollow = (e) => {
     const arg1 = { follower_id: this.props.auth.user.user_id }; // Follower ID
-    const arg2 = [e.target.name]; // Followee ID
+    const arg2 = [e.target.name]; // Following ID
     this.props.followUser(arg1, Number(arg2[0]), localStorage.getItem('token'), "search");
   }
 
   handleUnfollow = (e) => {
-    const id = this.props.auth.user.user_id; // Unfollower ID
-    const id2 = [e.target.name]; // Unfollowee ID
+    const arg1 = this.props.auth.user.user_id; // Unfollower ID
+    const arg2 = [e.target.name]; // Unfollowee ID
 
-    this.props.unfollowUser(id, id2, localStorage.getItem('token'));
+    this.props.unfollowUser(arg1, Number(arg2[0]), localStorage.getItem('token'), "search");
   }
 
   handleViewProfile = (e) => {
