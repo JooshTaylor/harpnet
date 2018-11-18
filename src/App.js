@@ -65,7 +65,7 @@ class App extends Component {
               <PrivateRoute exact path='/profile/:id' component={Profile} />
             </Switch>
           </main>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     );

@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE, GET_ERRORS, CLEAR_ERRORS, ADD_EXTRA_POSTS, ADD_EXTRA_COMMENTS } from './constants';
+import { GET_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, SET_INDIV_POSTS, GET_ERRORS, CLEAR_ERRORS } from './constants';
 
 import axios from 'axios';
 
@@ -21,8 +21,22 @@ export const getFeed = (data, iteration, token) => dispatch => {
     })
 }
 
+export const getPostsByUser = (id, token) => dispatch => {
+  axios.get(`https://lit-citadel-92787.herokuapp.com/api/posts/${id}`, {
+    headers: {
+      "Authorization": token
+    }
+  })
+    .then(posts => {
+      dispatch({
+        type: SET_INDIV_POSTS,
+        payload: posts.data
+      })
+    })
+}
+
 export const makePost = (data, token) => dispatch => {
-  axios.post('https://lit-citadel-92787.herokuapp.com/api/posts/new', data, {
+  axios.post('https://lit-citadel-92787.herokuapp.com/api/posts', data, {
     headers: {
       "Authorization": token
     }

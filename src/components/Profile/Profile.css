@@ -6,10 +6,51 @@
   align-items: center;
 }
 
+
+
 .profile {
-  margin-top: 8rem;
+  margin: 9rem auto 0;
   padding-bottom: 10rem;
   display: flex;
   flex-direction: column;
+  max-width: 70%;
+  background-color: #fff;
+  border: 1px solid var(--color-white-darker-2);
+}
+
+.info {
+  display: flex;
+  border-bottom: 1px solid var(--color-white-darker-2);
+  padding: 2rem;
+  padding-bottom: 0;
+  font-size: 2rem;
+}
+
+.info__img-box {
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+}
+
+.info__img {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+}
+
+.info__info {
+  margin-right: auto;
+}
+
+
+.info__actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.posts {
+  padding: 2rem;
 }

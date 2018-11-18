@@ -9,7 +9,7 @@
 /* Left column */
 .landing__info {
     flex: 1;
-    padding: 8rem 5rem 8rem 5rem;
+    padding: 8rem 5rem 4rem 5rem;
 
     display: flex;
     flex-direction: column;
@@ -98,7 +98,7 @@ small {
 /* Right column */
 .landing__register {
     flex: 1;
-    padding: 8rem 5rem;
+    padding: 8rem 5rem 4rem;
     background-color: var(--color-white-darker);
 
     display: flex;
@@ -146,10 +146,20 @@ small {
     outline: none;
 }
 
+@media screen and (max-width: 1400px) {
+    small {
+        width: 70%
+    }
+}
+
 
 @media screen and (max-width: 1270px) {
     .landing__heading-1 {
         text-align: center;
+    }
+
+    small {
+        width: 80%
     }
 }
 
@@ -198,6 +208,7 @@ small {
     .feature__heading {
         margin: 1.5rem 0 1rem;
     }
+
 }
 
 @media screen and (max-width: 650px) {

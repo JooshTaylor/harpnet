@@ -12,11 +12,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const middleware = [thunk];
 
-// const store = createStore(rootReducer, composeWithDevTools(
-//   applyMiddleware(...middleware)
-// ));
+const store = createStore(rootReducer, composeWithDevTools(
+  applyMiddleware(...middleware)
+));
 
-const store = createStore(rootReducer, applyMiddleware(...middleware));
+// const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 // const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
 
