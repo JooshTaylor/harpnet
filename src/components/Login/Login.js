@@ -56,7 +56,10 @@ class Login extends Component {
       <section className="login">
         <h1 className="login__heading-1">
           Login To Your account
-          </h1>
+        </h1>
+        <small>
+          The backend is hosted by Heroku's free service, which initially is slow to start up (like this website was), so registering an account or logging into a public account may take up to 10 seconds. After that things should run much faster.
+      </small>
         <form noValidate onSubmit={this.onSubmit} className="login__form">
           <FormText type="text" name="userOrEmail" placeholder="Email Address or Username" onChange={this.onChange} value={this.state.userOrEmail} errors={this.props.errors} />
           <FormText type="password" name="password" placeholder="Password" onChange={this.onChange} value={this.state.password} errors={this.props.errors} />

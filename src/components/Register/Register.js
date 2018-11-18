@@ -64,6 +64,9 @@ class Register extends Component {
           <h1 className="register__heading-1">
             Sign up for an account
           </h1>
+          <small>
+            The backend is hosted by Heroku's free service, which initially is slow to start up (like this website was), so registering an account or logging into a public account may take up to 10 seconds. After that things should run much faster.
+          </small>
           <form noValidate onSubmit={this.onSubmit} className="register__form">
             <FormText type="email" name="email" placeholder="Email Address" onChange={this.onChange} value={this.state.email} errors={this.props.errors} />
             <FormText type="text" name="username" placeholder="Username" onChange={this.onChange} value={this.state.username} errors={this.props.errors} />

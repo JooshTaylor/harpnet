@@ -17,6 +17,13 @@
     color: transparent;
     text-transform: uppercase;
     letter-spacing: 1px;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+}
+
+small {
+    margin-bottom: 3rem;
+    width: 50%;
 }
 
 .login__heading-2 {

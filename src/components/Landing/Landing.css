@@ -30,6 +30,12 @@
 
 .landing__heading-1--reverse {
     background-image: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-light));
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+}
+
+small {
+    margin-bottom: 3rem;
 }
 
 .landing__heading-2 {

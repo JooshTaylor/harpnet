@@ -72,7 +72,7 @@ class Landing extends Component {
                             The hottest social networking website of 2019
                         </h2>
                         <p className="landing__paragraph">
-                            Boasting a total of {count} accounts as of today, Harpnet is a fast growing social networking website where you can connect with anybody from your friends and family to your colleagues.
+                            Harpnet is a fast growing social networking website where you can connect with anybody from your friends and family to your colleagues.
                             We offer the following features:
                         </p>
                         <ul className="landing__features">
@@ -103,11 +103,10 @@ class Landing extends Component {
                             What this actually is
                         </h2>
                         <p className="landing__paragraph">
-                            This website is actually just a development playground. It functions as a normal social media website with the features listed above and can be used for that purpose, but its primary purpose is for practicing web development skills.
+                            This website is actually just a development playground. It functions as a normal social media website with currently only the feed from the sections listed above implemented. This project is under constant development, so the other features will be completed and added soon. Just know that this website's primary purpose is to practice my web development skills.
                         </p>
                         <p className="landing__paragraph">
-                            There are 3 dummy accounts that you can access to interact with all of the features, or you can make your own account. If you use a public account, feel free to make or delete posts and comments, follow/unfollow accounts, and send messages.
-                            We have a messenger bot called "Harpy" that sends a randomized response when you send it messages if you would like to test the messaging functionality.
+                            There are 3 dummy accounts that you can access to interact with all of the features, or you can make your own account. If you use a public account, feel free to make or delete posts and comments, follow/unfollow accounts, and send messages (soon!).
                         </p>
                     </div>
 
@@ -118,6 +117,9 @@ class Landing extends Component {
                         <h1 className="landing__heading-1 landing__heading-1--reverse">
                             Sign up for an account
                         </h1>
+                        <small>
+                            The backend is hosted by Heroku's free service, which initially is slow to start up (like this website was), so registering an account or logging into a public account may take up to 10 seconds. After that things should run much faster.
+                        </small>
                         <form noValidate onSubmit={this.onSubmit} className="landing__form">
                             <FormText type="email" name="email" placeholder="Email Address" onChange={this.onChange} value={this.state.email} errors={this.props.errors} />
                             <FormText type="text" name="username" placeholder="Username" onChange={this.onChange} value={this.state.username} errors={this.props.errors} />
