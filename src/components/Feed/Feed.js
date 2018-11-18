@@ -6,7 +6,7 @@ import Spinner from '../Common/Spinner';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getProfile } from '../../actions/profileActions';
+import { getProfile, clearViewProfile } from '../../actions/profileActions';
 import { getFollowData, followUser } from '../../actions/followsActions';
 
 import './Feed.css';
@@ -21,6 +21,7 @@ class Feed extends Component {
 
   //When the feed page is loaded, we set the token to our state for accessibility, then call 2 functions to retrieve data.
   componentDidMount() {
+    this.props.clearViewProfile();
     this.setState({ token: localStorage.getItem('token') }, () => {
       this.props.getProfile(this.props.auth.user.user_id, this.state.token);
       this.props.getFollowData(this.props.auth.user.user_id, this.state.token);
@@ -70,6 +71,7 @@ Feed.propTypes = {
   followUser: PropTypes.func.isRequired,
   getProfile: PropTypes.func.isRequired,
   getFollowData: PropTypes.func.isRequired,
+  clearViewProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   follows: PropTypes.object.isRequired
@@ -85,6 +87,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps,
   {
-    getProfile, getFollowData, followUser
+    getProfile, getFollowData, followUser, clearViewProfile
   }
 )(withRouter(Feed));

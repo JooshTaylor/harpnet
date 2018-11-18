@@ -20,7 +20,10 @@ export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
 
 // Profile constants
 export const SET_PROFILE = 'SET_PROFILE';
+export const PROFILE_LOADING = 'PROFILE_LOADING';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
+export const SET_VIEW_PROFILE = 'SET_VIEW_PROFILE';
+export const CLEAR_VIEW_PROFILE = 'CLEAR_VIEW_PROFILE';
 
 
 

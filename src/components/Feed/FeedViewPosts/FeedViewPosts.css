@@ -37,6 +37,7 @@
   height: 7rem;
   border-radius: 50%;
   border: 2px solid var(--color-primary);
+  cursor: pointer;
 }
 
 .post__details-text-box {
@@ -54,6 +55,7 @@
 
 .post__details-username {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .post__details-date {

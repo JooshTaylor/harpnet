@@ -156,6 +156,7 @@ small {
 @media screen and (max-width: 1200px) {
     .landing {
         flex-direction: column;
+        margin-top: 5rem;
     }
 
     .landing__info {

@@ -4,6 +4,7 @@ import './Search.css';
 import { connect } from 'react-redux';
 import { resetSearch, searchUsers } from '../../../actions/searchActions';
 import { followUser, unfollowUser, getFollowData } from '../../../actions/followsActions';
+import { clearViewProfile } from '../../../actions/profileActions';
 import Spinner from '../../Common/Spinner';
 import UserSearchInfo from '../UserSearchInfo/UserSearchInfo';
 
@@ -16,6 +17,10 @@ class Search extends Component {
       this.props.getFollowData(auth.user.user_id, localStorage.getItem('token'));
       this.props.searchUsers(search.searchField, localStorage.getItem('token'));
     }
+  }
+
+  componentDidMount() {
+    this.props.clearViewProfile();
   }
 
   componentWillUnmount() {
@@ -36,7 +41,7 @@ class Search extends Component {
   }
 
   handleViewProfile = (e) => {
-    // Action to get user profile - send with router
+    this.props.history.push(`/profile/${[e.target.name]}`);
   }
 
   render() {
@@ -68,7 +73,7 @@ class Search extends Component {
                   :
                   (<button name={result.user_id} onClick={this.handleFollow} className="search__btn search__btn--follow">Follow</button>)
               }
-              <button name={result.user_id} className="search__btn">View Profile</button>
+              <button onClick={this.handleViewProfile} name={result.user_id} className="search__btn">View Profile</button>
             </div>
           </li>
         );
@@ -103,7 +108,8 @@ Search.propTypes = {
   followUser: PropTypes.func.isRequired,
   unfollowUser: PropTypes.func.isRequired,
   resetSearch: PropTypes.func.isRequired,
-  getFollowData: PropTypes.func.isRequired
+  getFollowData: PropTypes.func.isRequired,
+  clearViewProfile: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, { getFollowData, searchUsers, followUser, unfollowUser, resetSearch })(Search);
+export default connect(mapStateToProps, { clearViewProfile, getFollowData, searchUsers, followUser, unfollowUser, resetSearch })(Search);

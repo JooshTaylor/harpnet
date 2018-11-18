@@ -10,6 +10,8 @@ import PrivateRoute from './components/Common/PrivateRoute/PrivateRoute';
 
 import Login from './components/Login/Login';
 
+import Profile from './components/Profile/Profile';
+
 import Register from './components/Register/Register';
 
 import Feed from './components/Feed/Feed';
@@ -55,6 +57,12 @@ class App extends Component {
             </Switch>
             <Switch>
               <PrivateRoute exact path='/search' component={Search} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path='/profile' component={Profile} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path='/profile/:id' component={Profile} />
             </Switch>
           </main>
           <Footer />

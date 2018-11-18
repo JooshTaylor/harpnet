@@ -1,7 +1,9 @@
-import { SET_PROFILE, CLEAR_PROFILE } from '../actions/constants';
+import { SET_PROFILE, CLEAR_PROFILE, SET_VIEW_PROFILE, PROFILE_LOADING, CLEAR_VIEW_PROFILE } from '../actions/constants';
 
 const initialState = {
-    profile: {}
+    profile: {},
+    viewProfile: {},
+    loading: true
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -12,13 +14,36 @@ export const profileReducer = (state = initialState, action) => {
         case CLEAR_PROFILE:
             return {
                 ...state,
-                profile: {}
+                profile: {},
+                viewProfile: {},
+                loading: false
+            }
+
+        case CLEAR_VIEW_PROFILE:
+            return {
+                ...state,
+                loading: false,
+                viewProfile: {}
             }
 
         case SET_PROFILE:
             return {
                 ...state,
-                profile: action.payload
+                profile: action.payload,
+                loading: false
+            }
+
+        case SET_VIEW_PROFILE:
+            return {
+                ...state,
+                viewProfile: action.payload,
+                loading: false
+            }
+
+        case PROFILE_LOADING:
+            return {
+                ...state,
+                loading: true
             }
     }
 }

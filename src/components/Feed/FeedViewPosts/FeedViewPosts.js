@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { getFeed, deletePost } from '../../../actions/postActions';
 import './FeedViewPosts.css';
 
@@ -11,8 +12,6 @@ class FeedViewPosts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showDeletePrompt: false,
-      deleteSubject: -1, //The delete subject when not -1 holds the value of the post potentially being deleted
       iteration: 1
     }
   }
@@ -36,23 +35,12 @@ class FeedViewPosts extends Component {
     }
   }
 
-  toggleDeletePrompt = (e) => {
-    if (!this.state.showDeletePrompt) {
-      this.setState({
-        showDeletePrompt: true,
-        deleteSubject: [e.target.name]
-      })
-    } else {
-      this.setState({
-        showDeletePrompt: false,
-        deleteSubject: -1
-      })
-    }
-  }
-
   deletePost = (e) => {
     this.props.deletePost([e.target.name], localStorage.getItem('token'));
-    // this.toggleDeletePrompt();
+  }
+
+  handleViewProfile = (e) => {
+    this.props.history.push(`/profile/${[e.target.name]}`);
   }
 
   showMorePosts = (e) => {
@@ -68,20 +56,6 @@ class FeedViewPosts extends Component {
   render() {
     const { auth, post } = this.props;
 
-    const deletePrompt = this.state.showDeletePrompt ?
-      (
-        <div className="delete-prompt">
-          <h1 className="delete-prompt__heading">Are you sure you want to delete this post?</h1>
-          <p className="delete-prompt__note">Once you hit delete, this post can never be recovered!</p>
-          <a href={`#${this.state.deleteSubject}`} onClick={this.toggleDeletePrompt} className="delete-prompt__keep" type="button">
-            Keep
-          </a>
-          <button onClick={this.deletePost} name={this.state.deleteSubject} className="delete-prompt__delete" type="button">
-            Delete
-          </button>
-        </div>
-      ) : null;
-
     //Posts is an array of 30 posts made by the accounts that the user is following ordered from latest to earliest.
     const posts = post.posts.map(post => {
       return (
@@ -89,10 +63,10 @@ class FeedViewPosts extends Component {
           <div className="post__top">
             <div className="post__details">
               <div className="post__details-img-box">
-                <img className="post__details-img" src={`https://robohash.org/${post.creator_username}/?200x200`} alt={post.creator_username} />
+                <img onClick={this.handleViewProfile} name={post.creator_id} className="post__details-img" src={`https://robohash.org/${post.creator_username}/?200x200`} alt={post.creator_username} />
               </div>
               <div className="post__details-text-box">
-                <h2 className="post__details-username">
+                <h2 onClick={this.handleViewProfile} name={post.creator_id} className="post__details-username">
                   {post.creator_username}
                 </h2>
                 <h3 className="post__details-date">
@@ -141,7 +115,6 @@ class FeedViewPosts extends Component {
 
     return (
       <ul className="feed">
-        {deletePrompt}
         {posts}
         {post.morePosts ? (<button name={this.state.iteration} type="button" onClick={this.showMorePosts} className="posts__showmore">Show More</button>) : null}
       </ul>
@@ -165,4 +138,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getFeed, deletePost })(FeedViewPosts);
+export default connect(mapStateToProps, { getFeed, deletePost })(withRouter(FeedViewPosts));
