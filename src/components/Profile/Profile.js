@@ -5,8 +5,17 @@ import { connect } from 'react-redux';
 import Spinner from '../Common/Spinner';
 import { getProfileById, clearViewProfile } from '../../actions/profileActions';
 import { getPostsByUser } from '../../actions/postActions';
+import { followUser, unfollowUser, getFollowData } from '../../actions/followsActions';
 
 class Profile extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    const { auth } = this.props;
+
+    if (nextProps.profile.reload) {
+      this.props.getFollowData(auth.user.user_id, localStorage.getItem('token'));
+    }
+  }
 
   componentDidMount() {
     if (this.props.match.params.id) {
@@ -20,6 +29,22 @@ class Profile extends Component {
 
   componentWillUnmount() {
     this.props.clearViewProfile();
+  }
+
+  handleFollow = (e) => {
+    const token = localStorage.getItem('token');
+    const follower = { follower_id: this.props.auth.user.user_id }
+    const following = [e.target.name]
+
+    this.props.followUser(follower, Number(following[0]), token, 'profile');
+  }
+
+  handleUnfollow = (e) => {
+    const token = localStorage.getItem('token');
+    const unfollower = this.props.auth.user.user_id;
+    const unfollowing = [e.target.name]
+
+    this.props.unfollowUser(unfollower, Number(unfollowing[0]), token, 'profile');
   }
 
   render() {
@@ -68,8 +93,8 @@ class Profile extends Component {
               {
                 profile.viewProfile.username !== profile.profile.username ?
                   !follows.following.includes(profile.viewProfile.user_id) ?
-                    (<button onClick={this.handleFollow} className="info__btn">Follow</button>) :
-                    (<button onClick={this.handleUnfollow} className="info__btn info__btn--red">Unfollow</button>)
+                    (<button onClick={this.handleFollow} name={profile.viewProfile.user_id} className="info__btn info__btn--follow">Follow</button>) :
+                    (<button onClick={this.handleUnfollow} name={profile.viewProfile.user_id} className="info__btn info__btn--unfollow">Unfollow</button>)
                   : null
               }
 
@@ -88,6 +113,9 @@ Profile.propTypes = {
   getProfileById: PropTypes.func.isRequired,
   clearViewProfile: PropTypes.func.isRequired,
   getPostsByUser: PropTypes.func.isRequired,
+  followUser: PropTypes.func.isRequired,
+  unfollowUser: PropTypes.func.isRequired,
+  getFollowData: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 }
@@ -101,4 +129,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getPostsByUser, getProfileById, clearViewProfile })(Profile);
+export default connect(mapStateToProps, { getFollowData, unfollowUser, followUser, getPostsByUser, getProfileById, clearViewProfile })(Profile);

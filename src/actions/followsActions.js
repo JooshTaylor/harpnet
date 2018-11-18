@@ -1,7 +1,11 @@
-import { SET_FOLLOWS, RELOAD_SEARCH, FOLLOWS_LOADING } from './constants';
+import { SET_FOLLOWS, RELOAD_SEARCH, FOLLOWS_LOADING, RELOAD_PROFILE, END_RELOAD_PROFILE } from './constants';
 import axios from 'axios';
 
 export const getFollowData = (id, token) => dispatch => {
+    dispatch({
+        type: END_RELOAD_PROFILE
+    })
+
     dispatch({
         type: FOLLOWS_LOADING
     })
@@ -33,9 +37,10 @@ export const followUser = (follower_id, following_id, token, location) => dispat
                         type: RELOAD_SEARCH
                     })
 
-                //case for profiles
-
-                //case for follow prompt
+                case "profile":
+                    dispatch({
+                        type: RELOAD_PROFILE
+                    })
 
                 //case for feed
             }
@@ -56,9 +61,10 @@ export const unfollowUser = (unfollower_id, unfollowing_id, token, location) => 
                         type: RELOAD_SEARCH
                     })
 
-                //case for profiles
-
-                //case for follow prompt
+                case "profile":
+                    dispatch({
+                        type: RELOAD_PROFILE
+                    })
 
                 //case for feed
             }

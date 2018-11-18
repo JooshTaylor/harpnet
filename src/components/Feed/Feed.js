@@ -46,7 +46,7 @@ class Feed extends Component {
         <div className="view__no-following">
           <h1 className="view__heading-1">Uh Oh! It looks like you haven't followed anybody yet</h1>
           <div className="view__box">
-            <h2 className="view__heading-2">Search for other users to follow in the searchbar! Hint: there aren't very many users so just search for 'A'.</h2>
+            <h2 className="view__heading-2">Search for other users to follow in the searchbar! Hint: there aren't very many users so just search for 'a' or 'e' to get results.</h2>
           </div>
         </div>
       );
