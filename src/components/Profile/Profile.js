@@ -4,11 +4,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../Common/Spinner';
 import ProfileViewPosts from './ProfileViewPosts/ProfileViewPosts';
+import ProfileViewFollowing from './ProfileViewFollowing/ProfileViewFollowing';
+import ProfileViewFollowers from './ProfileViewFollowers/ProfileViewFollowers';
 import { getProfileById, clearViewProfile } from '../../actions/profileActions';
 import { getPostsByUser } from '../../actions/postActions';
-import { followUser, unfollowUser, getFollowData } from '../../actions/followsActions';
+import { followUser, unfollowUser, getFollowData, getFollowDataByUser } from '../../actions/followsActions';
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      view: "posts"
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     const { auth } = this.props;
@@ -22,9 +30,11 @@ class Profile extends Component {
     if (this.props.match.params.id) {
       this.props.getProfileById(this.props.match.params.id, localStorage.getItem('token'));
       this.props.getPostsByUser(this.props.match.params.id, localStorage.getItem('token'));
+      // this.props.getFollowDataByUser(this.props.match.params.id, localStorage.getItem('token'));
     } else {
       this.props.getProfileById(this.props.auth.user.user_id, localStorage.getItem('token'));
       this.props.getPostsByUser(this.props.auth.user.user_id, localStorage.getItem('token'));
+      // this.props.getFollowDataByUser(this.props.auth.user.user_id, localStorage.getItem('token'));
     }
   }
 
@@ -46,6 +56,12 @@ class Profile extends Component {
     const unfollowing = [e.target.name]
 
     this.props.unfollowUser(unfollower, Number(unfollowing[0]), token, 'profile');
+  }
+
+  changeView = (view) => {
+    this.setState({
+      view: view
+    })
   }
 
   render() {
@@ -101,13 +117,13 @@ class Profile extends Component {
               </div>
             </div>
             <ul className="info__bottom">
-              <li className="info__option info__option--select">Posts</li>
-              <li className="info__option">Following</li>
-              <li className="info__option">Followers</li>
+              <li onClick={() => { this.changeView('posts') }} name="posts" className="info__option info__option--select">Posts</li>
+              <li onClick={() => { this.changeView('following') }} className="info__option">Following</li>
+              <li onClick={() => { this.changeView('followers') }} name="followers" className="info__option">Followers</li>
             </ul>
           </div>
           <div className="posts">
-            {post.profile.posts ? (<ProfileViewPosts />) : null}
+            {post.profile.posts && this.state.view === "posts" ? (<ProfileViewPosts />) : null}{follows.profile.following && this.state.view === "following" ? (<ProfileViewFollowing />) : null}{follows.profile.followers && this.state.view === "followers" ? (<ProfileViewFollowers />) : null}
           </div>
         </div>
       )
@@ -122,6 +138,7 @@ Profile.propTypes = {
   followUser: PropTypes.func.isRequired,
   unfollowUser: PropTypes.func.isRequired,
   getFollowData: PropTypes.func.isRequired,
+  getFollowDataByUser: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
@@ -137,4 +154,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getFollowData, unfollowUser, followUser, getPostsByUser, getProfileById, clearViewProfile })(Profile);
+export default connect(mapStateToProps, { getFollowData, getFollowDataByUser, unfollowUser, followUser, getPostsByUser, getProfileById, clearViewProfile })(Profile);

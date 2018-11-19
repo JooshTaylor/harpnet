@@ -1,4 +1,4 @@
-import { SET_FOLLOWS, RELOAD_SEARCH, FOLLOWS_LOADING, RELOAD_PROFILE, END_RELOAD_PROFILE } from './constants';
+import { SET_FOLLOWS, RELOAD_SEARCH, FOLLOWS_LOADING, RELOAD_PROFILE, END_RELOAD_PROFILE, SET_INDIV_FOLLOWS } from './constants';
 import axios from 'axios';
 
 export const getFollowData = (id, token) => dispatch => {
@@ -19,6 +19,20 @@ export const getFollowData = (id, token) => dispatch => {
             dispatch({
                 type: SET_FOLLOWS,
                 payload: res.data
+            })
+        })
+}
+
+export const getFollowDataByUser = (id, token) => dispatch => {
+    axios.get(`https://lit-citadel-92787.herokuapp.com/api/follows/${id}`, {
+        headers: {
+            "Authorization": token
+        }
+    })
+        .then(follows => {
+            dispatch({
+                type: SET_INDIV_FOLLOWS,
+                payload: follows.data
             })
         })
 }
