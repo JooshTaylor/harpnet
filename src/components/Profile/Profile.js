@@ -3,6 +3,7 @@ import './Profile.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../Common/Spinner';
+import ProfileViewPosts from './ProfileViewPosts/ProfileViewPosts';
 import { getProfileById, clearViewProfile } from '../../actions/profileActions';
 import { getPostsByUser } from '../../actions/postActions';
 import { followUser, unfollowUser, getFollowData } from '../../actions/followsActions';
@@ -57,51 +58,56 @@ class Profile extends Component {
     if (profile.loading && Object.keys(profile.viewProfile).length === 0) {
       return (<div className="profile-spinner"><Spinner /></div>)
     } else {
-      console.log(post.profile.posts);
-      console.log(post.profile.comments);
       return (
         <div className="profile">
           <div className="info">
-            <div className="info__img-box">
-              <img src={`https://robohash.org/${profile.viewProfile.username}/?200x200`} alt="profile" className="info__img" />
-              <h1 className="info__username">{profile.viewProfile.username}</h1>
-            </div>
-            <div className="info__info">
-              {
-                profile.viewProfile.first_name && profile.viewProfile.last_name ?
-                  (<p className="info__name"><strong>Name:</strong> {profile.viewProfile.first_name} {profile.viewProfile.last_name}</p>) :
-                  null
-              }
-              {
-                profile.viewProfile.first_name && !profile.viewProfile.last_name ?
-                  (<p className="info__name"><strong>Name:</strong> {profile.viewProfile.first_name}</p>) :
-                  null
-              }
-              {
-                profile.viewProfile.biography ?
-                  (<p className="info__bio"><strong>Bio:</strong> {profile.viewProfile.biography}</p>) :
-                  null
-              }
-              {infoCheck}
-            </div>
-            <div className="info__actions">
-              {
-                profile.viewProfile.username === profile.profile.username ?
-                  (<button className="info__btn">Edit Profile</button>) :
-                  null
-              }
-              {
-                profile.viewProfile.username !== profile.profile.username ?
-                  !follows.following.includes(profile.viewProfile.user_id) ?
-                    (<button onClick={this.handleFollow} name={profile.viewProfile.user_id} className="info__btn info__btn--follow">Follow</button>) :
-                    (<button onClick={this.handleUnfollow} name={profile.viewProfile.user_id} className="info__btn info__btn--unfollow">Unfollow</button>)
-                  : null
-              }
+            <div className="info__top">
+              <div className="info__img-box">
+                <img src={`https://robohash.org/${profile.viewProfile.username}/?200x200`} alt="profile" className="info__img" />
+                <h1 className="info__username">{profile.viewProfile.username}</h1>
+              </div>
+              <div className="info__info">
+                {
+                  profile.viewProfile.first_name && profile.viewProfile.last_name ?
+                    (<p className="info__name"><strong>Name:</strong> {profile.viewProfile.first_name} {profile.viewProfile.last_name}</p>) :
+                    null
+                }
+                {
+                  profile.viewProfile.first_name && !profile.viewProfile.last_name ?
+                    (<p className="info__name"><strong>Name:</strong> {profile.viewProfile.first_name}</p>) :
+                    null
+                }
+                {
+                  profile.viewProfile.biography ?
+                    (<p className="info__bio"><strong>Bio:</strong> {profile.viewProfile.biography}</p>) :
+                    null
+                }
+                {infoCheck}
+              </div>
+              <div className="info__actions">
+                {
+                  profile.viewProfile.username === profile.profile.username ?
+                    (<button className="info__btn">Edit Profile</button>) :
+                    null
+                }
+                {
+                  profile.viewProfile.username !== profile.profile.username ?
+                    !follows.following.includes(profile.viewProfile.user_id) ?
+                      (<button onClick={this.handleFollow} name={profile.viewProfile.user_id} className="info__btn info__btn--follow">Follow</button>) :
+                      (<button onClick={this.handleUnfollow} name={profile.viewProfile.user_id} className="info__btn info__btn--unfollow">Unfollow</button>)
+                    : null
+                }
 
+              </div>
             </div>
+            <ul className="info__bottom">
+              <li className="info__option info__option--select">Posts</li>
+              <li className="info__option">Following</li>
+              <li className="info__option">Followers</li>
+            </ul>
           </div>
           <div className="posts">
-            Posts
+            {post.profile.posts ? (<ProfileViewPosts />) : null}
           </div>
         </div>
       )
@@ -117,7 +123,9 @@ Profile.propTypes = {
   unfollowUser: PropTypes.func.isRequired,
   getFollowData: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+  follows: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
