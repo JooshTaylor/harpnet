@@ -4,7 +4,7 @@ import "./Landing.css";
 import FormText from "../Forms/FormText/FormText";
 // import FormDate from '../Forms/FormDate/FormDate';
 import PubAcc from "../Common/PubAcc/PubAcc";
-import { withRouter, Redirect } from "react-router-dom";
+import { navigate } from "@reach/router";
 import { registerUser } from "../../actions/authActions";
 
 import { connect } from "react-redux";
@@ -49,14 +49,14 @@ class Landing extends Component {
     };
 
     //Redux action for registering users. Takes form data and browser history.
-    this.props.registerUser(userData, this.props.history);
+    this.props.registerUser(userData);
   };
 
   render() {
     const count = 1; //temporary
     //If a users is logged in, they cannot access this page and are redirected to their feed.
     if (this.props.auth.isLoggedIn) {
-      return <Redirect to="/feed" />;
+      navigate("/feed");
     } else {
       return (
         <section className="landing">
@@ -193,4 +193,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { registerUser }
-)(withRouter(Landing));
+)(Landing);
