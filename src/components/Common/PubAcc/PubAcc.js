@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./PubAcc.css";
 import { loginUser } from "../../../actions/authActions";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class PubAcc extends Component {
   publicAccount = e => {
@@ -25,7 +26,7 @@ class PubAcc extends Component {
         break;
     }
 
-    this.props.loginUser(botInfo);
+    this.props.loginUser(botInfo, this.props.history);
   };
 
   render() {
@@ -87,4 +88,4 @@ PubAcc.propTypes = {
 export default connect(
   null,
   { loginUser }
-)(PubAcc);
+)(withRouter(PubAcc));

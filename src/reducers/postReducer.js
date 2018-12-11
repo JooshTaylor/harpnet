@@ -1,11 +1,11 @@
-import { GET_POSTS, CLEAR_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, ADD_EXTRA_POSTS, ADD_EXTRA_COMMENTS, SET_INDIV_POSTS } from '../actions/constants';
+import { GET_POSTS, CLEAR_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE, ADD_EXTRA_POSTS, ADD_EXTRA_COMMENTS } from '../actions/constants';
 
 const initialState = {
     posts: [],
     comments: [],
     reload: false,
     morePosts: false,
-    profile: {}
+    deleteState: false
 }
 
 export const postReducer = (state = initialState, action) => {
@@ -55,13 +55,6 @@ export const postReducer = (state = initialState, action) => {
             return {
                 ...state,
                 comments: [...state.comments, ...action.payload],
-                reload: false
-            }
-
-        case SET_INDIV_POSTS:
-            return {
-                ...state,
-                profile: action.payload,
                 reload: false
             }
     }

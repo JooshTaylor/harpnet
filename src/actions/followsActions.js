@@ -1,24 +1,13 @@
-import {
-  SET_FOLLOWS,
-  RELOAD_SEARCH,
-  FOLLOWS_LOADING,
-  RELOAD_PROFILE,
-  END_RELOAD_PROFILE,
-  SET_INDIV_FOLLOWS
-} from "./constants";
+import { SET_FOLLOWS, RELOAD_SEARCH, FOLLOWS_LOADING } from "./constants";
 import axios from "axios";
 
 export const getFollowData = (id, token) => dispatch => {
-  dispatch({
-    type: END_RELOAD_PROFILE
-  });
-
   dispatch({
     type: FOLLOWS_LOADING
   });
 
   axios
-    .get(`http://localhost:5000/api/v1/follows/get/${id}`, {
+    .get(`http://localhost:5000/api/follows/get/${id}`, {
       headers: {
         Authorization: token
       }
@@ -31,21 +20,6 @@ export const getFollowData = (id, token) => dispatch => {
     });
 };
 
-export const getFollowDataByUser = (id, token) => dispatch => {
-  axios
-    .get(`http://localhost:5000/api/v1/follows/${id}`, {
-      headers: {
-        Authorization: token
-      }
-    })
-    .then(follows => {
-      dispatch({
-        type: SET_INDIV_FOLLOWS,
-        payload: follows.data
-      });
-    });
-};
-
 export const followUser = (
   follower_id,
   following_id,
@@ -53,7 +27,7 @@ export const followUser = (
   location
 ) => dispatch => {
   axios
-    .post(`http://localhost:5000/api/v1/follows/${following_id}`, follower_id, {
+    .post(`http://localhost:5000/api/follows/${following_id}`, follower_id, {
       headers: {
         Authorization: token
       }
@@ -67,10 +41,9 @@ export const followUser = (
             type: RELOAD_SEARCH
           });
 
-        case "profile":
-          dispatch({
-            type: RELOAD_PROFILE
-          });
+        //case for profiles
+
+        //case for follow prompt
 
         //case for feed
       }
@@ -85,7 +58,7 @@ export const unfollowUser = (
 ) => dispatch => {
   axios
     .delete(
-      `http://localhost:5000/api/v1/follows/${unfollower_id}/${unfollowing_id}`,
+      `http://localhost:5000/api/follows/${unfollower_id}/${unfollowing_id}`,
       {
         headers: {
           Authorization: token
@@ -101,10 +74,9 @@ export const unfollowUser = (
             type: RELOAD_SEARCH
           });
 
-        case "profile":
-          dispatch({
-            type: RELOAD_PROFILE
-          });
+        //case for profiles
+
+        //case for follow prompt
 
         //case for feed
       }

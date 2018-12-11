@@ -1,0 +1,16 @@
+.form-date {
+
+}
+
+.form-date__select {
+
+}
+
+.form-date__option {
+
+}
+
+.form-date__errors {
+    color: red;
+    transform: translateX(-20px);
+}

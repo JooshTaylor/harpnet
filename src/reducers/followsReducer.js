@@ -1,10 +1,9 @@
-import { FOLLOWS_LOADING, SET_FOLLOWS, CLEAR_FOLLOWS, SET_INDIV_FOLLOWS } from '../actions/constants';
+import { FOLLOWS_LOADING, SET_FOLLOWS, CLEAR_FOLLOWS } from '../actions/constants';
 
 const initialState = {
     following: [],
     followers: [],
-    loading: false,
-    profile: {}
+    loading: false
 }
 
 export const followsReducer = (state = initialState, action) => {
@@ -23,8 +22,7 @@ export const followsReducer = (state = initialState, action) => {
                 ...state,
                 following: [],
                 followers: [],
-                loading: false,
-                profile: {}
+                loading: false
             }
 
         case SET_FOLLOWS:
@@ -33,13 +31,6 @@ export const followsReducer = (state = initialState, action) => {
                 following: action.payload.following,
                 followers: action.payload.followers,
                 loading: false
-            }
-
-        case SET_INDIV_FOLLOWS:
-            return {
-                ...state,
-                loading: false,
-                profile: action.payload
             }
     }
 }

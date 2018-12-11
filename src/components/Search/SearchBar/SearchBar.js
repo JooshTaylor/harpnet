@@ -1,51 +1,38 @@
-import React, { Component } from "react";
-import "./SearchBar.css";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { searchUsers } from "../../../actions/searchActions";
+import React, { Component } from 'react';
+import './SearchBar.css';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { searchUsers } from '../../../actions/searchActions';
+import { withRouter } from 'react-router-dom';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchfield: ""
-    };
+    }
   }
 
-  onChange = e => {
-    this.setState({ searchfield: e.target.value });
-  };
+  onChange = (e) => {
+    this.setState({ searchfield: e.target.value })
+  }
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
 
-    this.props.searchUsers(
-      this.state.searchfield,
-      localStorage.getItem("token")
-    );
+    this.props.searchUsers(this.state.searchfield, localStorage.getItem('token'), this.props.history);
 
-    this.setState({ searchfield: "" });
-  };
+    this.setState({ searchfield: "" })
+  }
 
   render() {
     return (
       <form onSubmit={this.onSubmit} noValidate className="searchbar">
-        <input
-          className="searchbar__input"
-          type="text"
-          onChange={this.onChange}
-          value={this.state.searchfield}
-          placeholder="Search users.."
-        />
-        <button className="searchbar__button">
-          <i className="fas fa-search" />
-        </button>
+        <input className="searchbar__input" type="text" onChange={this.onChange} value={this.state.searchfield} placeholder="Search users.." />
+        <button className="searchbar__button"><i className="fas fa-search"></i></button>
       </form>
-    );
+    )
   }
 }
 
-export default connect(
-  null,
-  { searchUsers }
-)(SearchBar);
+export default connect(null, { searchUsers })(withRouter(SearchBar));

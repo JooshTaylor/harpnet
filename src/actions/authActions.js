@@ -21,7 +21,7 @@ export const registerUser = (user, history) => dispatch => {
   });
 
   axios
-    .post("http://localhost:5000/api/v1/auth/register", user)
+    .post("http://localhost:5000/api/auth/register", user)
     .then(res => {
       dispatch({
         type: REGISTER_SUCCESS
@@ -51,7 +51,7 @@ export const loginUser = (data, history) => dispatch => {
   });
 
   axios
-    .post("http://localhost:5000/api/v1/auth/login", data)
+    .post("http://localhost:5000/api/auth/login", data)
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS

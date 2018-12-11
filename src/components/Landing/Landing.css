@@ -9,7 +9,7 @@
 /* Left column */
 .landing__info {
     flex: 1;
-    padding: 8rem 5rem 4rem 5rem;
+    padding: 8rem 5rem 8rem 5rem;
 
     display: flex;
     flex-direction: column;
@@ -30,12 +30,6 @@
 
 .landing__heading-1--reverse {
     background-image: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-light));
-    padding-bottom: 0;
-    margin-bottom: 1rem;
-}
-
-small {
-    margin-bottom: 3rem;
 }
 
 .landing__heading-2 {
@@ -98,7 +92,7 @@ small {
 /* Right column */
 .landing__register {
     flex: 1;
-    padding: 8rem 5rem 4rem;
+    padding: 8rem 5rem;
     background-color: var(--color-white-darker);
 
     display: flex;
@@ -146,27 +140,16 @@ small {
     outline: none;
 }
 
-@media screen and (max-width: 1400px) {
-    small {
-        width: 70%
-    }
-}
-
 
 @media screen and (max-width: 1270px) {
     .landing__heading-1 {
         text-align: center;
-    }
-
-    small {
-        width: 80%
     }
 }
 
 @media screen and (max-width: 1200px) {
     .landing {
         flex-direction: column;
-        margin-top: 5rem;
     }
 
     .landing__info {
@@ -208,7 +191,6 @@ small {
     .feature__heading {
         margin: 1.5rem 0 1rem;
     }
-
 }
 
 @media screen and (max-width: 650px) {

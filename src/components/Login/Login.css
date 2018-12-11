@@ -4,7 +4,7 @@
     color: var(--color-text);
     flex-direction: column;
     align-items: center;
-    padding: 8rem 0 4rem;
+    padding: 8rem 0 15rem;
     text-align: center;
 }
 
@@ -17,13 +17,6 @@
     color: transparent;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 1rem;
-    padding-bottom: 0;
-}
-
-small {
-    margin-bottom: 3rem;
-    width: 50%;
 }
 
 .login__heading-2 {

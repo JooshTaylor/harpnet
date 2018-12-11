@@ -2,16 +2,18 @@ import {
   GET_POSTS,
   GET_COMMENTS,
   FEED_RELOAD_TRUE,
-  SET_INDIV_POSTS,
+  DELETE_DECLINE,
   GET_ERRORS,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  ADD_EXTRA_POSTS,
+  ADD_EXTRA_COMMENTS
 } from "./constants";
 
 import axios from "axios";
 
 export const getFeed = (data, iteration, token) => dispatch => {
   axios
-    .post(`http://localhost:5000/api/v1/posts/get/${iteration}`, data, {
+    .post(`http://localhost:5000/api/posts/get/${iteration}`, data, {
       headers: {
         Authorization: token
       }
@@ -29,24 +31,9 @@ export const getFeed = (data, iteration, token) => dispatch => {
     });
 };
 
-export const getPostsByUser = (id, token) => dispatch => {
-  axios
-    .get(`http://localhost:5000/api/v1/posts/${id}`, {
-      headers: {
-        Authorization: token
-      }
-    })
-    .then(posts => {
-      dispatch({
-        type: SET_INDIV_POSTS,
-        payload: posts.data
-      });
-    });
-};
-
 export const makePost = (data, token) => dispatch => {
   axios
-    .post("http://localhost:5000/api/v1/posts", data, {
+    .post("http://localhost:5000/api/posts/new", data, {
       headers: {
         Authorization: token
       }
@@ -69,7 +56,7 @@ export const makePost = (data, token) => dispatch => {
 
 export const makeComment = (data, token) => dispatch => {
   axios
-    .post(`http://localhost:5000/api/v1/posts/comment`, data, {
+    .post(`http://localhost:5000/api/posts/comment`, data, {
       headers: {
         Authorization: token
       }
@@ -83,7 +70,7 @@ export const makeComment = (data, token) => dispatch => {
 
 export const deletePost = (id, token) => dispatch => {
   axios
-    .delete(`http://localhost:5000/api/v1/posts/${id}`, {
+    .delete(`http://localhost:5000/api/posts/${id}`, {
       headers: {
         Authorization: token
       }
@@ -97,7 +84,7 @@ export const deletePost = (id, token) => dispatch => {
 
 export const deleteComment = (id, token) => dispatch => {
   axios
-    .delete(`http://localhost:5000/api/v1/posts/comment/${id}`, {
+    .delete(`http://localhost:5000/api/posts/comment/${id}`, {
       headers: {
         Authorization: token
       }

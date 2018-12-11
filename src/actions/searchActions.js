@@ -12,7 +12,7 @@ export const searchUsers = (params, token, history = null) => dispatch => {
   }
 
   axios
-    .get(`http://localhost:5000/api/v1/search/${params}`, {
+    .get(`http://localhost:5000/api/search/${params}`, {
       headers: {
         Authorization: token
       }
