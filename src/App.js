@@ -7,7 +7,6 @@ import { Router } from "@reach/router";
 import { authenticateUser } from "./actions/authActions";
 import { getProfile } from "./actions/profileActions";
 
-import PrivateRoute from "./components/Common/PrivateRoute/PrivateRoute";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
@@ -22,13 +21,14 @@ class App extends Component {
     const token = window.localStorage.getItem("token");
     if (token) {
       axios
-        .get("https://lit-citadel-92787.herokuapp.com/api/auth/authenticate", {
+        .get("http://localhost:5000/api/v1/auth/authenticate", {
           headers: {
             Authorization: token
           }
         })
         .then(res => {
           if (res) {
+            console.log(res);
             this.props.authenticateUser(res.data);
             this.props.getProfile(res.data.user_id, token);
           }

@@ -1,32 +1,32 @@
-import { SEARCH_LOADING, SEARCH_COMPLETE, RESET_SEARCH } from './constants';
-import axios from 'axios';
+import { SEARCH_LOADING, SEARCH_COMPLETE, RESET_SEARCH } from "./constants";
+import axios from "axios";
 
 export const searchUsers = (params, token, history = null) => dispatch => {
   dispatch({
     type: SEARCH_LOADING,
     payload: params
-  })
+  });
 
   if (history) {
-    history.push('/search');
+    history.push("/search");
   }
 
-  axios.get(`https://lit-citadel-92787.herokuapp.com/api/search/${params}`, {
-    headers: {
-      "Authorization": token
-    }
-  })
+  axios
+    .get(`http://localhost:5000/api/v1/search/${params}`, {
+      headers: {
+        Authorization: token
+      }
+    })
     .then(res => {
       dispatch({
         type: SEARCH_COMPLETE,
         payload: res.data
-      })
-    })
-
-}
+      });
+    });
+};
 
 export const resetSearch = () => {
   return {
     type: RESET_SEARCH
-  }
-}
+  };
+};
