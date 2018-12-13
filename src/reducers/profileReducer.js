@@ -1,24 +1,24 @@
-import { SET_PROFILE, CLEAR_PROFILE } from '../actions/constants';
+import { SET_PROFILE, CLEAR_PROFILE } from "../actions/constants";
 
 const initialState = {
-    profile: {}
-}
+  profile: {}
+};
 
 export const profileReducer = (state = initialState, action) => {
-    switch (action.type) {
-        default:
-            return state;
+  switch (action.type) {
+    default:
+      return state;
 
-        case CLEAR_PROFILE:
-            return {
-                ...state,
-                profile: {}
-            }
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: {}
+      };
 
-        case SET_PROFILE:
-            return {
-                ...state,
-                profile: action.payload
-            }
-    }
-}
+    case SET_PROFILE:
+      return {
+        ...state,
+        profile: action.payload
+      };
+  }
+};

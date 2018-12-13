@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import "./PubAcc.css";
-import { loginUser } from "../../../actions/authActions";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { loginUser } from "../../../actions/authActions";
 
 class PubAcc extends Component {
   publicAccount = e => {
@@ -26,7 +25,7 @@ class PubAcc extends Component {
         break;
     }
 
-    this.props.loginUser(botInfo, this.props.history);
+    this.props.loginUser(botInfo);
   };
 
   render() {
@@ -88,4 +87,4 @@ PubAcc.propTypes = {
 export default connect(
   null,
   { loginUser }
-)(withRouter(PubAcc));
+)(PubAcc);

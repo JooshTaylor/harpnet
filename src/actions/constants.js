@@ -1,53 +1,41 @@
 // Error constants
-export const GET_ERRORS = 'GET_ERRORS';
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
-
+export const GET_ERRORS = "GET_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 // Auth constants
-export const REGISTER_PENDING = 'REGISTER_PENDING';
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const REGISTER_PENDING = "REGISTER_PENDING";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
 
-export const LOGIN_PENDING = 'LOGIN_PENDING';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGIN_PENDING = "LOGIN_PENDING";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
 
-export const SET_USER = 'SET_USER';
-export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
-
-
-
+export const SET_USER = "SET_USER";
+export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
 
 // Profile constants
-export const SET_PROFILE = 'SET_PROFILE';
-export const CLEAR_PROFILE = 'CLEAR_PROFILE';
-
-
-
+export const SET_PROFILE = "SET_PROFILE";
+export const CLEAR_PROFILE = "CLEAR_PROFILE";
 
 // Follows constants
-export const SET_FOLLOWS = 'SET_FOLLOWS';
-export const CLEAR_FOLLOWS = 'CLEAR_FOLLOWS';
-export const FOLLOWS_LOADING = 'FOLLOWS_LOADING';
-
-
-
+export const SET_FOLLOWS = "SET_FOLLOWS";
+export const CLEAR_FOLLOWS = "CLEAR_FOLLOWS";
+export const FOLLOWS_LOADING = "FOLLOWS_LOADING";
 
 // Post constants
-export const GET_POSTS = 'SET_POSTS';
-export const CLEAR_POSTS = 'CLEAR_POSTS';
-export const GET_COMMENTS = 'GET_COMMENTS';
-export const FEED_RELOAD_TRUE = 'FEED_RELOAD_TRUE';
-export const DELETE_DECLINE = 'DELETE_DECLINE';
-export const DELETE_PENDING = 'DELETE_PENDING';
-export const ADD_EXTRA_POSTS = 'ADD_EXTRA_POSTS';
-export const ADD_EXTRA_COMMENTS = 'ADD_EXTRA_COMMENTS';
-
-
-
+export const GET_POSTS = "SET_POSTS";
+export const CLEAR_POSTS = "CLEAR_POSTS";
+export const GET_COMMENTS = "GET_COMMENTS";
+export const FEED_RELOAD_TRUE = "FEED_RELOAD_TRUE";
+export const DELETE_DECLINE = "DELETE_DECLINE";
+export const DELETE_PENDING = "DELETE_PENDING";
+export const ADD_EXTRA_POSTS = "ADD_EXTRA_POSTS";
+export const ADD_EXTRA_COMMENTS = "ADD_EXTRA_COMMENTS";
+export const FEED_LOADING = "FEED_LOADING";
 
 // Search constants
-export const SEARCH_LOADING = 'SEARCH_LOADING';
-export const SEARCH_COMPLETE = 'SEARCH_COMPLETE';
-export const RESET_SEARCH = 'RESET_SEARCH';
-export const RELOAD_SEARCH = 'RELOAD_SEARCH';
+export const SEARCH_LOADING = "SEARCH_LOADING";
+export const SEARCH_COMPLETE = "SEARCH_COMPLETE";
+export const RESET_SEARCH = "RESET_SEARCH";
+export const RELOAD_SEARCH = "RELOAD_SEARCH";

@@ -1,25 +1,20 @@
 import React, { Component } from "react";
+import "./App.css";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router } from "@reach/router";
+
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import Feed from "./components/Feed/Feed";
+import Landing from "./components/Landing/Landing";
+import Navigation from "./components/Navigation/Navigation";
+import Search from "./components/Search/Search/Search";
 
 import { authenticateUser } from "./actions/authActions";
 import { getProfile } from "./actions/profileActions";
-
-import PrivateRoute from "./components/Common/PrivateRoute/PrivateRoute";
-
-import Login from "./components/Login/Login";
-
-import Register from "./components/Register/Register";
-
-import Feed from "./components/Feed/Feed";
-import Footer from "./components/Footer/Footer";
-import Landing from "./components/Landing/Landing";
-import Navigation from "./components/Navigation/Navigation";
-
-import Search from "./components/Search/Search/Search";
-
-import "./App.css";
+import { getFollowData } from "./actions/followsActions";
 
 class App extends Component {
   //Validating the auth token
@@ -36,6 +31,7 @@ class App extends Component {
           if (res) {
             this.props.authenticateUser(res.data);
             this.props.getProfile(res.data.user_id, token);
+            this.props.getFollowData(res.data.user_id, token);
           }
         });
     }
@@ -43,27 +39,31 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div className="app">
-          <Navigation />
-          <main className="app__body">
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Switch>
-              <PrivateRoute exact path="/feed" component={Feed} />
-            </Switch>
-            <Switch>
-              <PrivateRoute exact path="/search" component={Search} />
-            </Switch>
-          </main>
-        </div>
-      </Router>
+      <div className="app">
+        <Navigation />
+        <main className="app__body">
+          <Router>
+            <Landing path="/" />
+            <Login path="/login" />
+            <Register path="/register" />
+            <Feed path="/feed" />
+            <Search path="/search/:params" />
+            {/* <Profile path="profile" />
+            <Profile path="profile/:id" /> */}
+          </Router>
+        </main>
+      </div>
     );
   }
 }
 
+App.propTypes = {
+  authenticateUser: PropTypes.func.isRequired,
+  getProfile: PropTypes.func.isRequired,
+  getFollowData: PropTypes.func.isRequired
+};
+
 export default connect(
   null,
-  { authenticateUser, getProfile }
+  { authenticateUser, getProfile, getFollowData }
 )(App);

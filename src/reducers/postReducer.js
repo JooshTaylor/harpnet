@@ -1,61 +1,87 @@
-import { GET_POSTS, CLEAR_POSTS, GET_COMMENTS, FEED_RELOAD_TRUE, DELETE_DECLINE, ADD_EXTRA_POSTS, ADD_EXTRA_COMMENTS } from '../actions/constants';
+import {
+  GET_POSTS,
+  CLEAR_POSTS,
+  GET_COMMENTS,
+  FEED_RELOAD_TRUE,
+  ADD_EXTRA_POSTS,
+  ADD_EXTRA_COMMENTS,
+  FEED_LOADING
+} from "../actions/constants";
 
 const initialState = {
-    posts: [],
-    comments: [],
-    reload: false,
-    morePosts: false,
-    deleteState: false
-}
+  posts: [],
+  comments: [],
+  reload: false,
+  morePosts: false,
+  deleteState: false,
+  loading: true,
+  reduxLoaded: false
+};
 
 export const postReducer = (state = initialState, action) => {
-    switch (action.type) {
-        default:
-            return state;
+  switch (action.type) {
+    default:
+      return state;
 
-        case GET_POSTS:
-            return {
-                ...state,
-                posts: action.payload.posts,
-                morePosts: action.payload.morePosts,
-                reload: false
-            }
+    case FEED_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
 
-        case CLEAR_POSTS:
-            return {
-                ...state,
-                posts: [],
-                comments: [],
-                reload: false,
-                morePosts: false
-            }
+    case GET_POSTS:
+      return {
+        ...state,
+        posts: action.payload.posts,
+        morePosts: action.payload.morePosts,
+        reload: false,
+        loading: false,
+        reduxLoaded: true
+      };
 
-        case GET_COMMENTS:
-            return {
-                ...state,
-                comments: action.payload,
-                reload: false
-            }
+    case CLEAR_POSTS:
+      return {
+        ...state,
+        posts: [],
+        comments: [],
+        reload: false,
+        morePosts: false,
+        loading: false,
+        reduxLoaded: true
+      };
 
-        case FEED_RELOAD_TRUE:
-            return {
-                ...state,
-                reload: true
-            }
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload,
+        reload: false,
+        loading: false,
+        reduxLoaded: true
+      };
 
-        case ADD_EXTRA_POSTS:
-            return {
-                ...state,
-                posts: [...state.posts, ...action.payload.posts],
-                morePosts: action.payload.morePosts,
-                reload: false
-            }
+    case FEED_RELOAD_TRUE:
+      return {
+        ...state,
+        reload: true,
+        loading: false,
+        reduxLoaded: true
+      };
 
-        case ADD_EXTRA_COMMENTS:
-            return {
-                ...state,
-                comments: [...state.comments, ...action.payload],
-                reload: false
-            }
-    }
-}
+    case ADD_EXTRA_POSTS:
+      return {
+        ...state,
+        posts: [...state.posts, ...action.payload.posts],
+        morePosts: action.payload.morePosts,
+        reload: false,
+        reduxLoaded: true
+      };
+
+    case ADD_EXTRA_COMMENTS:
+      return {
+        ...state,
+        comments: [...state.comments, ...action.payload],
+        reload: false,
+        reduxLoaded: true
+      };
+  }
+};

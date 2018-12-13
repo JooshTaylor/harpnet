@@ -2,16 +2,18 @@ import {
   GET_POSTS,
   GET_COMMENTS,
   FEED_RELOAD_TRUE,
-  DELETE_DECLINE,
   GET_ERRORS,
   CLEAR_ERRORS,
-  ADD_EXTRA_POSTS,
-  ADD_EXTRA_COMMENTS
+  FEED_LOADING
 } from "./constants";
 
 import axios from "axios";
 
 export const getFeed = (data, iteration, token) => dispatch => {
+  console.log(11);
+  dispatch({
+    type: FEED_LOADING
+  });
   axios
     .post(`http://localhost:5000/api/posts/get/${iteration}`, data, {
       headers: {

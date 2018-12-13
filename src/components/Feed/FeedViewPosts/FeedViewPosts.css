@@ -5,12 +5,10 @@
   position: relative;
 }
 
-
-
 .post {
   width: 60rem;
   background-color: #fff;
-  box-shadow: 0 0.2rem 1rem rgba(0,0,0,0.25);
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   text-align: left;
 }
@@ -61,8 +59,6 @@
   font-weight: 400;
 }
 
-
-
 .post__delete {
   align-self: flex-start;
   color: var(--color-white);
@@ -78,8 +74,6 @@
   text-decoration: none;
 }
 
-
-
 .post__content-box {
   margin-left: 2rem;
 }
@@ -87,8 +81,6 @@
 .post__content {
   font-size: 1.8rem;
 }
-
-
 
 .post__bottom {
   background-color: var(--color-white-darker);
@@ -98,7 +90,6 @@
   padding-top: 0;
 }
 
-
 .posts__showmore {
   border: none;
   background-color: var(--color-primary);
@@ -106,7 +97,7 @@
   padding: 1rem 2.5rem;
   font-size: 1.6rem;
   color: var(--color-white);
-  transition: all .2s;
+  transition: all 0.2s;
   cursor: pointer;
   margin: 3rem 0 2rem;
 }
