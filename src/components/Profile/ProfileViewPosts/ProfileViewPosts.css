@@ -1,36 +1,39 @@
-.feed {
-  margin-top: 2rem;
+.profile-posts {
   list-style: none;
-  transform: translateX(-2rem);
   position: relative;
+  border: 2px solid var(--color-white-darker-2);
+  width: 80rem;
+  padding: 0;
+  margin-top: 2rem;
 }
 
-.post {
-  width: 60rem;
+
+
+.profile-post {
   background-color: #fff;
-  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
+  /* border-radius: 5px; */
   text-align: left;
+  width: 100%;
 }
 
-.post:not(:last-child) {
-  margin-bottom: 1rem;
+.profile-post:not(:last-child) {
+  border-bottom: 1px solid var(--color-white-darker-2);
 }
 
-.post__top {
+.profile-post__top {
   padding: 1.5rem;
 }
 
-.post__details {
+.profile-post__details {
   display: flex;
   margin-bottom: 2rem;
 }
 
-.post__details-img-box {
+.profile-post__details-img-box {
   margin-right: 1rem;
 }
 
-.post__details-img {
+.profile-post__details-img {
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
@@ -38,7 +41,7 @@
   cursor: pointer;
 }
 
-.post__details-text-box {
+.profile-post__details-text-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,22 +49,24 @@
   margin-right: auto;
 }
 
-.post__details-text-box > * {
+.profile-post__details-text-box > * {
   margin: 0;
   padding: 3px 0;
 }
 
-.post__details-username {
+.profile-post__details-username {
   font-size: 1.5rem;
   cursor: pointer;
 }
 
-.post__details-date {
+.profile-post__details-date {
   font-size: 1.4rem;
   font-weight: 400;
 }
 
-.post__delete {
+
+
+.profile-post__delete {
   align-self: flex-start;
   color: var(--color-white);
   background-color: var(--color-bg);
@@ -76,34 +81,17 @@
   text-decoration: none;
 }
 
-.post__content-box {
+
+
+.profile-post__content-box {
   margin-left: 2rem;
 }
 
-.post__content {
+.profile-post__content {
   font-size: 1.8rem;
 }
 
-.post__bottom {
+.profile-post__bottom {
   background-color: var(--color-white-darker);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
   padding: 1.5rem;
-  padding-top: 0;
-}
-
-.posts__showmore {
-  border: none;
-  background-color: var(--color-primary);
-  border-radius: 3px;
-  padding: 1rem 2.5rem;
-  font-size: 1.6rem;
-  color: var(--color-white);
-  transition: all 0.2s;
-  cursor: pointer;
-  margin: 3rem 0 2rem;
-}
-
-.posts__showmore:hover {
-  background-color: var(--color-primary-dark);
 }

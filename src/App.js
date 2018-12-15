@@ -11,6 +11,7 @@ import Feed from "./components/Feed/Feed";
 import Landing from "./components/Landing/Landing";
 import Navigation from "./components/Navigation/Navigation";
 import Search from "./components/Search/Search/Search";
+import Profile from "./components/Profile/Profile";
 
 import { authenticateUser } from "./actions/authActions";
 import { getProfile } from "./actions/profileActions";
@@ -48,8 +49,8 @@ class App extends Component {
             <Register path="/register" />
             <Feed path="/feed" />
             <Search path="/search/:params" />
-            {/* <Profile path="profile" />
-            <Profile path="profile/:id" /> */}
+            <Profile path="/profile" />
+            <Profile path="/profile/:id" />
           </Router>
         </main>
       </div>

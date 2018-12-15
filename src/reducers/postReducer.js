@@ -5,7 +5,8 @@ import {
   FEED_RELOAD_TRUE,
   ADD_EXTRA_POSTS,
   ADD_EXTRA_COMMENTS,
-  FEED_LOADING
+  FEED_LOADING,
+  SET_INDIV_POSTS
 } from "../actions/constants";
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
   morePosts: false,
   deleteState: false,
   loading: true,
-  reduxLoaded: false
+  reduxLoaded: false,
+  profile: []
 };
 
 export const postReducer = (state = initialState, action) => {
@@ -82,6 +84,14 @@ export const postReducer = (state = initialState, action) => {
         comments: [...state.comments, ...action.payload],
         reload: false,
         reduxLoaded: true
+      };
+
+    case SET_INDIV_POSTS:
+      return {
+        ...state,
+        reload: false,
+        reduxLoaded: true,
+        profile: action.payload
       };
   }
 };

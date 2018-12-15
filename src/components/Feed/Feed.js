@@ -36,7 +36,7 @@ class Feed extends Component {
       navigate("/login");
     }
 
-    const { auth, follows, post } = this.props;
+    const { follows } = this.props;
     let postsCheck;
 
     if (follows.loading) {

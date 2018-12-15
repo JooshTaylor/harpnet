@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./FeedViewPosts.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { navigate } from "@reach/router";
 
 import PostAddComments from "../PostAddComments/PostAddComments";
 import PostViewComments from "../PostViewComments/PostViewComments";
@@ -86,10 +87,14 @@ class FeedViewPosts extends Component {
                   className="post__details-img"
                   src={`https://robohash.org/${post.creator_username}/?200x200`}
                   alt={post.creator_username}
+                  onClick={() => navigate(`/profile/${post.creator_id}`)}
                 />
               </div>
               <div className="post__details-text-box">
-                <h2 className="post__details-username">
+                <h2
+                  className="post__details-username"
+                  onClick={() => navigate(`/profile/${post.creator_id}`)}
+                >
                   {post.creator_username}
                 </h2>
                 <h3 className="post__details-date">

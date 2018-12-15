@@ -4,13 +4,13 @@ import {
   FEED_RELOAD_TRUE,
   GET_ERRORS,
   CLEAR_ERRORS,
-  FEED_LOADING
+  FEED_LOADING,
+  SET_INDIV_POSTS
 } from "./constants";
 
 import axios from "axios";
 
 export const getFeed = (data, iteration, token) => dispatch => {
-  console.log(11);
   dispatch({
     type: FEED_LOADING
   });
@@ -29,6 +29,21 @@ export const getFeed = (data, iteration, token) => dispatch => {
       dispatch({
         type: GET_COMMENTS,
         payload: res.data.comments
+      });
+    });
+};
+
+export const getPostsByUser = (id, token) => dispatch => {
+  axios
+    .get(`http://localhost:5000/api/posts/${id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(posts => {
+      dispatch({
+        type: SET_INDIV_POSTS,
+        payload: posts.data
       });
     });
 };

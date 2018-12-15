@@ -1,4 +1,9 @@
-import { SET_FOLLOWS, RELOAD_SEARCH, FOLLOWS_LOADING } from "./constants";
+import {
+  SET_FOLLOWS,
+  RELOAD_SEARCH,
+  FOLLOWS_LOADING,
+  SET_INDIV_FOLLOWS
+} from "./constants";
 import axios from "axios";
 
 export const getFollowData = (id, token) => dispatch => {
@@ -80,5 +85,20 @@ export const unfollowUser = (
 
         //case for feed
       }
+    });
+};
+
+export const getFollowDataByUser = (id, token) => dispatch => {
+  axios
+    .get(`http://localhost:5000/api/follows/${id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(follows => {
+      dispatch({
+        type: SET_INDIV_FOLLOWS,
+        payload: follows.data
+      });
     });
 };

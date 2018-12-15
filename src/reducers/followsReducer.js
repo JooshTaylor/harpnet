@@ -8,7 +8,8 @@ const initialState = {
   following: [],
   followers: [],
   loading: true,
-  reduxLoaded: false
+  reduxLoaded: false,
+  profile: {}
 };
 
 export const followsReducer = (state = initialState, action) => {

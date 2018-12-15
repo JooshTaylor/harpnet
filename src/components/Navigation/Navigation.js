@@ -16,6 +16,10 @@ class Navigation extends Component {
     };
   }
 
+  componentWillUnmount() {
+    localStorage.removeItem("token");
+  }
+
   //Event listener callback to toggle the dropdown menu
   toggleDropdown = e => {
     e.preventDefault();
@@ -79,7 +83,10 @@ class Navigation extends Component {
           <SearchBar />
         </li>
         <li className="nav__item">
-          <Link className="nav__link nav__link--profile" to="/profile">
+          <Link
+            className="nav__link nav__link--profile"
+            to={`/profile/${auth.user}`}
+          >
             <img
               src={`https://robohash.org/${profile.profile.username}/?200x200`}
               className="nav__img"

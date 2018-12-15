@@ -1,0 +1,132 @@
+.profile-spinner {
+  margin-top: 8rem;
+  padding-bottom: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.profile {
+  margin: 9rem auto 3rem;
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  background-color: #fff;
+  border: 2px solid var(--color-white-darker-2);
+  border-radius: 5px;
+}
+
+.info {
+  display: flex;
+  border-bottom: 1px solid var(--color-white-darker-2);
+  padding: 2rem;
+  padding-bottom: 0;
+  font-size: 2rem;
+  flex-direction: column;
+}
+
+.info__top {
+  display: flex;
+}
+
+.info__img-box {
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info__img {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+}
+
+.info__info {
+  margin-right: auto;
+}
+
+
+.info__actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info__btn {
+  margin: 2rem 0;
+  border: none;
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  padding: 1rem 2rem;
+  border-radius: 3px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.info__btn:hover {
+  background-color: var(--color-bg-dark);
+}
+
+.info__btn--follow {
+  background-color: var(--color-primary);
+  border: none;
+  transition: all .2s;
+}
+
+.info__btn--follow:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.info__btn--unfollow {
+  background-color: red;
+  border: none;
+  transition: all .2s;
+}
+
+.info__btn--unfollow:hover {
+  background-color: #CC0000;
+}
+
+.info__bottom {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  margin: 0;
+}
+
+.info__option {
+  margin: 0;
+  padding: .5rem 1.5rem;
+  cursor: pointer;
+  border: 1px solid var(--color-white-darker-2);
+  border-bottom: none;
+}
+
+.info__option:first-child {
+  border-top-left-radius: 5px;
+}
+
+.info__option:last-child {
+  border-top-right-radius: 5px;
+}
+
+.info__option--select {
+  background-color: var(--color-bg);
+  color: #fff;
+  border-right: none;
+  border-left: none;
+}
+
+
+.posts {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

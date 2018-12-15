@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Spinner from "../../Common/Spinner";
 import { connect } from "react-redux";
 
+import Button from "../../Common/Buttons/Button";
 import UserSearchInfo from "../UserSearchInfo/UserSearchInfo";
 import { resetSearch, searchUsers } from "../../../actions/searchActions";
 import {
@@ -11,18 +12,37 @@ import {
   unfollowUser,
   getFollowData
 } from "../../../actions/followsActions";
+import { navigate, Link } from "@reach/router";
 
 class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchField: "",
+      inactiveButtons: []
+    };
+  }
+
   componentWillReceiveProps(nextProps) {
     const { search, auth } = this.props;
 
     if (nextProps.search.reload) {
-      this.props.getFollowData(
-        auth.user.user_id,
-        localStorage.getItem("token")
-      );
+      this.props.getFollowData(auth.user, localStorage.getItem("token"));
       this.props.searchUsers(search.searchField, localStorage.getItem("token"));
     }
+  }
+
+  componentDidMount() {
+    const searchParams = window.location.pathname
+      .split("/")
+      .slice(2)
+      .join("");
+    this.setState({ searchField: searchParams }, () => {
+      this.props.searchUsers(
+        this.state.searchField,
+        localStorage.getItem("token")
+      );
+    });
   }
 
   componentWillUnmount() {
@@ -32,6 +52,7 @@ class Search extends Component {
   handleFollow = e => {
     const arg1 = { follower_id: this.props.auth.user }; // Follower ID
     const arg2 = [e.target.name]; // Following ID
+
     this.props.followUser(
       arg1,
       Number(arg2[0]),
@@ -55,9 +76,15 @@ class Search extends Component {
   render() {
     const { search, auth, follows } = this.props;
 
+    if (!localStorage.getItem("token")) {
+      navigate("/");
+    }
+
     if (search.loading & (search.searchResults.length === 0)) {
       return <Spinner />;
     }
+
+    // Dynamically rendering follow/unfollow/inactive buttons depending on state
 
     const searchResults = search.searchResults
       .filter(user => user.user_id !== auth.user)
@@ -83,25 +110,23 @@ class Search extends Component {
             </div>
             <div className="search__options">
               {follows.following.includes(result.user_id) ? (
-                <button
+                <Button
                   name={result.user_id}
-                  onClick={this.handleUnfollow}
-                  className="search__btn search__btn--unfollow"
-                >
-                  Unfollow
-                </button>
+                  text="Unfollow"
+                  callback={this.handleUnfollow}
+                  className="unfollow"
+                />
               ) : (
-                <button
+                <Button
                   name={result.user_id}
-                  onClick={this.handleFollow}
-                  className="search__btn search__btn--follow"
-                >
-                  Follow
-                </button>
+                  text="Follow"
+                  callback={this.handleFollow}
+                  className="follow"
+                />
               )}
-              <button name={result.user_id} className="search__btn">
+              <Link className="search__btn" to={`/profile/${result.user_id}`}>
                 View Profile
-              </button>
+              </Link>
             </div>
           </li>
         );
