@@ -61,3 +61,84 @@
   transition: all 0.2s;
   width: 12rem;
 }
+
+.post-btn {
+  background-color: var(--color-primary);
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 1rem;
+  cursor: pointer;
+  width: 8rem;
+  font-size: 1.6rem;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.comment-btn {
+  background-color: var(--color-primary-light);
+  border: none;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  padding: 0.8rem;
+  cursor: pointer;
+  width: 8rem;
+  font-size: 1.4rem;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.show-more-posts-btn {
+  border: none;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+  padding: 1rem 2.5rem;
+  font-size: 1.6rem;
+  color: var(--color-white);
+  transition: all 0.2s;
+  cursor: pointer;
+  margin: 3rem 0 2rem;
+}
+
+.show-more-posts-btn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.edit-profile-btn {
+  margin: 2rem 0;
+  border: none;
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  padding: 1rem 2rem;
+  border-radius: 3px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.edit-profile-btn:hover {
+  background-color: var(--color-bg-dark);
+}
+
+.modal-go-back {
+  padding: 1rem 2rem;
+  border-radius: 3px;
+  background-color: var(--color-bg);
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--color-white);
+  margin: 0 0.7rem;
+}
+
+.modal-delete {
+  border: none;
+  color: var(--color-white);
+  padding: 1rem 2rem;
+  border-radius: 3px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  background-color: red;
+  margin: 0 0.7rem;
+}

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./PostAddComments.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import Button from "../../Common/Buttons/Button";
 import { makeComment } from "../../../actions/postActions";
 
 class PostAddComments extends Component {
@@ -49,7 +51,7 @@ class PostAddComments extends Component {
 
   render() {
     return (
-      <form className="comment-form" onSubmit={this.onSubmit} noValidate>
+      <form className="comment-form" noValidate>
         <img
           alt="Commenter"
           className="comment-user-pic"
@@ -65,7 +67,11 @@ class PostAddComments extends Component {
           onChange={this.onChange}
           value={this.state.comment}
         />
-        <input type="submit" className="comment-btn" value="Submit" />
+        <Button
+          className="comment-btn"
+          text="Submit"
+          callback={this.onSubmit}
+        />
       </form>
     );
   }

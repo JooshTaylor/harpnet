@@ -3,6 +3,8 @@ import "./Post.css";
 import { navigate } from "@reach/router";
 import { connect } from "react-redux";
 
+import PostAddComments from "../Feed/PostAddComments/PostAddComments";
+import PostViewComments from "../Feed/PostViewComments/PostViewComments";
 import Spinner from "../Common/Spinner";
 import { getPostById } from "../../actions/postActions";
 
@@ -33,55 +35,129 @@ class Post extends Component {
         post = this.props.singlePost;
         user_id = this.props.user_id;
       }
-      return (
-        <div className="post__top">
-          <div className="post__details">
-            <div className="post__details-img-box">
-              <img
-                className="post__details-img"
-                src={`https://robohash.org/${post.creator_username}/?200x200`}
-                alt={post.creator_username}
-                onClick={() => navigate(`/profile/${post.creator_id}`)}
-              />
+      // This renders the post with different styles based on if it's viewed on its own or in the feed/profile. This is a lazy solution that will be fixed up later.
+      if (fromFeed) {
+        console.log(1);
+        return (
+          <div className="post__top">
+            <div className="post__details">
+              <div className="post__details-img-box">
+                <img
+                  className="post__details-img"
+                  src={`https://robohash.org/${post.creator_username}/?200x200`}
+                  alt={post.creator_username}
+                  onClick={() => navigate(`/profile/${post.creator_id}`)}
+                />
+              </div>
+              <div className="post__details-text-box">
+                <h2
+                  className="post__details-username"
+                  onClick={() => navigate(`/profile/${post.creator_id}`)}
+                >
+                  {post.creator_username}
+                </h2>
+                <h3 className="post__details-date">
+                  {post.post_date
+                    .split(" ")
+                    .slice(0, 3)
+                    .join(" ")}
+                  <br />
+                  {post.post_date
+                    .split(" ")
+                    .slice(3, 4)
+                    .toString()
+                    .split(":")
+                    .slice(0, 2)
+                    .join(":")}
+                </h3>
+              </div>
+              {post.creator_id === user_id ? (
+                <button
+                  onClick={this.props.openModal}
+                  name={post.post_id}
+                  className="post__delete"
+                >
+                  &times;
+                </button>
+              ) : null}
             </div>
-            <div className="post__details-text-box">
-              <h2
-                className="post__details-username"
-                onClick={() => navigate(`/profile/${post.creator_id}`)}
-              >
-                {post.creator_username}
-              </h2>
-              <h3 className="post__details-date">
-                {post.post_date
-                  .split(" ")
-                  .slice(0, 3)
-                  .join(" ")}
-                <br />
-                {post.post_date
-                  .split(" ")
-                  .slice(3, 4)
-                  .toString()
-                  .split(":")
-                  .slice(0, 2)
-                  .join(":")}
-              </h3>
+            <div className="post__content-box">
+              <p className="post__content">{post.content}</p>
             </div>
-            {post.creator_id === user_id ? (
-              <button
-                onClick={this.props.openModal}
-                name={post.post_id}
-                className="post__delete"
-              >
-                &times;
-              </button>
-            ) : null}
+            <div className="post__features-box">{post.score} points</div>
           </div>
-          <div className="post__content-box">
-            <p className="post__content">{post.content}</p>
+        );
+      } else {
+        console.log(2);
+        return (
+          <div className="post--single">
+            <div className="post__top">
+              <div className="post__details">
+                <div className="post__details-img-box">
+                  <img
+                    className="post__details-img"
+                    src={`https://robohash.org/${
+                      post.creator_username
+                    }/?200x200`}
+                    alt={post.creator_username}
+                    onClick={() => navigate(`/profile/${post.creator_id}`)}
+                  />
+                </div>
+                <div className="post__details-text-box">
+                  <h2
+                    className="post__details-username"
+                    onClick={() => navigate(`/profile/${post.creator_id}`)}
+                  >
+                    {post.creator_username}
+                  </h2>
+                  <h3 className="post__details-date">
+                    {post.post_date
+                      .split(" ")
+                      .slice(0, 3)
+                      .join(" ")}
+                    <br />
+                    {post.post_date
+                      .split(" ")
+                      .slice(3, 4)
+                      .toString()
+                      .split(":")
+                      .slice(0, 2)
+                      .join(":")}
+                  </h3>
+                </div>
+                {post.creator_id === user_id ? (
+                  <button
+                    onClick={this.props.openModal}
+                    name={post.post_id}
+                    className="post__delete"
+                  >
+                    &times;
+                  </button>
+                ) : null}
+              </div>
+              <div className="post__content-box">
+                <p className="post__content">{post.content}</p>
+              </div>
+              <div className="post__features-box">{post.score} points</div>
+            </div>
+            <div className="post__bottom--single">
+              <PostAddComments post_id={post.post_id} />
+              {/* If the post has comments, it will render the PostViewComments component */}
+              {this.props.post.comments ? (
+                this.props.post.comments.filter(comment => {
+                  return comment.post_id === post.post_id;
+                }).length !== 0 ? (
+                  <PostViewComments
+                    comments={this.props.post.comments.filter(comment => {
+                      return comment.post_id === post.post_id;
+                    })}
+                  />
+                ) : null
+              ) : null}
+            </div>
           </div>
-          <div className="post__features-box">{post.score} points</div>
-        </div>
-      );
+        );
+      }
     }
   }
 }

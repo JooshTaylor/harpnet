@@ -2,12 +2,10 @@ import {
   GET_POSTS,
   CLEAR_POSTS,
   GET_COMMENTS,
-  FEED_RELOAD_TRUE,
-  ADD_EXTRA_POSTS,
-  ADD_EXTRA_COMMENTS,
+  RELOAD_FEED,
   FEED_LOADING,
-  SET_INDIV_POSTS,
-  SET_SINGLE_POST
+  SET_SINGLE_POST,
+  RESET_SINGLE_POST
 } from "../actions/constants";
 
 const initialState = {
@@ -64,37 +62,12 @@ export const postReducer = (state = initialState, action) => {
         reduxLoaded: true
       };
 
-    case FEED_RELOAD_TRUE:
+    case RELOAD_FEED:
       return {
         ...state,
         reload: true,
         loading: false,
         reduxLoaded: true
-      };
-
-    case ADD_EXTRA_POSTS:
-      return {
-        ...state,
-        posts: [...state.posts, ...action.payload.posts],
-        morePosts: action.payload.morePosts,
-        reload: false,
-        reduxLoaded: true
-      };
-
-    case ADD_EXTRA_COMMENTS:
-      return {
-        ...state,
-        comments: [...state.comments, ...action.payload],
-        reload: false,
-        reduxLoaded: true
-      };
-
-    case SET_INDIV_POSTS:
-      return {
-        ...state,
-        reload: false,
-        reduxLoaded: true,
-        profile: action.payload
       };
 
     case SET_SINGLE_POST:
@@ -103,6 +76,12 @@ export const postReducer = (state = initialState, action) => {
         reload: false,
         reduxLoaded: true,
         single: action.payload
+      };
+
+    case RESET_SINGLE_POST:
+      return {
+        ...state,
+        single: {}
       };
   }
 };

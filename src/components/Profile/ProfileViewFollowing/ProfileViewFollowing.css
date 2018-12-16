@@ -1,2 +1,51 @@
-.profile__following {
+span {
+  font-weight: 700;
+}
+
+.followings {
+  list-style: none;
+  padding: 0;
+}
+
+.following__following {
+  display: flex;
+  list-style: none;
+  position: relative;
+  border: 2px solid var(--color-white-darker-2);
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.following__img-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.following__img {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+}
+
+.following__username {
+  font-style: italic;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: currentColor;
+  padding: 1.2rem 0;
+}
+
+.following__info {
+  flex: 0 0 50%;
+  margin-right: auto;
+}
+
+.following__options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3rem;
 }

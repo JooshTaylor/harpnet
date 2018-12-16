@@ -3,12 +3,18 @@ import "./PostViewComments.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import Button from "../../Common/Buttons/Button";
 import Modal from "react-modal";
 import { deleteComment } from "../../../actions/postActions";
 
 const modalStyles = {
   content: {
-    marginTop: "7rem"
+    width: "30%",
+    height: "20%",
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   }
 };
 
@@ -46,7 +52,7 @@ class PostViewComments extends Component {
   };
 
   render() {
-    const comments = this.props.comments.map(comment => {
+    const commentsWidget = this.props.comments.map(comment => {
       return (
         <li
           key={comment.comment_id}
@@ -84,15 +90,26 @@ class PostViewComments extends Component {
           contentLabel="Delete Post Warning Modal"
           style={modalStyles}
         >
-          <h2>Are you sure you want to delete this comment?</h2>
-          <p>Once a comment is deleted, it can never be recovered.</p>
-          <button onClick={this.closeModal}>Go Back</button>
-          <button onClick={this.deleteComment}>Delete</button>
+          <h2 className="modal__heading">
+            Are you sure you want to delete this comment?
+          </h2>
+          <p className="modal__paragraph">
+            Once a comment is deleted, it can never be recovered.
+          </p>
+          <div className="modal__btns">
+            <Button
+              text="Go Back"
+              callback={this.closeModal}
+              className="modal-go-back"
+            />
+            <Button
+              text="Delete"
+              callback={this.deleteComment}
+              className="modal-delete"
+            />
+          </div>
         </Modal>
-        <ul className="comments">
-          {/* {deletePrompt} */}
-          {comments}
-        </ul>
+        <ul className="comments">{commentsWidget}</ul>
       </Fragment>
     );
   }

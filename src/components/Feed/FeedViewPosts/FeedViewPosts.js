@@ -3,6 +3,7 @@ import "./FeedViewPosts.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import Button from "../../Common/Buttons/Button";
 import Modal from "react-modal";
 import Post from "../../Post/Post";
 import PostAddComments from "../PostAddComments/PostAddComments";
@@ -11,7 +12,12 @@ import { getFeed, deletePost } from "../../../actions/postActions";
 
 const modalStyles = {
   content: {
-    marginTop: "7rem"
+    width: "30%",
+    height: "20%",
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   }
 };
 
@@ -36,8 +42,11 @@ class FeedViewPosts extends Component {
     this.props.getFeed(data, 1, localStorage.getItem("token"));
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.post.reload === true) {
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.post.reload !== this.props.post.reload &&
+      this.props.post.reload === true
+    ) {
       const data = {
         following: this.props.follows.following,
         id: this.props.auth.user
@@ -128,22 +137,34 @@ class FeedViewPosts extends Component {
           contentLabel="Delete Post Warning Modal"
           style={modalStyles}
         >
-          <h2>Are you sure you want to delete this post?</h2>
-          <p>Once a post is deleted, it can never be recovered.</p>
-          <button onClick={this.closeModal}>Go Back</button>
-          <button onClick={this.deletePost}>Delete</button>
+          <h2 className="modal__heading">
+            Are you sure you want to delete this post?
+          </h2>
+          <p className="modal__paragraph">
+            Once a post is deleted, it can never be recovered.
+          </p>
+          <div className="modal__btns">
+            <Button
+              text="Go Back"
+              callback={this.closeModal}
+              className="modal-go-back"
+            />
+            <Button
+              text="Delete"
+              callback={this.deletePost}
+              className="modal-delete"
+            />
+          </div>
         </Modal>
         <ul className="feed">
           {posts}
           {post.morePosts ? (
-            <button
+            <Button
+              className="show-more-posts-btn"
+              text="Show More"
+              callback={this.showMorePosts}
               name={this.state.iteration}
-              type="button"
-              onClick={this.showMorePosts}
-              className="posts__showmore"
-            >
-              Show More
-            </button>
+            />
           ) : null}
         </ul>
       </Fragment>

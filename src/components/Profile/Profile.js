@@ -12,12 +12,11 @@ import ProfileViewPosts from "./ProfileViewPosts/ProfileViewPosts";
 import ProfileViewFollowing from "./ProfileViewFollowing/ProfileViewFollowing";
 import ProfileViewFollowers from "./ProfileViewFollowers/ProfileViewFollowers";
 import { getViewProfile, clearViewProfile } from "../../actions/profileActions";
-import { getPostsByUser, deletePost } from "../../actions/postActions";
+import { deletePost } from "../../actions/postActions";
 import {
   followUser,
   unfollowUser,
-  getFollowData,
-  getFollowDataByUser
+  getFollowData
 } from "../../actions/followsActions";
 
 const modalStyles = {
@@ -167,6 +166,7 @@ class Profile extends Component {
         viewWidget = (
           <ProfileViewFollowers
             followers={profile.viewProfile.follows.followers}
+            followings={follows.following}
           />
         );
       }
@@ -207,11 +207,9 @@ class Profile extends Component {
 Profile.propTypes = {
   getViewProfile: PropTypes.func.isRequired,
   clearViewProfile: PropTypes.func.isRequired,
-  getPostsByUser: PropTypes.func.isRequired,
   followUser: PropTypes.func.isRequired,
   unfollowUser: PropTypes.func.isRequired,
   getFollowData: PropTypes.func.isRequired,
-  getFollowDataByUser: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
@@ -231,10 +229,8 @@ export default connect(
   mapStateToProps,
   {
     getFollowData,
-    getFollowDataByUser,
     unfollowUser,
     followUser,
-    getPostsByUser,
     getViewProfile,
     clearViewProfile,
     deletePost

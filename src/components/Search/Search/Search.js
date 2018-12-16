@@ -18,17 +18,23 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchField: "",
-      inactiveButtons: []
+      searchField: ""
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { search, auth } = this.props;
-
-    if (nextProps.search.reload) {
-      this.props.getFollowData(auth.user, localStorage.getItem("token"));
-      this.props.searchUsers(search.searchField, localStorage.getItem("token"));
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.search.reload !== this.props.search.reload &&
+      this.props.search.reload === true
+    ) {
+      this.props.getFollowData(
+        this.props.auth.user,
+        localStorage.getItem("token")
+      );
+      this.props.searchUsers(
+        this.props.search.searchField,
+        localStorage.getItem("token")
+      );
     }
   }
 
@@ -84,8 +90,6 @@ class Search extends Component {
       return <Spinner />;
     }
 
-    // Dynamically rendering follow/unfollow/inactive buttons depending on state
-
     const searchResults = search.searchResults
       .filter(user => user.user_id !== auth.user)
       .map(result => {
@@ -134,9 +138,13 @@ class Search extends Component {
                   className="follow"
                 />
               )}
-              <Link className="search__btn" to={`/profile/${result.user_id}`}>
-                View Profile
-              </Link>
+              <Button
+                text="View Profile"
+                callback={() => {
+                  navigate(`/profile/${result.user_id}`);
+                }}
+                className="edit-profile-btn"
+              />
             </div>
           </li>
         );

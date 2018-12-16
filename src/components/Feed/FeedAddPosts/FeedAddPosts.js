@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./FeedAddPosts.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import Button from "../../Common/Buttons/Button";
 import { makePost } from "../../../actions/postActions";
 
 class FeedAddPosts extends Component {
@@ -44,7 +46,7 @@ class FeedAddPosts extends Component {
   render() {
     const { errors } = this.props;
     return (
-      <form className="post-form" onSubmit={this.onSubmit} noValidate>
+      <form className="post-form" noValidate>
         <input
           type="text"
           className="post-field"
@@ -53,7 +55,7 @@ class FeedAddPosts extends Component {
           onChange={this.onChange}
           value={this.state.post}
         />
-        <input type="submit" className="post-btn" value="Submit" />
+        <Button className="post-btn" text="Submit" callback={this.onSubmit} />
         {Object.keys(errors).length > 0 ? (
           <small className="post-errors">{errors.errors.post}</small>
         ) : null}

@@ -2,7 +2,6 @@ import {
   SET_FOLLOWS,
   RELOAD_SEARCH,
   FOLLOWS_LOADING,
-  SET_INDIV_FOLLOWS,
   RELOAD_PROFILE,
   RESET_PROFILE_RELOAD
 } from "./constants";
@@ -18,7 +17,7 @@ export const getFollowData = (id, token) => dispatch => {
   });
 
   axios
-    .get(`http://localhost:5000/api/follows/get/${id}`, {
+    .get(`http://localhost:5000/api/follows/${id}`, {
       headers: {
         Authorization: token
       }
@@ -101,20 +100,5 @@ export const unfollowUser = (
 
         //case for feed
       }
-    });
-};
-
-export const getFollowDataByUser = (id, token) => dispatch => {
-  axios
-    .get(`http://localhost:5000/api/follows/${id}`, {
-      headers: {
-        Authorization: token
-      }
-    })
-    .then(follows => {
-      dispatch({
-        type: SET_INDIV_FOLLOWS,
-        payload: follows.data
-      });
     });
 };

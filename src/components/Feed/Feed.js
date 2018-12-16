@@ -8,7 +8,7 @@ import FeedViewPosts from "./FeedViewPosts/FeedViewPosts";
 import FeedAddPosts from "./FeedAddPosts/FeedAddPosts";
 import { getProfile } from "../../actions/profileActions";
 import { getFollowData, followUser } from "../../actions/followsActions";
-import { getFeed } from "../../actions/postActions";
+import { getFeed, resetSinglePost } from "../../actions/postActions";
 import { navigate } from "@reach/router";
 
 class Feed extends Component {
@@ -18,6 +18,10 @@ class Feed extends Component {
       user: -1,
       token: ""
     };
+  }
+
+  componentWillMount() {
+    this.props.resetSinglePost();
   }
 
   followUser = id => {
@@ -92,6 +96,7 @@ export default connect(
     getProfile,
     getFollowData,
     followUser,
-    getFeed
+    getFeed,
+    resetSinglePost
   }
 )(Feed);

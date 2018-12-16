@@ -30,20 +30,15 @@ export const END_VIEW_PROFILE_RELOAD = "END_VIEW_PROFILE_RELOAD";
 export const SET_FOLLOWS = "SET_FOLLOWS";
 export const CLEAR_FOLLOWS = "CLEAR_FOLLOWS";
 export const FOLLOWS_LOADING = "FOLLOWS_LOADING";
-export const SET_INDIV_FOLLOWS = "SET_INDIV_FOLLOWS";
 
 // Post constants
 export const GET_POSTS = "SET_POSTS";
-export const CLEAR_POSTS = "CLEAR_POSTS";
 export const GET_COMMENTS = "GET_COMMENTS";
-export const FEED_RELOAD_TRUE = "FEED_RELOAD_TRUE";
-export const DELETE_DECLINE = "DELETE_DECLINE";
-export const DELETE_PENDING = "DELETE_PENDING";
-export const ADD_EXTRA_POSTS = "ADD_EXTRA_POSTS";
-export const ADD_EXTRA_COMMENTS = "ADD_EXTRA_COMMENTS";
+export const CLEAR_POSTS = "CLEAR_POSTS";
+export const RELOAD_FEED = "RELOAD_FEED";
 export const FEED_LOADING = "FEED_LOADING";
-export const SET_INDIV_POSTS = "SET_INDIV_POSTS";
 export const SET_SINGLE_POST = "SET_SINGLE_POST";
+export const RESET_SINGLE_POST = "RESET_SINGLE_POST";
 
 // Search constants
 export const SEARCH_LOADING = "SEARCH_LOADING";

@@ -25,18 +25,17 @@
   padding-top: 0;
 }
 
-.posts__showmore {
-  border: none;
-  background-color: var(--color-primary);
-  border-radius: 3px;
-  padding: 1rem 2.5rem;
-  font-size: 1.6rem;
-  color: var(--color-white);
-  transition: all 0.2s;
-  cursor: pointer;
-  margin: 3rem 0 2rem;
+.modal__heading {
+  text-align: center;
+  font-size: 1.8rem;
 }
 
-.posts__showmore:hover {
-  background-color: var(--color-primary-dark);
+.modal__paragraph {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+}
+
+.modal__btns {
+  text-align: center;
 }

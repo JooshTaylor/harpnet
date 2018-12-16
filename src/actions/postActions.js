@@ -1,13 +1,13 @@
 import {
   GET_POSTS,
   GET_COMMENTS,
-  FEED_RELOAD_TRUE,
+  RELOAD_FEED,
   GET_ERRORS,
   CLEAR_ERRORS,
   FEED_LOADING,
-  SET_INDIV_POSTS,
   SET_SINGLE_POST,
-  RELOAD_VIEW_PROFILE
+  RELOAD_VIEW_PROFILE,
+  RESET_SINGLE_POST
 } from "./constants";
 
 import axios from "axios";
@@ -36,21 +36,6 @@ export const getFeed = (data, iteration, token) => dispatch => {
     });
 };
 
-export const getPostsByUser = (id, token) => dispatch => {
-  axios
-    .get(`http://localhost:5000/api/posts/user/${id}`, {
-      headers: {
-        Authorization: token
-      }
-    })
-    .then(posts => {
-      dispatch({
-        type: SET_INDIV_POSTS,
-        payload: posts.data
-      });
-    });
-};
-
 export const getPostById = (id, token) => dispatch => {
   const user_id = jwt_decode(token);
   axios
@@ -68,16 +53,22 @@ export const getPostById = (id, token) => dispatch => {
     });
 };
 
+export const resetSinglePost = () => {
+  return {
+    type: RESET_SINGLE_POST
+  };
+};
+
 export const makePost = (data, token) => dispatch => {
   axios
-    .post("http://localhost:5000/api/posts/new", data, {
+    .post("http://localhost:5000/api/posts/post", data, {
       headers: {
         Authorization: token
       }
     })
     .then(res => {
       dispatch({
-        type: FEED_RELOAD_TRUE
+        type: RELOAD_FEED
       });
       dispatch({
         type: CLEAR_ERRORS
@@ -100,14 +91,14 @@ export const makeComment = (data, token) => dispatch => {
     })
     .then(res => {
       dispatch({
-        type: FEED_RELOAD_TRUE
+        type: RELOAD_FEED
       });
     });
 };
 
 export const deletePost = (id, token, location) => dispatch => {
   axios
-    .delete(`http://localhost:5000/api/posts/${id}`, {
+    .delete(`http://localhost:5000/api/posts/post/${id}`, {
       headers: {
         Authorization: token
       }
@@ -119,7 +110,7 @@ export const deletePost = (id, token, location) => dispatch => {
           return null;
         case "feed":
           dispatch({
-            type: FEED_RELOAD_TRUE
+            type: RELOAD_FEED
           });
           break;
         case "profile":
@@ -139,7 +130,7 @@ export const deleteComment = (id, token) => dispatch => {
     })
     .then(res => {
       dispatch({
-        type: FEED_RELOAD_TRUE
+        type: RELOAD_FEED
       });
     });
 };
