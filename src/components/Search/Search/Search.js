@@ -96,9 +96,19 @@ class Search extends Component {
                 className="search__img"
                 src={`https://robohash.org/${result.username}/?200x200`}
                 alt="profile"
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  navigate(`/profile/${result.user_id}`);
+                }}
               />
               <figcaption className="search__img-caption">
-                <h2 className="search__username">{result.username}</h2>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  className="search__username"
+                  to={`/profile/${result.user_id}`}
+                >
+                  {result.username}
+                </Link>
               </figcaption>
             </figure>
             <div className="search__info">

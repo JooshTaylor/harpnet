@@ -12,6 +12,8 @@ import Landing from "./components/Landing/Landing";
 import Navigation from "./components/Navigation/Navigation";
 import Search from "./components/Search/Search/Search";
 import Profile from "./components/Profile/Profile";
+import Settings from "./components/Settings/Settings";
+import Post from "./components/Post/Post";
 
 import { authenticateUser } from "./actions/authActions";
 import { getProfile } from "./actions/profileActions";
@@ -51,6 +53,8 @@ class App extends Component {
             <Search path="/search/:params" />
             <Profile path="/profile" />
             <Profile path="/profile/:id" />
+            <Settings path="/settings" />
+            <Post path="/post/:id" />
           </Router>
         </main>
       </div>

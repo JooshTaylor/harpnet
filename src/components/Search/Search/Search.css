@@ -48,6 +48,10 @@ span {
 
 .search__username {
   font-style: italic;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: currentColor;
+  padding: 1.2rem 0;
 }
 
 .search__info {

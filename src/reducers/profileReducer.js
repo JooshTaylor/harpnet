@@ -5,7 +5,7 @@ import {
   PROFILE_LOADING,
   CLEAR_VIEW_PROFILE,
   RELOAD_PROFILE,
-  END_RELOAD_PROFILE
+  RESET_PROFILE_RELOAD
 } from "../actions/constants";
 
 const initialState = {
@@ -66,7 +66,7 @@ export const profileReducer = (state = initialState, action) => {
         reload: true
       };
 
-    case END_RELOAD_PROFILE:
+    case RESET_PROFILE_RELOAD:
       return {
         ...state,
         reload: false

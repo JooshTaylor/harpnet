@@ -3,11 +3,12 @@ import { navigate } from "@reach/router";
 import "./Profile.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 import Spinner from "../Common/Spinner";
 import ProfileViewPosts from "./ProfileViewPosts/ProfileViewPosts";
 import ProfileViewFollowing from "./ProfileViewFollowing/ProfileViewFollowing";
 import ProfileViewFollowers from "./ProfileViewFollowers/ProfileViewFollowers";
-import { getProfileById, clearViewProfile } from "../../actions/profileActions";
+import { getViewProfile, clearViewProfile } from "../../actions/profileActions";
 import { getPostsByUser } from "../../actions/postActions";
 import {
   followUser,
@@ -27,29 +28,23 @@ class Profile extends Component {
   componentWillReceiveProps(nextProps) {
     const { auth } = this.props;
 
-    if (nextProps.profile.reload) {
+    // This runs if the client has followed/unfollowed the user profile they are viewing.
+    if (nextProps.profile.reload === true) {
       this.props.getFollowData(auth.user, localStorage.getItem("token"));
     }
   }
 
   componentDidMount() {
     if (this.props.id) {
-      console.log(this.props.id);
-      this.props.getProfileById(this.props.id, localStorage.getItem("token"));
-      this.props.getPostsByUser(this.props.id, localStorage.getItem("token"));
+      this.props.getViewProfile(this.props.id, localStorage.getItem("token"));
     } else {
       const self = this;
       setTimeout(function() {
-        self.props.getProfileById(
-          self.props.auth.user,
-          localStorage.getItem("token")
-        );
-        self.props.getPostsByUser(
+        self.props.getViewProfile(
           self.props.auth.user,
           localStorage.getItem("token")
         );
       }, 1000);
-      // this.props.getFollowDataByUser(this.props.auth.user, localStorage.getItem('token'));
     }
   }
 
@@ -58,22 +53,25 @@ class Profile extends Component {
   }
 
   handleFollow = e => {
-    const token = localStorage.getItem("token");
-    const follower = { follower_id: this.props.auth.user };
-    const following = [e.target.name];
+    const arg1 = { follower_id: this.props.auth.user }; // Follower ID
+    const arg2 = [e.target.name]; // Following ID
 
-    this.props.followUser(follower, Number(following[0]), token, "profile");
+    this.props.followUser(
+      arg1,
+      Number(arg2[0]),
+      localStorage.getItem("token"),
+      "profile"
+    );
   };
 
   handleUnfollow = e => {
-    const token = localStorage.getItem("token");
-    const unfollower = this.props.auth.user;
-    const unfollowing = [e.target.name];
+    const arg1 = this.props.auth.user; // Unfollower ID
+    const arg2 = [e.target.name]; // Unfollowee ID
 
     this.props.unfollowUser(
-      unfollower,
-      Number(unfollowing[0]),
-      token,
+      arg1,
+      Number(arg2[0]),
+      localStorage.getItem("token"),
       "profile"
     );
   };
@@ -90,13 +88,6 @@ class Profile extends Component {
       navigate("/");
     }
 
-    const infoCheck =
-      !profile.viewProfile.bio &&
-      !profile.viewProfile.first_name &&
-      !profile.viewProfile.last_name ? (
-        <p>This user has not provided any personal information</p>
-      ) : null;
-
     if (profile.loading || Object.keys(profile.viewProfile).length === 0) {
       return (
         <div className="profile-spinner">
@@ -104,6 +95,13 @@ class Profile extends Component {
         </div>
       );
     } else {
+      const infoCheck =
+        !profile.viewProfile.profile.bio &&
+        !profile.viewProfile.profile.first_name &&
+        !profile.viewProfile.profile.last_name ? (
+          <p>This user has not provided any personal information</p>
+        ) : null;
+
       return (
         <div className="profile">
           <div className="info">
@@ -111,45 +109,52 @@ class Profile extends Component {
               <div className="info__img-box">
                 <img
                   src={`https://robohash.org/${
-                    profile.viewProfile.username
+                    profile.viewProfile.profile.username
                   }/?200x200`}
                   alt="profile"
                   className="info__img"
                 />
                 <h1 className="info__username">
-                  {profile.viewProfile.username}
+                  {profile.viewProfile.profile.username}
                 </h1>
               </div>
               <div className="info__info">
-                {profile.viewProfile.first_name &&
-                profile.viewProfile.last_name ? (
+                {profile.viewProfile.profile.first_name &&
+                profile.viewProfile.profile.last_name ? (
                   <p className="info__name">
-                    <strong>Name:</strong> {profile.viewProfile.first_name}{" "}
-                    {profile.viewProfile.last_name}
+                    <strong>Name:</strong>{" "}
+                    {profile.viewProfile.profile.first_name}{" "}
+                    {profile.viewProfile.profile.last_name}
                   </p>
                 ) : null}
-                {profile.viewProfile.first_name &&
-                !profile.viewProfile.last_name ? (
+                {profile.viewProfile.profile.first_name &&
+                !profile.viewProfile.profile.last_name ? (
                   <p className="info__name">
-                    <strong>Name:</strong> {profile.viewProfile.first_name}
+                    <strong>Name:</strong>{" "}
+                    {profile.viewProfile.profile.first_name}
                   </p>
                 ) : null}
                 {profile.viewProfile.biography ? (
                   <p className="info__bio">
-                    <strong>Bio:</strong> {profile.viewProfile.biography}
+                    <strong>Bio:</strong>{" "}
+                    {profile.viewProfile.profile.biography}
                   </p>
                 ) : null}
                 {infoCheck}
               </div>
               <div className="info__actions">
-                {profile.viewProfile.username === profile.profile.username ? (
+                {profile.viewProfile.profile.username ===
+                profile.profile.username ? (
                   <button className="info__btn">Edit Profile</button>
                 ) : null}
-                {profile.viewProfile.username !== profile.profile.username ? (
-                  !follows.following.includes(profile.viewProfile.user_id) ? (
+                {profile.viewProfile.profile.username !==
+                profile.profile.username ? (
+                  !follows.following.includes(
+                    profile.viewProfile.profile.user_id
+                  ) ? (
                     <button
                       onClick={this.handleFollow}
-                      name={profile.viewProfile.user_id}
+                      name={profile.viewProfile.profile.user_id}
                       className="info__btn info__btn--follow"
                     >
                       Follow
@@ -157,7 +162,7 @@ class Profile extends Component {
                   ) : (
                     <button
                       onClick={this.handleUnfollow}
-                      name={profile.viewProfile.user_id}
+                      name={profile.viewProfile.profile.user_id}
                       className="info__btn info__btn--unfollow"
                     >
                       Unfollow
@@ -213,7 +218,7 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  getProfileById: PropTypes.func.isRequired,
+  getViewProfile: PropTypes.func.isRequired,
   clearViewProfile: PropTypes.func.isRequired,
   getPostsByUser: PropTypes.func.isRequired,
   followUser: PropTypes.func.isRequired,
@@ -243,7 +248,7 @@ export default connect(
     unfollowUser,
     followUser,
     getPostsByUser,
-    getProfileById,
+    getViewProfile,
     clearViewProfile
   }
 )(Profile);

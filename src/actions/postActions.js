@@ -5,10 +5,12 @@ import {
   GET_ERRORS,
   CLEAR_ERRORS,
   FEED_LOADING,
-  SET_INDIV_POSTS
+  SET_INDIV_POSTS,
+  SET_SINGLE_POST
 } from "./constants";
 
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 export const getFeed = (data, iteration, token) => dispatch => {
   dispatch({
@@ -35,7 +37,7 @@ export const getFeed = (data, iteration, token) => dispatch => {
 
 export const getPostsByUser = (id, token) => dispatch => {
   axios
-    .get(`http://localhost:5000/api/posts/${id}`, {
+    .get(`http://localhost:5000/api/posts/user/${id}`, {
       headers: {
         Authorization: token
       }
@@ -44,6 +46,23 @@ export const getPostsByUser = (id, token) => dispatch => {
       dispatch({
         type: SET_INDIV_POSTS,
         payload: posts.data
+      });
+    });
+};
+
+export const getPostById = (id, token) => dispatch => {
+  const user_id = jwt_decode(token);
+  axios
+    .get(`http://localhost:5000/api/posts/post/${id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(post => {
+      post.data.user_id = user_id;
+      dispatch({
+        type: SET_SINGLE_POST,
+        payload: post.data
       });
     });
 };

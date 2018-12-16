@@ -9,7 +9,7 @@ import axios from "axios";
 
 export const getProfile = (id, token) => dispatch => {
   axios
-    .get(`http://localhost:5000/api/profile/get/${id}`, {
+    .get(`http://localhost:5000/api/profile/${id}`, {
       headers: {
         Authorization: token
       }
@@ -28,13 +28,13 @@ export const getProfile = (id, token) => dispatch => {
     );
 };
 
-export const getProfileById = (id, token) => dispatch => {
+export const getViewProfile = (id, token) => dispatch => {
   dispatch({
     type: PROFILE_LOADING
   });
 
   axios
-    .get(`http://localhost:5000/api/profile/get/${id}`, {
+    .get(`http://localhost:5000/api/profile/view/${id}`, {
       headers: {
         Authorization: token
       }

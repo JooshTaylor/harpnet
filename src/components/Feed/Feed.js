@@ -9,7 +9,7 @@ import FeedAddPosts from "./FeedAddPosts/FeedAddPosts";
 import { getProfile } from "../../actions/profileActions";
 import { getFollowData, followUser } from "../../actions/followsActions";
 import { getFeed } from "../../actions/postActions";
-import { navigate } from "../../../node_modules/@reach/router";
+import { navigate } from "@reach/router";
 
 class Feed extends Component {
   constructor(props) {

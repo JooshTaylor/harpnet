@@ -122,3 +122,8 @@ export const logoutUser = () => dispatch => {
     type: CLEAR_POSTS
   });
 };
+
+export const deleteAccount = id => dispatch => {
+  localStorage.removeItem("token");
+  axios.delete(`http://localhost:5000/api/auth/delete/${id}`);
+};
