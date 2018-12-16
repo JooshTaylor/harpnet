@@ -5,14 +5,17 @@ import {
   PROFILE_LOADING,
   CLEAR_VIEW_PROFILE,
   RELOAD_PROFILE,
-  RESET_PROFILE_RELOAD
+  RESET_PROFILE_RELOAD,
+  RELOAD_VIEW_PROFILE,
+  END_VIEW_PROFILE_RELOAD
 } from "../actions/constants";
 
 const initialState = {
   profile: {},
   viewProfile: {},
   loading: false,
-  reload: false
+  reload: false,
+  viewReload: false
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -26,7 +29,8 @@ export const profileReducer = (state = initialState, action) => {
         profile: {},
         viewProfile: {},
         loading: false,
-        reload: false
+        reload: false,
+        viewReload: false
       };
 
     case CLEAR_VIEW_PROFILE:
@@ -34,7 +38,8 @@ export const profileReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         viewProfile: {},
-        reload: false
+        reload: false,
+        viewReload: false
       };
 
     case SET_PROFILE:
@@ -42,7 +47,8 @@ export const profileReducer = (state = initialState, action) => {
         ...state,
         profile: action.payload,
         loading: false,
-        reload: false
+        reload: false,
+        viewReload: false
       };
 
     case SET_VIEW_PROFILE:
@@ -50,26 +56,42 @@ export const profileReducer = (state = initialState, action) => {
         ...state,
         viewProfile: action.payload,
         loading: false,
-        reload: false
+        reload: false,
+        viewReload: false
       };
 
     case PROFILE_LOADING:
       return {
         ...state,
         loading: true,
-        reload: false
+        reload: false,
+        viewReload: false
       };
 
     case RELOAD_PROFILE:
       return {
         ...state,
-        reload: true
+        reload: true,
+        viewReload: false
       };
 
     case RESET_PROFILE_RELOAD:
       return {
         ...state,
-        reload: false
+        reload: false,
+        viewReload: false
+      };
+
+    case RELOAD_VIEW_PROFILE:
+      return {
+        ...state,
+        viewReload: true
+      };
+
+    case END_VIEW_PROFILE_RELOAD:
+      return {
+        ...state,
+        viewReload: false
       };
   }
 };

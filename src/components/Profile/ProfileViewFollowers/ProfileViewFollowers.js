@@ -1,20 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import "./ProfileViewFollowers.css";
 
-class ProfileViewFollowers extends Component {
-  render() {
-    return (
-      <div className="profile__followers">
-        Followers
-      </div>
-    )
-  }
-}
+const ProfileViewFollowers = ({ followers }) => {
+  const followersWidget = followers.map(follower => {
+    return <li key={follower.user_id}>{follower.username}</li>;
+  });
+  return <ul>{followersWidget}</ul>;
+};
 
-const mapStateToProps = state => {
-  return {
-    follows: state.follows
-  }
-}
-
-export default connect(mapStateToProps)(ProfileViewFollowers)
+export default ProfileViewFollowers;

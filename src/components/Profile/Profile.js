@@ -4,12 +4,15 @@ import "./Profile.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import Modal from "react-modal";
 import Spinner from "../Common/Spinner";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import ProfileSwitch from "./ProfileSwitch/ProfileSwitch";
 import ProfileViewPosts from "./ProfileViewPosts/ProfileViewPosts";
 import ProfileViewFollowing from "./ProfileViewFollowing/ProfileViewFollowing";
 import ProfileViewFollowers from "./ProfileViewFollowers/ProfileViewFollowers";
 import { getViewProfile, clearViewProfile } from "../../actions/profileActions";
-import { getPostsByUser } from "../../actions/postActions";
+import { getPostsByUser, deletePost } from "../../actions/postActions";
 import {
   followUser,
   unfollowUser,
@@ -17,20 +20,33 @@ import {
   getFollowDataByUser
 } from "../../actions/followsActions";
 
+const modalStyles = {
+  content: {
+    marginTop: "7rem"
+  }
+};
+
+Modal.setAppElement("#root");
+
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: "posts"
+      view: "posts",
+      showModal: false,
+      deleteSubject: -1
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { auth } = this.props;
-
-    // This runs if the client has followed/unfollowed the user profile they are viewing.
-    if (nextProps.profile.reload === true) {
-      this.props.getFollowData(auth.user, localStorage.getItem("token"));
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.profile.reload !== this.props.profile.reload &&
+      this.props.profile.reload === true
+    ) {
+      this.props.getFollowData(
+        this.props.auth.user,
+        localStorage.getItem("token")
+      );
     }
   }
 
@@ -82,8 +98,31 @@ class Profile extends Component {
     });
   };
 
+  openModal = e => {
+    this.setState({
+      showModal: true,
+      deleteSubject: [e.target.name]
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      showModal: false,
+      deleteSubject: -1
+    });
+  };
+
+  deletePost = () => {
+    this.props.deletePost(
+      this.state.deleteSubject,
+      localStorage.getItem("token"),
+      "profile"
+    );
+    this.closeModal();
+  };
+
   render() {
-    const { post, profile, follows } = this.props;
+    const { auth, profile, follows } = this.props;
     if (!localStorage.getItem("token")) {
       navigate("/");
     }
@@ -94,123 +133,71 @@ class Profile extends Component {
           <Spinner />
         </div>
       );
+    } else if (
+      profile.viewProfile.profile.private &&
+      profile.viewProfile.profile.user_id !== auth.user
+    ) {
+      return (
+        <div className="profile">
+          <h1>Sorry, this user's profile is private.</h1>
+          <button>Home</button>
+        </div>
+      );
     } else {
-      const infoCheck =
-        !profile.viewProfile.profile.bio &&
-        !profile.viewProfile.profile.first_name &&
-        !profile.viewProfile.profile.last_name ? (
-          <p>This user has not provided any personal information</p>
-        ) : null;
+      if (profile.viewReload) {
+        this.props.getViewProfile(this.props.id, localStorage.getItem("token"));
+      }
+
+      let viewWidget = <Spinner />;
+      if (this.state.view === "posts") {
+        viewWidget = (
+          <ProfileViewPosts
+            openModal={this.openModal}
+            posts={profile.viewProfile.post}
+            user_id={auth.user}
+          />
+        );
+      } else if (this.state.view === "following") {
+        viewWidget = (
+          <ProfileViewFollowing
+            followings={profile.viewProfile.follows.following}
+          />
+        );
+      } else if (this.state.view === "followers") {
+        viewWidget = (
+          <ProfileViewFollowers
+            followers={profile.viewProfile.follows.followers}
+          />
+        );
+      }
 
       return (
         <div className="profile">
           <div className="info">
-            <div className="info__top">
-              <div className="info__img-box">
-                <img
-                  src={`https://robohash.org/${
-                    profile.viewProfile.profile.username
-                  }/?200x200`}
-                  alt="profile"
-                  className="info__img"
-                />
-                <h1 className="info__username">
-                  {profile.viewProfile.profile.username}
-                </h1>
-              </div>
-              <div className="info__info">
-                {profile.viewProfile.profile.first_name &&
-                profile.viewProfile.profile.last_name ? (
-                  <p className="info__name">
-                    <strong>Name:</strong>{" "}
-                    {profile.viewProfile.profile.first_name}{" "}
-                    {profile.viewProfile.profile.last_name}
-                  </p>
-                ) : null}
-                {profile.viewProfile.profile.first_name &&
-                !profile.viewProfile.profile.last_name ? (
-                  <p className="info__name">
-                    <strong>Name:</strong>{" "}
-                    {profile.viewProfile.profile.first_name}
-                  </p>
-                ) : null}
-                {profile.viewProfile.biography ? (
-                  <p className="info__bio">
-                    <strong>Bio:</strong>{" "}
-                    {profile.viewProfile.profile.biography}
-                  </p>
-                ) : null}
-                {infoCheck}
-              </div>
-              <div className="info__actions">
-                {profile.viewProfile.profile.username ===
-                profile.profile.username ? (
-                  <button className="info__btn">Edit Profile</button>
-                ) : null}
-                {profile.viewProfile.profile.username !==
-                profile.profile.username ? (
-                  !follows.following.includes(
-                    profile.viewProfile.profile.user_id
-                  ) ? (
-                    <button
-                      onClick={this.handleFollow}
-                      name={profile.viewProfile.profile.user_id}
-                      className="info__btn info__btn--follow"
-                    >
-                      Follow
-                    </button>
-                  ) : (
-                    <button
-                      onClick={this.handleUnfollow}
-                      name={profile.viewProfile.profile.user_id}
-                      className="info__btn info__btn--unfollow"
-                    >
-                      Unfollow
-                    </button>
-                  )
-                ) : null}
-              </div>
-            </div>
-            <ul className="info__bottom">
-              <li
-                onClick={() => {
-                  this.changeView("posts");
-                }}
-                name="posts"
-                className="info__option info__option--select"
-              >
-                Posts
-              </li>
-              <li
-                onClick={() => {
-                  this.changeView("following");
-                }}
-                className="info__option"
-              >
-                Following
-              </li>
-              <li
-                onClick={() => {
-                  this.changeView("followers");
-                }}
-                name="followers"
-                className="info__option"
-              >
-                Followers
-              </li>
-            </ul>
+            <ProfileInfo
+              profile={profile}
+              follows={follows}
+              handleFollow={this.handleFollow}
+              handleUnfollow={this.handleUnfollow}
+            />
+            <ProfileSwitch
+              selection={this.state.view}
+              changeView={this.changeView}
+            />
           </div>
-          <div className="posts">
-            {post.profile.posts && this.state.view === "posts" ? (
-              <ProfileViewPosts />
-            ) : null}
-            {follows.profile.following && this.state.view === "following" ? (
-              <ProfileViewFollowing />
-            ) : null}
-            {follows.profile.followers && this.state.view === "followers" ? (
-              <ProfileViewFollowers />
-            ) : null}
-          </div>
+          <div className="posts">{viewWidget}</div>
+          <Modal
+            isOpen={this.state.showModal}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            contentLabel="Delete Post Warning Modal"
+            style={modalStyles}
+          >
+            <h2>Are you sure you want to delete this post?</h2>
+            <p>Once a post is deleted, it can never be recovered.</p>
+            <button onClick={this.closeModal}>Go Back</button>
+            <button onClick={this.deletePost}>Delete</button>
+          </Modal>
         </div>
       );
     }
@@ -249,6 +236,7 @@ export default connect(
     followUser,
     getPostsByUser,
     getViewProfile,
-    clearViewProfile
+    clearViewProfile,
+    deletePost
   }
 )(Profile);

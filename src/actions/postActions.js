@@ -6,7 +6,8 @@ import {
   CLEAR_ERRORS,
   FEED_LOADING,
   SET_INDIV_POSTS,
-  SET_SINGLE_POST
+  SET_SINGLE_POST,
+  RELOAD_VIEW_PROFILE
 } from "./constants";
 
 import axios from "axios";
@@ -104,7 +105,7 @@ export const makeComment = (data, token) => dispatch => {
     });
 };
 
-export const deletePost = (id, token) => dispatch => {
+export const deletePost = (id, token, location) => dispatch => {
   axios
     .delete(`http://localhost:5000/api/posts/${id}`, {
       headers: {
@@ -112,9 +113,20 @@ export const deletePost = (id, token) => dispatch => {
       }
     })
     .then(res => {
-      dispatch({
-        type: FEED_RELOAD_TRUE
-      });
+      console.log(location);
+      switch (location) {
+        default:
+          return null;
+        case "feed":
+          dispatch({
+            type: FEED_RELOAD_TRUE
+          });
+          break;
+        case "profile":
+          dispatch({
+            type: RELOAD_VIEW_PROFILE
+          });
+      }
     });
 };
 

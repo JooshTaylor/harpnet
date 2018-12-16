@@ -6,8 +6,6 @@
   align-items: center;
 }
 
-
-
 .profile {
   margin: 9rem auto 3rem;
   padding-bottom: 4rem;
@@ -50,7 +48,6 @@
   margin-right: auto;
 }
 
-
 .info__actions {
   display: flex;
   flex-direction: column;
@@ -66,7 +63,7 @@
   border-radius: 3px;
   font-size: 1.6rem;
   cursor: pointer;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .info__btn:hover {
@@ -76,7 +73,7 @@
 .info__btn--follow {
   background-color: var(--color-primary);
   border: none;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .info__btn--follow:hover {
@@ -86,47 +83,16 @@
 .info__btn--unfollow {
   background-color: red;
   border: none;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .info__btn--unfollow:hover {
-  background-color: #CC0000;
+  background-color: #cc0000;
 }
-
-.info__bottom {
-  display: flex;
-  list-style: none;
-  justify-content: center;
-  margin: 0;
-}
-
-.info__option {
-  margin: 0;
-  padding: .5rem 1.5rem;
-  cursor: pointer;
-  border: 1px solid var(--color-white-darker-2);
-  border-bottom: none;
-}
-
-.info__option:first-child {
-  border-top-left-radius: 5px;
-}
-
-.info__option:last-child {
-  border-top-right-radius: 5px;
-}
-
-.info__option--select {
-  background-color: var(--color-bg);
-  color: #fff;
-  border-right: none;
-  border-left: none;
-}
-
 
 .posts {
   padding: 0 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }

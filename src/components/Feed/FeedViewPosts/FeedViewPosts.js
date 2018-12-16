@@ -67,7 +67,8 @@ class FeedViewPosts extends Component {
   deletePost = () => {
     this.props.deletePost(
       this.state.deleteSubject,
-      localStorage.getItem("token")
+      localStorage.getItem("token"),
+      "feed"
     );
     this.closeModal();
   };
@@ -144,7 +145,6 @@ class FeedViewPosts extends Component {
               Show More
             </button>
           ) : null}
-          <button onClick={this.closeModal} />
         </ul>
       </Fragment>
     );
