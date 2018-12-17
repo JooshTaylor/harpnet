@@ -5,7 +5,9 @@ import {
   RELOAD_FEED,
   FEED_LOADING,
   SET_SINGLE_POST,
-  RESET_SINGLE_POST
+  RESET_SINGLE_POST,
+  RELOAD_SINGLE_POST,
+  END_RELOAD_SINGLE_POST
 } from "../actions/constants";
 
 const initialState = {
@@ -13,10 +15,11 @@ const initialState = {
   comments: [],
   morePosts: false,
   deleteState: false,
-  single: {},
   loading: true,
   reduxLoaded: false,
   reload: false,
+  single: {},
+  singleReload: false,
   profile: []
 };
 
@@ -82,6 +85,18 @@ export const postReducer = (state = initialState, action) => {
       return {
         ...state,
         single: {}
+      };
+
+    case RELOAD_SINGLE_POST:
+      return {
+        ...state,
+        singleReload: true
+      };
+
+    case END_RELOAD_SINGLE_POST:
+      return {
+        ...state,
+        singleReload: false
       };
   }
 };

@@ -6,8 +6,10 @@ import {
   CLEAR_ERRORS,
   FEED_LOADING,
   SET_SINGLE_POST,
+  RELOAD_SINGLE_POST,
   RELOAD_VIEW_PROFILE,
-  RESET_SINGLE_POST
+  RESET_SINGLE_POST,
+  END_RELOAD_SINGLE_POST
 } from "./constants";
 
 import axios from "axios";
@@ -37,6 +39,9 @@ export const getFeed = (data, iteration, token) => dispatch => {
 };
 
 export const getPostById = (id, token) => dispatch => {
+  dispatch({
+    type: END_RELOAD_SINGLE_POST
+  });
   const user_id = jwt_decode(token);
   axios
     .get(`http://localhost:5000/api/posts/post/${id}`, {
@@ -82,7 +87,7 @@ export const makePost = (data, token) => dispatch => {
     });
 };
 
-export const makeComment = (data, token) => dispatch => {
+export const makeComment = (data, token, single = false) => dispatch => {
   axios
     .post(`http://localhost:5000/api/posts/comment`, data, {
       headers: {
@@ -90,9 +95,15 @@ export const makeComment = (data, token) => dispatch => {
       }
     })
     .then(res => {
-      dispatch({
-        type: RELOAD_FEED
-      });
+      if (single) {
+        dispatch({
+          type: RELOAD_SINGLE_POST
+        });
+      } else {
+        dispatch({
+          type: RELOAD_FEED
+        });
+      }
     });
 };
 
@@ -104,7 +115,6 @@ export const deletePost = (id, token, location) => dispatch => {
       }
     })
     .then(res => {
-      console.log(location);
       switch (location) {
         default:
           return null;
@@ -121,7 +131,7 @@ export const deletePost = (id, token, location) => dispatch => {
     });
 };
 
-export const deleteComment = (id, token) => dispatch => {
+export const deleteComment = (id, token, single = false) => dispatch => {
   axios
     .delete(`http://localhost:5000/api/posts/comment/${id}`, {
       headers: {
@@ -129,8 +139,14 @@ export const deleteComment = (id, token) => dispatch => {
       }
     })
     .then(res => {
-      dispatch({
-        type: RELOAD_FEED
-      });
+      if (single) {
+        dispatch({
+          type: RELOAD_SINGLE_POST
+        });
+      } else {
+        dispatch({
+          type: RELOAD_FEED
+        });
+      }
     });
 };

@@ -49,6 +49,8 @@
 .post__details-date {
   font-size: 1.4rem;
   font-weight: 400;
+  text-decoration: none;
+  color: currentColor;
 }
 
 .post__delete {

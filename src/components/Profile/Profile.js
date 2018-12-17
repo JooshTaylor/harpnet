@@ -4,6 +4,7 @@ import "./Profile.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import Button from "../Common/Buttons/Button";
 import Modal from "react-modal";
 import Spinner from "../Common/Spinner";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
@@ -21,7 +22,12 @@ import {
 
 const modalStyles = {
   content: {
-    marginTop: "7rem"
+    width: "30%",
+    height: "20%",
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   }
 };
 
@@ -46,6 +52,9 @@ class Profile extends Component {
         this.props.auth.user,
         localStorage.getItem("token")
       );
+    }
+    if (this.props.id !== prevProps.id) {
+      this.props.getViewProfile(this.props.id, localStorage.getItem("token"));
     }
   }
 
@@ -159,12 +168,20 @@ class Profile extends Component {
       } else if (this.state.view === "following") {
         viewWidget = (
           <ProfileViewFollowing
+            handleFollow={this.handleFollow}
+            handleUnfollow={this.handleUnfollow}
+            clientFollows={follows.following}
+            clientId={auth.user}
             followings={profile.viewProfile.follows.following}
           />
         );
       } else if (this.state.view === "followers") {
         viewWidget = (
           <ProfileViewFollowers
+            handleFollow={this.handleFollow}
+            handleUnfollow={this.handleUnfollow}
+            clientFollows={follows.following}
+            clientId={auth.user}
             followers={profile.viewProfile.follows.followers}
             followings={follows.following}
           />
@@ -193,10 +210,24 @@ class Profile extends Component {
             contentLabel="Delete Post Warning Modal"
             style={modalStyles}
           >
-            <h2>Are you sure you want to delete this post?</h2>
-            <p>Once a post is deleted, it can never be recovered.</p>
-            <button onClick={this.closeModal}>Go Back</button>
-            <button onClick={this.deletePost}>Delete</button>
+            <h2 className="modal__heading">
+              Are you sure you want to delete this post?
+            </h2>
+            <p className="modal__paragraph">
+              Once a post is deleted, it can never be recovered.
+            </p>
+            <div className="modal__btns">
+              <Button
+                text="Go Back"
+                callback={this.closeModal}
+                className="modal-go-back"
+              />
+              <Button
+                text="Delete"
+                callback={this.deletePost}
+                className="modal-delete"
+              />
+            </div>
           </Modal>
         </div>
       );

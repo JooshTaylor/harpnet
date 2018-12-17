@@ -39,6 +39,8 @@ export const RELOAD_FEED = "RELOAD_FEED";
 export const FEED_LOADING = "FEED_LOADING";
 export const SET_SINGLE_POST = "SET_SINGLE_POST";
 export const RESET_SINGLE_POST = "RESET_SINGLE_POST";
+export const RELOAD_SINGLE_POST = "RELOAD_SINGLE_POST";
+export const END_RELOAD_SINGLE_POST = "END_RELOAD_SINGLE_POST";
 
 // Search constants
 export const SEARCH_LOADING = "SEARCH_LOADING";

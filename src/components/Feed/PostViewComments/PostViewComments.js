@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Button from "../../Common/Buttons/Button";
 import Modal from "react-modal";
 import { deleteComment } from "../../../actions/postActions";
+import { navigate } from "../../../../node_modules/@reach/router";
 
 const modalStyles = {
   content: {
@@ -46,7 +47,8 @@ class PostViewComments extends Component {
   deleteComment = () => {
     this.props.deleteComment(
       this.state.deleteSubject,
-      localStorage.getItem("token")
+      localStorage.getItem("token"),
+      this.props.single
     );
     this.closeModal();
   };
@@ -60,12 +62,20 @@ class PostViewComments extends Component {
           className="comments__comment"
         >
           <img
+            style={{ cursor: "pointer" }}
             className="comments__dp"
             alt="Commenter"
             src={`https://robohash.org/${comment.creator_username}/?200x200`}
+            onClick={() => navigate(`/profile/${comment.creator_id}`)}
           />
           <div className="comments__content-box">
-            <h2 className="comments__name">{comment.creator_username}</h2>
+            <h2
+              style={{ cursor: "pointer" }}
+              className="comments__name"
+              onClick={() => navigate(`/profile/${comment.creator_id}`)}
+            >
+              {comment.creator_username}
+            </h2>
             <p className="comments__text">{comment.text}</p>
             {comment.creator_id === this.props.auth.user ? (
               <button

@@ -29,17 +29,10 @@ class PostAddComments extends Component {
         .join(" ")
     };
 
-    const reloadData = {
-      following: this.props.follows.following,
-      id: this.props.auth.user
-    };
+    // If the comment was made from the /post/id route, single===true
+    const single = this.props.single;
 
-    console.log(this.state.comment);
-    this.props.makeComment(
-      commentData,
-      localStorage.getItem("token"),
-      reloadData
-    );
+    this.props.makeComment(commentData, localStorage.getItem("token"), single);
     this.setState({ comment: "" });
   };
 
