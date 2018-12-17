@@ -142,8 +142,11 @@ class Profile extends Component {
         </div>
       );
     } else if (
-      profile.viewProfile.profile.private &&
-      profile.viewProfile.profile.user_id !== auth.user
+      (profile.viewProfile.profile.privacy === 3 &&
+        profile.viewProfile.profile.user_id !== auth.user) ||
+      (profile.viewProfile.profile.privacy === 2 &&
+        profile.viewProfile.profile.user_id !== auth.user &&
+        !follows.following.includes(profile.viewProfile.profile.user_id))
     ) {
       return (
         <div className="profile">

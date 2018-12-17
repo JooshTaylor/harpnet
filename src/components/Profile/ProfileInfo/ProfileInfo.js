@@ -39,7 +39,7 @@ const ProfileInfo = ({ profile, follows, handleFollow, handleUnfollow }) => {
             <strong>Name:</strong> {profile.viewProfile.profile.first_name}
           </p>
         ) : null}
-        {profile.viewProfile.biography ? (
+        {profile.viewProfile.profile.biography ? (
           <p className="info__bio">
             <strong>Bio:</strong> {profile.viewProfile.profile.biography}
           </p>

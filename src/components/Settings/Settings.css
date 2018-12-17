@@ -1,0 +1,83 @@
+.settings {
+  width: 80%;
+  background-color: white;
+  margin: 10rem auto 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.settings__settings {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 50%;
+  border: 1px solid var(--color-bg);
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-right: 0.5px solid var(--color-bg);
+  padding: 2rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.settings__profile {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 50%;
+  border: 1px solid var(--color-bg);
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-left: 0.5px solid var(--color-bg);
+  padding: 2rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.settings__heading-1 {
+  font-size: 2.8rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.settings__heading-2 {
+  font-size: 1.7rem;
+  margin: 0;
+  padding: 0;
+  margin-right: auto;
+}
+
+.settings__set {
+  display: flex;
+  align-items: center;
+}
+
+.settings__borders {
+  border-top: 1px solid var(--color-bg);
+  border-bottom: 1px solid var(--color-bg);
+}
+
+.settings__input {
+  margin: 1rem 0;
+  font-size: 1.6rem;
+  border: none;
+  border: 2px solid var(--color-bg);
+  border-radius: 3px;
+}
+
+.settings__input-large {
+  margin: 1rem 0;
+  font-size: 1.6rem;
+  border: none;
+  border: 2px solid var(--color-bg);
+  border-radius: 3px;
+}
+
+.save-changes {
+  text-align: center;
+  width: 20%;
+  margin: 0 auto;
+  background-color: var(--color-bg);
+  color: white;
+  padding: 0 2rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+}

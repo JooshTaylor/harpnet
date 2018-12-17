@@ -64,10 +64,9 @@ export const clearViewProfile = () => {
   };
 };
 
-export const makeProfilePrivate = (id, token) => dispatch => {
-  console.log(token);
+export const changePrivacy = (state, id, token) => dispatch => {
   axios
-    .put(`http://localhost:5000/api/profile/private/${id}`, null, {
+    .put(`http://localhost:5000/api/profile/privacy/${id}`, state, {
       headers: {
         Authorization: token
       }
@@ -79,9 +78,37 @@ export const makeProfilePrivate = (id, token) => dispatch => {
     });
 };
 
-export const makeProfilePublic = (id, token) => dispatch => {
+export const updateBio = (bio, id, token) => dispatch => {
   axios
-    .put(`http://localhost:5000/api/profile/public/${id}`, null, {
+    .put(`http://localhost:5000/api/profile/biography/${id}`, bio, {
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(() => {
+      dispatch({
+        type: RELOAD_PROFILE
+      });
+    });
+};
+
+export const updateFirstName = (fname, id, token) => dispatch => {
+  axios
+    .put(`http://localhost:5000/api/profile/first_name/${id}`, fname, {
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(() => {
+      dispatch({
+        type: RELOAD_PROFILE
+      });
+    });
+};
+
+export const updateLastName = (lname, id, token) => dispatch => {
+  axios
+    .put(`http://localhost:5000/api/profile/last_name/${id}`, lname, {
       headers: {
         Authorization: token
       }

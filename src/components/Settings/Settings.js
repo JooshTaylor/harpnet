@@ -3,34 +3,122 @@ import "./Settings.css";
 import { navigate } from "@reach/router";
 import { connect } from "react-redux";
 
+import Button from "../Common/Buttons/Button";
 import Spinner from "../Common/Spinner";
 import { deleteAccount, logoutUser } from "../../actions/authActions";
 import {
-  makeProfilePrivate,
-  makeProfilePublic,
-  getProfile
+  getProfile,
+  changePrivacy,
+  updateBio,
+  updateFirstName,
+  updateLastName
 } from "../../actions/profileActions";
 
 class Settings extends Component {
+  constructor(props) {
+    super(props);
+    // Privacy states: 1 = public, 2 = public to followers only, 3 = private to all.
+    this.state = {
+      privacy: 1,
+      bio: "",
+      firstName: "",
+      lastName: "",
+      loading: false
+    };
+  }
+
+  componentDidMount() {
+    const { profile } = this.props.profile;
+    this.setState({
+      privacy: profile.privacy,
+      bio: profile.biography,
+      firstName: profile.first_name,
+      lastName: profile.last_name
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { profile } = this.props.profile;
+    if (prevProps.profile.profile.privacy !== profile.privacy) {
+      this.setState({
+        privacy: profile.privacy
+      });
+    }
+    if (prevProps.profile.profile.first_name !== profile.first_name) {
+      this.setState({
+        firstName: profile.first_name
+      });
+    }
+    if (prevProps.profile.profile.last_name !== profile.last_name) {
+      this.setState({
+        lastName: profile.last_name
+      });
+    }
+    if (prevProps.profile.profile.biography !== profile.biography) {
+      this.setState({
+        bio: profile.biography === null ? "" : profile.biography
+      });
+    }
+  }
+
+  togglePrivacy = e => {
+    this.setState({ privacy: Number([e.target.name]) });
+  };
+
+  handleFNameChange = e => {
+    this.setState({ firstName: e.target.value });
+  };
+
+  handleLNameChange = e => {
+    this.setState({ lastName: e.target.value });
+  };
+
+  handleBioChange = e => {
+    this.setState({ bio: e.target.value });
+  };
+
   deleteAccount = () => {
     this.props.logoutUser();
     this.props.deleteAccount(this.props.auth.user);
     navigate("/");
   };
 
-  makeProfilePrivate = () => {
-    console.log(1);
-    this.props.makeProfilePrivate(
-      this.props.auth.user,
-      localStorage.getItem("token")
-    );
-  };
+  saveChanges = () => {
+    const { auth, profile } = this.props;
+    const token = localStorage.getItem("token");
 
-  makeProfilePublic = () => {
-    this.props.makeProfilePublic(
-      this.props.auth.user,
-      localStorage.getItem("token")
-    );
+    if (this.state.privacy !== profile.profile.private) {
+      this.props.changePrivacy({ state: this.state.privacy }, auth.user, token);
+    }
+
+    if (this.state.bio !== profile.profile.biography) {
+      this.props.updateBio({ bio: this.state.bio }, auth.user, token);
+    }
+
+    if (this.state.firstName !== profile.profile.first_name) {
+      this.props.updateFirstName(
+        { fname: this.state.firstName },
+        auth.user,
+        token
+      );
+    }
+
+    if (this.state.lastName !== profile.profile.last_name) {
+      this.props.updateLastName(
+        { lname: this.state.lastName },
+        auth.user,
+        token
+      );
+    }
+
+    this.setState({
+      loading: true
+    });
+    const self = this;
+    setTimeout(function() {
+      self.setState({ loading: false });
+      navigate(`/profile/${auth.user}`);
+    }, 3000);
   };
 
   render() {
@@ -43,15 +131,17 @@ class Settings extends Component {
       navigate("/login");
     }
 
-    if (Object.keys(this.props.profile).length === 0) {
+    let settingsWidget;
+
+    if (Object.keys(this.props.profile).length === 0 || this.state.loading) {
       return <Spinner />;
     } else if (
       ["Harper", "Harphene", "Bailey"].includes(
         this.props.profile.profile.username
       )
     ) {
-      return (
-        <div>
+      settingsWidget = (
+        <div className="settings__settings">
           <h1>
             Sorry! You cannot edit the settings for a public account. Please
             make your own account to test these out (your account may be deleted
@@ -61,32 +151,113 @@ class Settings extends Component {
       );
     } else {
       if (this.props.profile.reload) {
-        console.log(3);
         this.props.getProfile(
           this.props.auth.user,
           localStorage.getItem("token")
         );
       }
 
-      return (
-        <div>
-          <h1>Delete your account?</h1>
-          <button onClick={this.deleteAccount}>Delete</button>
-          <hr />
-          {this.props.profile.profile.private ? (
-            <Fragment>
-              <h1>Make your profile public?</h1>
-              <button onClick={this.makeProfilePublic}>Go Public</button>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <h1>Make your profile private?</h1>
-              <button onClick={this.makeProfilePrivate}>Go Private</button>
-            </Fragment>
-          )}
+      settingsWidget = (
+        <div className="settings__settings">
+          <h1 className="settings__heading-1">Account Settings</h1>
+          <div className="settings__borders">
+            <div className="settings__set">
+              <h2 className="settings__heading-2">
+                Make your profile completely public:
+              </h2>
+              <Button
+                text="Public"
+                name="1"
+                className={
+                  this.state.privacy === 1 ? "follow" : "edit-profile-btn"
+                }
+                callback={this.togglePrivacy}
+              />
+            </div>
+            <div className="settings__set">
+              <h2 className="settings__heading-2">
+                Make your profile only public to followers:
+              </h2>
+              <Button
+                text="Semi-Private"
+                name="2"
+                className={
+                  this.state.privacy === 2 ? "follow" : "edit-profile-btn"
+                }
+                callback={this.togglePrivacy}
+              />
+            </div>
+            <div className="settings__set">
+              <h2 className="settings__heading-2">
+                Make your profile private to everybody
+              </h2>
+              <Button
+                text="Private"
+                name="3"
+                className={
+                  this.state.privacy === 3 ? "follow" : "edit-profile-btn"
+                }
+                callback={this.togglePrivacy}
+              />
+            </div>
+          </div>
+          <div className="settings__set">
+            <h2 className="settings__heading-2">Delete your account?</h2>
+            <Button
+              text="Delete"
+              className="unfollow"
+              callback={this.deleteAccount}
+            />
+          </div>
         </div>
       );
     }
+    return (
+      <Fragment>
+        <div className="settings">
+          {settingsWidget}
+          <div className="settings__profile">
+            <h1 className="settings__heading-1">Profile Settings</h1>
+            <div className="settings__borders">
+              <div className="settings__set">
+                <h2 className="settings__heading-2">Change first name:</h2>
+                <input
+                  className="settings__input"
+                  onChange={this.handleFNameChange}
+                  value={this.state.firstName}
+                />
+              </div>
+              <div className="settings__set">
+                <h2 className="settings__heading-2">Change last name:</h2>
+                <input
+                  className="settings__input"
+                  onChange={this.handleLNameChange}
+                  value={this.state.lastName}
+                />
+              </div>
+              <div className="settings__set">
+                <h2 className="settings__heading-2">Change biography:</h2>
+                <textarea
+                  className="settings__input-large"
+                  onChange={this.handleBioChange}
+                  value={this.state.bio}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="save-changes">
+          <div className="settings__set">
+            <h2 className="settings__heading-2">Save Changes:</h2>
+            <Button
+              text="Save"
+              className="follow"
+              callback={this.saveChanges}
+            />
+          </div>
+        </div>
+      </Fragment>
+    );
   }
 }
 
@@ -102,8 +273,10 @@ export default connect(
   {
     deleteAccount,
     logoutUser,
-    makeProfilePrivate,
-    makeProfilePublic,
-    getProfile
+    getProfile,
+    changePrivacy,
+    updateBio,
+    updateFirstName,
+    updateLastName
   }
 )(Settings);
