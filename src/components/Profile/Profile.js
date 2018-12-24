@@ -150,8 +150,16 @@ class Profile extends Component {
     ) {
       return (
         <div className="profile">
-          <h1>Sorry, this user's profile is private.</h1>
-          <button>Home</button>
+          <h1 style={{ textAlign: "center" }}>
+            Sorry, this user's profile is private.
+          </h1>
+          <div style={{ width: "130px", margin: "0 auto" }}>
+            <Button
+              callback={() => navigate("/feed")}
+              className="edit-profile-btn"
+              text="Go To Feed"
+            />
+          </div>
         </div>
       );
     } else {

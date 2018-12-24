@@ -14,6 +14,7 @@ import Search from "./components/Search/Search/Search";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import Post from "./components/Post/Post";
+import ErrorBoundary from "./components/Common/ErrorBoundary";
 
 import { authenticateUser } from "./actions/authActions";
 import { getProfile } from "./actions/profileActions";
@@ -43,20 +44,24 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Navigation />
-        <main className="app__body">
-          <Router>
-            <Landing path="/" />
-            <Login path="/login" />
-            <Register path="/register" />
-            <Feed path="/feed" />
-            <Search path="/search/:params" />
-            <Profile path="/profile" />
-            <Profile path="/profile/:id" />
-            <Settings path="/settings" />
-            <Post path="/post/:id" />
-          </Router>
-        </main>
+        <ErrorBoundary>
+          <Navigation />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <main className="app__body">
+            <Router>
+              <Landing path="/" />
+              <Login path="/login" />
+              <Register path="/register" />
+              <Feed path="/feed" />
+              <Search path="/search/:params" />
+              <Profile path="/profile" />
+              <Profile path="/profile/:id" />
+              <Settings path="/settings" />
+              <Post path="/post/:id" />
+            </Router>
+          </main>
+        </ErrorBoundary>
       </div>
     );
   }

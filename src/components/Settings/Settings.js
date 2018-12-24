@@ -3,6 +3,7 @@ import "./Settings.css";
 import { navigate } from "@reach/router";
 import { connect } from "react-redux";
 
+import Modal from "react-modal";
 import Button from "../Common/Buttons/Button";
 import Spinner from "../Common/Spinner";
 import { deleteAccount, logoutUser } from "../../actions/authActions";
@@ -14,6 +15,17 @@ import {
   updateLastName
 } from "../../actions/profileActions";
 
+const modalStyles = {
+  content: {
+    width: "30%",
+    height: "20%",
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
+
 class Settings extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +35,8 @@ class Settings extends Component {
       bio: "",
       firstName: "",
       lastName: "",
-      loading: false
+      loading: false,
+      showModal: false
     };
   }
 
@@ -61,6 +74,18 @@ class Settings extends Component {
     }
   }
 
+  openModal = e => {
+    this.setState({
+      showModal: true
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      showModal: false
+    });
+  };
+
   togglePrivacy = e => {
     this.setState({ privacy: Number([e.target.name]) });
   };
@@ -78,9 +103,12 @@ class Settings extends Component {
   };
 
   deleteAccount = () => {
+    // console.log(this.props.auth.user);
+    this.props.deleteAccount(
+      this.props.auth.user,
+      localStorage.getItem("token")
+    );
     this.props.logoutUser();
-    this.props.deleteAccount(this.props.auth.user);
-    navigate("/");
   };
 
   saveChanges = () => {
@@ -117,6 +145,7 @@ class Settings extends Component {
     const self = this;
     setTimeout(function() {
       self.setState({ loading: false });
+      self.props.getProfile(self.props.auth.user, token);
       navigate(`/profile/${auth.user}`);
     }, 3000);
   };
@@ -133,7 +162,10 @@ class Settings extends Component {
 
     let settingsWidget;
 
-    if (Object.keys(this.props.profile).length === 0 || this.state.loading) {
+    if (
+      Object.keys(this.props.profile.profile).length === 0 ||
+      this.state.loading
+    ) {
       return <Spinner />;
     } else if (
       ["Harper", "Harphene", "Bailey"].includes(
@@ -142,11 +174,12 @@ class Settings extends Component {
     ) {
       settingsWidget = (
         <div className="settings__settings">
-          <h1>
-            Sorry! You cannot edit the settings for a public account. Please
-            make your own account to test these out (your account may be deleted
-            on this page later).
-          </h1>
+          <h1 className="settings__heading-1">Account Settings</h1>
+          <h2>
+            Sorry! You cannot edit the account settings for a public account.
+            Please make your own account to test these out (your account may be
+            deleted from this same page later).
+          </h2>
         </div>
       );
     } else {
@@ -206,7 +239,7 @@ class Settings extends Component {
             <Button
               text="Delete"
               className="unfollow"
-              callback={this.deleteAccount}
+              callback={this.openModal}
             />
           </div>
         </div>
@@ -256,6 +289,31 @@ class Settings extends Component {
             />
           </div>
         </div>
+        <Modal
+          isOpen={this.state.showModal}
+          onRequestClose={this.closeModal}
+          contentLabel="Delete Account Warning Modal"
+          style={modalStyles}
+        >
+          <h2 className="modal__heading">
+            Are you sure you want to delete your account?
+          </h2>
+          <p className="modal__paragraph">
+            Once an account is deleted, its data can never be recovered.
+          </p>
+          <div className="modal__btns">
+            <Button
+              text="Go Back"
+              callback={this.closeModal}
+              className="modal-go-back"
+            />
+            <Button
+              text="Delete"
+              callback={this.deleteAccount}
+              className="modal-delete"
+            />
+          </div>
+        </Modal>
       </Fragment>
     );
   }

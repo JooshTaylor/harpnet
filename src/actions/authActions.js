@@ -123,7 +123,11 @@ export const logoutUser = () => dispatch => {
   });
 };
 
-export const deleteAccount = id => dispatch => {
+export const deleteAccount = (id, token) => dispatch => {
+  axios.delete(`http://localhost:5000/api/auth/delete/${id}`, {
+    headers: {
+      Authorization: token
+    }
+  });
   localStorage.removeItem("token");
-  axios.delete(`http://localhost:5000/api/auth/delete/${id}`);
 };

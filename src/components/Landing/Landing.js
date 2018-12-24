@@ -92,18 +92,21 @@ class Landing extends Component {
 
             <h2 className="landing__heading-2">What this actually is</h2>
             <p className="landing__paragraph">
-              This website is actually just a development playground. It
-              functions as a normal social media website with the features
-              listed above and can be used for that purpose, but its primary
-              purpose is for practicing web development skills.
+              This website is actually just a development playground. I'm
+              continuously developing this to practice creating larger scale
+              applications using React.js, Redux, Node.js, Postgres and Redis.
             </p>
             <p className="landing__paragraph">
               There are 3 dummy accounts that you can access to interact with
               all of the features, or you can make your own account. If you use
               a public account, feel free to make or delete posts and comments,
-              follow/unfollow accounts, and send messages. We have a messenger
+              follow/unfollow accounts or edit the basic profile data (some of
+              this is protected for the public accounts). If you make your own
+              account, you will be able to delete it from the settings later if
+              you wish.
+              {/* We have a messenger
               bot called "Harpy" that sends a randomized response when you send
-              it messages if you would like to test the messaging functionality.
+              it messages if you would like to test the messaging functionality. */}
             </p>
           </div>
 

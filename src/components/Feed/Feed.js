@@ -40,12 +40,16 @@ class Feed extends Component {
       navigate("/login");
     }
 
-    const { follows } = this.props;
+    const { follows, post } = this.props;
     let postsCheck;
 
     if (follows.loading) {
       postsCheck = <Spinner />;
-    } else if (!follows.loading && follows.following.length === 0) {
+    } else if (
+      !follows.loading &&
+      follows.following.length === 0 &&
+      post.posts.length === 0
+    ) {
       postsCheck = (
         <div className="view__no-following">
           <h1 className="view__heading-1">
