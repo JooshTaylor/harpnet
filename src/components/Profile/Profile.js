@@ -39,7 +39,8 @@ class Profile extends Component {
     this.state = {
       view: "posts",
       showModal: false,
-      deleteSubject: -1
+      deleteSubject: -1,
+      inactiveButtons: []
     };
   }
 
@@ -77,6 +78,22 @@ class Profile extends Component {
   }
 
   handleFollow = e => {
+    // Logic to handle buttons being disabled after click
+    const btn = Number([e.target.name]);
+    this.setState({
+      inactiveButtons: [...this.state.inactiveButtons, btn]
+    });
+    const self = this;
+    setTimeout(function() {
+      const target = self.state.inactiveButtons.indexOf(btn);
+      self.setState({
+        inactiveButtons: self.state.inactiveButtons.filter(
+          btn => self.state.inactiveButtons.indexOf(btn) !== target
+        )
+      });
+    }, 1500);
+
+    // Actual following functionality
     const arg1 = { follower_id: this.props.auth.user }; // Follower ID
     const arg2 = [e.target.name]; // Following ID
 
@@ -89,6 +106,21 @@ class Profile extends Component {
   };
 
   handleUnfollow = e => {
+    // Logic to handle buttons being disabled after click
+    const btn = Number([e.target.name]);
+    this.setState({
+      inactiveButtons: [...this.state.inactiveButtons, btn]
+    });
+    const self = this;
+    setTimeout(function() {
+      const target = self.state.inactiveButtons.indexOf(btn);
+      self.setState({
+        inactiveButtons: self.state.inactiveButtons.filter(
+          btn => self.state.inactiveButtons.indexOf(btn) !== target
+        )
+      });
+    }, 1500);
+
     const arg1 = this.props.auth.user; // Unfollower ID
     const arg2 = [e.target.name]; // Unfollowee ID
 
@@ -184,6 +216,7 @@ class Profile extends Component {
             clientFollows={follows.following}
             clientId={auth.user}
             followings={profile.viewProfile.follows.following}
+            inactiveButtons={this.state.inactiveButtons}
           />
         );
       } else if (this.state.view === "followers") {
@@ -195,6 +228,7 @@ class Profile extends Component {
             clientId={auth.user}
             followers={profile.viewProfile.follows.followers}
             followings={follows.following}
+            inactiveButtons={this.state.inactiveButtons}
           />
         );
       }
@@ -207,6 +241,7 @@ class Profile extends Component {
               follows={follows}
               handleFollow={this.handleFollow}
               handleUnfollow={this.handleUnfollow}
+              inactiveButtons={this.state.inactiveButtons}
             />
             <ProfileSwitch
               selection={this.state.view}

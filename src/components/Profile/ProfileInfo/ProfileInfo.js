@@ -4,7 +4,13 @@ import { navigate } from "@reach/router";
 
 import Button from "../../Common/Buttons/Button";
 
-const ProfileInfo = ({ profile, follows, handleFollow, handleUnfollow }) => {
+const ProfileInfo = ({
+  profile,
+  follows,
+  handleFollow,
+  handleUnfollow,
+  inactiveButtons
+}) => {
   const infoCheck =
     !profile.viewProfile.profile.bio &&
     !profile.viewProfile.profile.first_name &&
@@ -54,11 +60,25 @@ const ProfileInfo = ({ profile, follows, handleFollow, handleUnfollow }) => {
         ) : null}
         {profile.viewProfile.profile.username !== profile.profile.username ? (
           !follows.following.includes(profile.viewProfile.profile.user_id) ? (
+            inactiveButtons.includes(profile.viewProfile.profile.user_id) ? (
+              <Button
+                name={profile.viewProfile.profile.user_id}
+                className="follow"
+                active={false}
+              />
+            ) : (
+              <Button
+                name={profile.viewProfile.profile.user_id}
+                text="Follow"
+                callback={handleFollow}
+                className="follow"
+              />
+            )
+          ) : inactiveButtons.includes(profile.viewProfile.profile.user_id) ? (
             <Button
               name={profile.viewProfile.profile.user_id}
-              text="Follow"
-              callback={handleFollow}
-              className="follow"
+              className="unfollow"
+              active={false}
             />
           ) : (
             <Button

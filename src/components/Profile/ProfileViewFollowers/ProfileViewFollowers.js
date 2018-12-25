@@ -10,7 +10,8 @@ const ProfileViewFollowers = ({
   clientFollows,
   clientId,
   handleFollow,
-  handleUnfollow
+  handleUnfollow,
+  inactiveButtons
 }) => {
   const followersWidget = followers.map(follower => {
     return (
@@ -45,19 +46,35 @@ const ProfileViewFollowers = ({
         <div className="follower__options">
           {clientFollows.includes(follower.user_id) &&
           follower.user_id !== clientId ? (
-            <Button
-              name={follower.user_id}
-              text="Unfollow"
-              callback={handleUnfollow}
-              className="unfollow"
-            />
+            inactiveButtons.includes(follower.user_id) ? (
+              <Button
+                name={follower.user_id}
+                className="unfollow"
+                active={false}
+              />
+            ) : (
+              <Button
+                name={follower.user_id}
+                text="Unfollow"
+                callback={handleUnfollow}
+                className="unfollow"
+              />
+            )
           ) : follower.user_id !== clientId ? (
-            <Button
-              name={follower.user_id}
-              text="Follow"
-              callback={handleFollow}
-              className="follow"
-            />
+            inactiveButtons.includes(follower.user_id) ? (
+              <Button
+                name={follower.user_id}
+                className="follow"
+                active={false}
+              />
+            ) : (
+              <Button
+                name={follower.user_id}
+                text="Follow"
+                callback={handleFollow}
+                className="follow"
+              />
+            )
           ) : null}
           <Button
             text="View Profile"

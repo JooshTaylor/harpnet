@@ -18,7 +18,8 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchField: ""
+      searchField: "",
+      inactiveButtons: []
     };
   }
 
@@ -56,6 +57,21 @@ class Search extends Component {
   }
 
   handleFollow = e => {
+    // Logic to handle buttons being disabled after click
+    const btn = Number([e.target.name]);
+    this.setState({
+      inactiveButtons: [...this.state.inactiveButtons, btn]
+    });
+    const self = this;
+    setTimeout(function() {
+      const target = self.state.inactiveButtons.indexOf(btn);
+      self.setState({
+        inactiveButtons: self.state.inactiveButtons.filter(
+          btn => self.state.inactiveButtons.indexOf(btn) !== target
+        )
+      });
+    }, 1500);
+
     const arg1 = { follower_id: this.props.auth.user }; // Follower ID
     const arg2 = [e.target.name]; // Following ID
 
@@ -68,6 +84,21 @@ class Search extends Component {
   };
 
   handleUnfollow = e => {
+    // Logic to handle buttons being disabled after click
+    const btn = Number([e.target.name]);
+    this.setState({
+      inactiveButtons: [...this.state.inactiveButtons, btn]
+    });
+    const self = this;
+    setTimeout(function() {
+      const target = self.state.inactiveButtons.indexOf(btn);
+      self.setState({
+        inactiveButtons: self.state.inactiveButtons.filter(
+          btn => self.state.inactiveButtons.indexOf(btn) !== target
+        )
+      });
+    }, 1500);
+
     const arg1 = this.props.auth.user; // Unfollower ID
     const arg2 = [e.target.name]; // Unfollowee ID
 
@@ -124,11 +155,25 @@ class Search extends Component {
             </div>
             <div className="search__options">
               {follows.following.includes(result.user_id) ? (
+                this.state.inactiveButtons.includes(result.user_id) ? (
+                  <Button
+                    name={result.user_id}
+                    className="unfollow"
+                    active={false}
+                  />
+                ) : (
+                  <Button
+                    name={result.user_id}
+                    text="Unfollow"
+                    callback={this.handleUnfollow}
+                    className="unfollow"
+                  />
+                )
+              ) : this.state.inactiveButtons.includes(result.user_id) ? (
                 <Button
                   name={result.user_id}
-                  text="Unfollow"
-                  callback={this.handleUnfollow}
-                  className="unfollow"
+                  className="follow"
+                  active={false}
                 />
               ) : (
                 <Button

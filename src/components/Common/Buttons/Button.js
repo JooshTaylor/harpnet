@@ -1,15 +1,15 @@
 import React from "react";
 import "./Button.css";
 
-const Button = ({ className, name, callback, text, active = true }) => {
+const Button = ({ className, name, callback, text, id, active = true }) => {
   return (
     <React.Fragment>
       {active ? (
-        <button className={className} name={name} onClick={callback}>
+        <button id={id} className={className} name={name} onClick={callback}>
           {text}
         </button>
       ) : (
-        <button className={`${className}--inactive`} name={name}>
+        <button id={id} className={`${className}--inactive`} name={name}>
           Loading
         </button>
       )}
