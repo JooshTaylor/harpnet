@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./Post.css";
+import PropTypes from "prop-types";
 import { navigate, Link } from "@reach/router";
 import { connect } from "react-redux";
 
@@ -254,6 +255,17 @@ const mapStateToProps = state => {
   return {
     post: state.post
   };
+};
+
+Post.propTypes = {
+  post: PropTypes.object.isRequired,
+  getPostById: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
+  resetSinglePost: PropTypes.func.isRequired,
+  fromFeed: PropTypes.bool,
+  user_id: PropTypes.number,
+  singlePost: PropTypes.object,
+  id: PropTypes.string
 };
 
 export default connect(

@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProfileSwitch.css";
+import PropTypes from "prop-types";
 
 const ProfileSwitch = ({ changeView, selection }) => {
   return (
@@ -38,6 +39,11 @@ const ProfileSwitch = ({ changeView, selection }) => {
       </li>
     </ul>
   );
+};
+
+ProfileSwitch.propTypes = {
+  selection: PropTypes.string.isRequired,
+  changeView: PropTypes.func.isRequired
 };
 
 export default ProfileSwitch;

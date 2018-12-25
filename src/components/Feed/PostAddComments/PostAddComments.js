@@ -75,7 +75,8 @@ PostAddComments.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   post_id: PropTypes.number.isRequired,
-  follows: PropTypes.object.isRequired
+  follows: PropTypes.object.isRequired,
+  single: PropTypes.bool
 };
 
 const mapStateToProps = state => {

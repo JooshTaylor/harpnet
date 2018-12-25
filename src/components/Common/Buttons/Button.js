@@ -1,5 +1,6 @@
 import React from "react";
 import "./Button.css";
+import PropTypes from "prop-types";
 
 const Button = ({ className, name, callback, text, id, active = true }) => {
   return (
@@ -15,6 +16,15 @@ const Button = ({ className, name, callback, text, id, active = true }) => {
       )}
     </React.Fragment>
   );
+};
+
+Button.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.number,
+  callback: PropTypes.func,
+  text: PropTypes.string,
+  id: PropTypes.string,
+  active: PropTypes.bool
 };
 
 export default Button;

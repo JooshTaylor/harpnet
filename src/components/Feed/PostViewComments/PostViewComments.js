@@ -126,8 +126,10 @@ class PostViewComments extends Component {
 }
 
 PostViewComments.propTypes = {
+  auth: PropTypes.object.isRequired,
   comments: PropTypes.array.isRequired,
-  deleteComment: PropTypes.func.isRequired
+  deleteComment: PropTypes.func.isRequired,
+  single: PropTypes.bool
 };
 
 const mapStateToProps = state => {

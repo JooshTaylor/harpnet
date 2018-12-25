@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./Settings.css";
+import PropTypes from "prop-types";
 import { navigate } from "@reach/router";
 import { connect } from "react-redux";
 
@@ -324,6 +325,18 @@ const mapStateToProps = state => {
     auth: state.auth,
     profile: state.profile
   };
+};
+
+Settings.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  getProfile: PropTypes.func.isRequired,
+  changePrivacy: PropTypes.func.isRequired,
+  updateBio: PropTypes.func.isRequired,
+  updateFirstName: PropTypes.func.isRequired,
+  updateLastName: PropTypes.func.isRequired
 };
 
 export default connect(

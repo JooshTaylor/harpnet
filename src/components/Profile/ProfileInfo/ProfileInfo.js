@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProfileInfo.css";
+import PropTypes from "prop-types";
 import { navigate } from "@reach/router";
 
 import Button from "../../Common/Buttons/Button";
@@ -92,6 +93,14 @@ const ProfileInfo = ({
       </div>
     </div>
   );
+};
+
+ProfileInfo.propTypes = {
+  profile: PropTypes.object.isRequired,
+  follows: PropTypes.object.isRequired,
+  handleFollow: PropTypes.func.isRequired,
+  handleUnfollow: PropTypes.func.isRequired,
+  inactiveButtons: PropTypes.array.isRequired
 };
 
 export default ProfileInfo;

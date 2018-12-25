@@ -1,5 +1,6 @@
 import React from "react";
 import "./ProfileViewPosts.css";
+import PropTypes from "prop-types";
 
 import Post from "../../Post/Post";
 
@@ -16,6 +17,12 @@ const ProfileViewPosts = ({ posts, user_id, openModal }) => {
     </li>
   ));
   return <ul>{postsWidget}</ul>;
+};
+
+ProfileViewPosts.propTypes = {
+  openModal: PropTypes.func.isRequired,
+  posts: PropTypes.object.isRequired,
+  user_id: PropTypes.number.isRequired
 };
 
 export default ProfileViewPosts;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { navigate } from "@reach/router";
 import "./Profile.css";
 import PropTypes from "prop-types";
+import { navigate } from "@reach/router";
 import { connect } from "react-redux";
 
 import Button from "../Common/Buttons/Button";
@@ -287,6 +287,7 @@ Profile.propTypes = {
   followUser: PropTypes.func.isRequired,
   unfollowUser: PropTypes.func.isRequired,
   getFollowData: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,

@@ -6,9 +6,7 @@ import { connect } from "react-redux";
 
 import FeedViewPosts from "./FeedViewPosts/FeedViewPosts";
 import FeedAddPosts from "./FeedAddPosts/FeedAddPosts";
-import { getProfile } from "../../actions/profileActions";
-import { getFollowData, followUser } from "../../actions/followsActions";
-import { getFeed, resetSinglePost } from "../../actions/postActions";
+import { resetSinglePost } from "../../actions/postActions";
 import { navigate } from "@reach/router";
 
 class Feed extends Component {
@@ -23,17 +21,6 @@ class Feed extends Component {
   componentWillMount() {
     this.props.resetSinglePost();
   }
-
-  followUser = id => {
-    // console.log(this.state.token);
-    this.props.followUser(
-      { follower_id: this.props.auth.user },
-      id,
-      this.state.token,
-      "prompt"
-    );
-    this.props.getFollowData(this.props.auth.user, this.state.token);
-  };
 
   render() {
     if (!localStorage.getItem("token")) {
@@ -77,18 +64,13 @@ class Feed extends Component {
 }
 
 Feed.propTypes = {
-  followUser: PropTypes.func.isRequired,
-  getProfile: PropTypes.func.isRequired,
-  getFollowData: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
-  follows: PropTypes.object.isRequired
+  resetSinglePost: PropTypes.func.isRequired,
+  follows: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth,
-    profile: state.profile,
     follows: state.follows,
     post: state.post
   };
@@ -97,10 +79,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getProfile,
-    getFollowData,
-    followUser,
-    getFeed,
     resetSinglePost
   }
 )(Feed);
