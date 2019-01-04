@@ -45,7 +45,6 @@ class Landing extends Component {
   };
 
   render() {
-    const count = 1; //temporary
     //If a users is logged in, they cannot access this page and are redirected to their feed.
     if (this.props.auth.isLoggedIn) {
       navigate("/feed");
@@ -60,10 +59,9 @@ class Landing extends Component {
               The hottest social networking website of 2019
             </h2>
             <p className="landing__paragraph">
-              Boasting a total of {count} accounts as of today, Harpnet is a
-              fast growing social networking website where you can connect with
-              anybody from your friends and family to your colleagues. We offer
-              the following features:
+              Harpnet is a fast growing social networking website where you can
+              connect with anybody from your friends and family to your
+              colleagues. We offer the following features:
             </p>
             <ul className="landing__features">
               <li className="landing__feature">
