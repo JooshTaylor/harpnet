@@ -17,7 +17,7 @@ export const getFollowData = (id, token) => dispatch => {
   });
 
   axios
-    .get(`http://localhost:5000/api/follows/${id}`, {
+    .get(`${process.env.REACT_APP_API}/api/follows/${id}`, {
       headers: {
         Authorization: token
       }
@@ -37,11 +37,15 @@ export const followUser = (
   location
 ) => dispatch => {
   axios
-    .post(`http://localhost:5000/api/follows/${following_id}`, follower_id, {
-      headers: {
-        Authorization: token
+    .post(
+      `${process.env.REACT_APP_API}/api/follows/${following_id}`,
+      follower_id,
+      {
+        headers: {
+          Authorization: token
+        }
       }
-    })
+    )
     .then(res => {
       switch (location) {
         default:
@@ -72,7 +76,9 @@ export const unfollowUser = (
 ) => dispatch => {
   axios
     .delete(
-      `http://localhost:5000/api/follows/${unfollower_id}/${unfollowing_id}`,
+      `${
+        process.env.REACT_APP_API
+      }/api/follows/${unfollower_id}/${unfollowing_id}`,
       {
         headers: {
           Authorization: token

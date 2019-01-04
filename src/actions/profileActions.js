@@ -16,7 +16,7 @@ export const getProfile = (id, token) => dispatch => {
   });
 
   axios
-    .get(`http://localhost:5000/api/profile/${id}`, {
+    .get(`${process.env.REACT_APP_API}/api/profile/${id}`, {
       headers: {
         Authorization: token
       }
@@ -45,7 +45,7 @@ export const getViewProfile = (id, token) => dispatch => {
   });
 
   axios
-    .get(`http://localhost:5000/api/profile/view/${id}`, {
+    .get(`${process.env.REACT_APP_API}/api/profile/view/${id}`, {
       headers: {
         Authorization: token
       }
@@ -66,7 +66,7 @@ export const clearViewProfile = () => {
 
 export const changePrivacy = (state, id, token) => dispatch => {
   axios
-    .put(`http://localhost:5000/api/profile/privacy/${id}`, state, {
+    .put(`${process.env.REACT_APP_API}/api/profile/privacy/${id}`, state, {
       headers: {
         Authorization: token
       }
@@ -80,7 +80,7 @@ export const changePrivacy = (state, id, token) => dispatch => {
 
 export const updateBio = (bio, id, token) => dispatch => {
   axios
-    .put(`http://localhost:5000/api/profile/biography/${id}`, bio, {
+    .put(`${process.env.REACT_APP_API}/api/profile/biography/${id}`, bio, {
       headers: {
         Authorization: token
       }
@@ -94,7 +94,7 @@ export const updateBio = (bio, id, token) => dispatch => {
 
 export const updateFirstName = (fname, id, token) => dispatch => {
   axios
-    .put(`http://localhost:5000/api/profile/first_name/${id}`, fname, {
+    .put(`${process.env.REACT_APP_API}/api/profile/first_name/${id}`, fname, {
       headers: {
         Authorization: token
       }
@@ -108,7 +108,7 @@ export const updateFirstName = (fname, id, token) => dispatch => {
 
 export const updateLastName = (lname, id, token) => dispatch => {
   axios
-    .put(`http://localhost:5000/api/profile/last_name/${id}`, lname, {
+    .put(`${process.env.REACT_APP_API}/api/profile/last_name/${id}`, lname, {
       headers: {
         Authorization: token
       }

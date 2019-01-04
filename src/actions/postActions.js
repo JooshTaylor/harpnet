@@ -11,7 +11,6 @@ import {
   RESET_SINGLE_POST,
   END_RELOAD_SINGLE_POST
 } from "./constants";
-
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
@@ -20,7 +19,7 @@ export const getFeed = (data, iteration, token) => dispatch => {
     type: FEED_LOADING
   });
   axios
-    .post(`http://localhost:5000/api/posts/get/${iteration}`, data, {
+    .post(`${process.env.REACT_APP_API}/api/posts/get/${iteration}`, data, {
       headers: {
         Authorization: token
       }
@@ -44,7 +43,7 @@ export const getPostById = (id, token) => dispatch => {
   });
   const user_id = jwt_decode(token);
   axios
-    .get(`http://localhost:5000/api/posts/post/${id}`, {
+    .get(`${process.env.REACT_APP_API}/api/posts/post/${id}`, {
       headers: {
         Authorization: token
       }
@@ -66,7 +65,7 @@ export const resetSinglePost = () => {
 
 export const makePost = (data, token) => dispatch => {
   axios
-    .post("http://localhost:5000/api/posts/post", data, {
+    .post(`${process.env.REACT_APP_API}/api/posts/post`, data, {
       headers: {
         Authorization: token
       }
@@ -89,7 +88,7 @@ export const makePost = (data, token) => dispatch => {
 
 export const makeComment = (data, token, single = false) => dispatch => {
   axios
-    .post(`http://localhost:5000/api/posts/comment`, data, {
+    .post(`${process.env.REACT_APP_API}/api/posts/comment`, data, {
       headers: {
         Authorization: token
       }
@@ -109,7 +108,7 @@ export const makeComment = (data, token, single = false) => dispatch => {
 
 export const deletePost = (id, token, location) => dispatch => {
   axios
-    .delete(`http://localhost:5000/api/posts/post/${id}`, {
+    .delete(`${process.env.REACT_APP_API}/api/posts/post/${id}`, {
       headers: {
         Authorization: token
       }
@@ -133,7 +132,7 @@ export const deletePost = (id, token, location) => dispatch => {
 
 export const deleteComment = (id, token, single = false) => dispatch => {
   axios
-    .delete(`http://localhost:5000/api/posts/comment/${id}`, {
+    .delete(`${process.env.REACT_APP_API}/api/posts/comment/${id}`, {
       headers: {
         Authorization: token
       }
