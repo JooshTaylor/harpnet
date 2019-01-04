@@ -4,3 +4,6 @@ services:
 
 before_install:
   - docker build -t taylorj99/harpnet-client -f Dockerfile.dev .
+
+script:
+  - docker run taylorj99/harpnet-client npm run test -- --coverage
