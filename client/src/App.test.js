@@ -8,6 +8,4 @@
 //   ReactDOM.unmountComponentAtNode(div);
 // });
 
-it("runs a test that will always pass for travis", () => {
-  expect(2).toBe(2);
-});
+it("runs a test that will always pass for travis", () => {});

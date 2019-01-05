@@ -26,18 +26,11 @@ class App extends Component {
     const token = window.localStorage.getItem("token");
     if (token) {
       axios
-        .get(
-          `${
-            process.env.NODE_ENV !== "production"
-              ? process.env.REACT_APP_DEV_API
-              : process.env.REACT_APP_PROD_API
-          }/api/auth/authenticate`,
-          {
-            headers: {
-              Authorization: token
-            }
+        .get("/api/auth/authenticate", {
+          headers: {
+            Authorization: token
           }
-        )
+        })
         .then(res => {
           if (res) {
             this.props.authenticateUser(res.data);
