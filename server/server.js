@@ -5,10 +5,10 @@ const cors = require("cors");
 const { requireAuth } = require("./authorization");
 const keys = require("./keys");
 
-//Creates an express instance - used to develop API endpoints
+// Creates an express instance - used to develop API endpoints
 const app = express();
 
-//Allows use of bodyParser to allow post requests to be made
+// Allows use of bodyParser to allow post requests to be made
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
   res.json("Working");
 });
 
-//Authentication endpoints
+// Authentication endpoints
 const auth = require("./api/auth");
 // Register a new user
 app.post("/auth/register", (req, res) => {
@@ -47,7 +47,7 @@ app.delete("/auth/delete/:id", requireAuth, (req, res) => {
   auth.deleteAccount(req, res, db);
 });
 
-//Profile endpoints
+// Profile endpoints
 const profile = require("./api/profile");
 // Gets a user's basic profile data.
 app.get("/profile/:id", requireAuth, (req, res) => {
@@ -74,7 +74,7 @@ app.put("/profile/last_name/:id", requireAuth, (req, res) => {
   profile.changeLastName(req, res, db);
 });
 
-//Follows endpoints
+// Follows endpoints
 const follows = require("./api/follows");
 // Returns all user data regarding who they follow and who follows them
 app.get("/follows/:id", requireAuth, (req, res) => {
@@ -93,7 +93,7 @@ app.delete(
   }
 );
 
-//Post endpoints
+// Post endpoints
 const posts = require("./api/posts");
 // Gets all posts made by a single user
 app.get("/posts/user/:id", requireAuth, (req, res) => {
@@ -124,13 +124,13 @@ app.delete("/posts/comment/:id", requireAuth, (req, res) => {
   posts.deleteComment(req, res, db);
 });
 
-//Search endpoints
+// Search endpoints
 const search = require("./api/search");
 // Finds all users whose usernames include the :arg params string
 app.get("/search/:arg", requireAuth, (req, res) => {
   search.search(req, res, db);
 });
 
-//Activates the server
+// Activates the server
 const port = process.env.PORT || 5000;
 app.listen(port, console.log(`Server is running on port ${port}`));
