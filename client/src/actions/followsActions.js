@@ -17,7 +17,7 @@ export const getFollowData = (id, token) => dispatch => {
   });
 
   axios
-    .get(`${process.env.REACT_APP_API}/api/follows/${id}`, {
+    .get(`/api/follows/${id}`, {
       headers: {
         Authorization: token
       }
@@ -37,15 +37,11 @@ export const followUser = (
   location
 ) => dispatch => {
   axios
-    .post(
-      `${process.env.REACT_APP_API}/api/follows/${following_id}`,
-      follower_id,
-      {
-        headers: {
-          Authorization: token
-        }
+    .post(`/api/follows/${following_id}`, follower_id, {
+      headers: {
+        Authorization: token
       }
-    )
+    })
     .then(res => {
       switch (location) {
         default:

@@ -24,7 +24,7 @@ export const registerUser = user => dispatch => {
   });
 
   axios
-    .post(`${process.env.REACT_APP_API}/api/auth/register`, user)
+    .post(`/api/auth/register`, user)
     .then(() => {
       dispatch({
         type: REGISTER_SUCCESS
@@ -54,7 +54,7 @@ export const loginUser = data => dispatch => {
   });
 
   axios
-    .post(`${process.env.REACT_APP_API}/api/auth/login`, data)
+    .post(`/api/auth/login`, data)
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS
@@ -124,7 +124,7 @@ export const logoutUser = () => dispatch => {
 };
 
 export const deleteAccount = (id, token) => dispatch => {
-  axios.delete(`${process.env.REACT_APP_API}/api/auth/delete/${id}`, {
+  axios.delete(`/api/auth/delete/${id}`, {
     headers: {
       Authorization: token
     }

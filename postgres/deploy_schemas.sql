@@ -1,0 +1,5 @@
+\i '/docker-entrypoint-initdb.d/tables/users.sql'
+\i '/docker-entrypoint-initdb.d/tables/login.sql'
+\i '/docker-entrypoint-initdb.d/tables/follows.sql'
+\i '/docker-entrypoint-initdb.d/tables/posts.sql'
+\i '/docker-entrypoint-initdb.d/tables/comments.sql'
