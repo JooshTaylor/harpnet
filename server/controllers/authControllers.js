@@ -2,9 +2,9 @@ const validateRegister = require("../validation/register");
 const validateLogin = require("../validation/login");
 const jwt = require("jsonwebtoken");
 const redis = require("redis");
-const keys = require("../keys");
+const keys = require("../config/keys");
 
-// Set up a redis client
+// Setting up a redis client
 const redisClient = redis.createClient({
   host: keys.redisHost,
   port: keys.redisPort,
@@ -234,6 +234,6 @@ module.exports = {
   handleRegister,
   handleLogin,
   handleAuthentication,
-  redisClient,
-  deleteAccount
+  deleteAccount,
+  redisClient
 };

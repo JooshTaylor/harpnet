@@ -1,5 +1,5 @@
 const validatePostData = require("../validation/post");
-const { mergeSort } = require("../mergeSort");
+const { mergeSort } = require("../services/mergeSort");
 
 // Gets all posts required to load the feed
 const getFeedPosts = async (req, res, db) => {
