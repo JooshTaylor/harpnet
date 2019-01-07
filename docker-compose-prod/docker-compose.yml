@@ -6,7 +6,7 @@ services:
   postgres:
     build: ../postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST=postgres
       - POSTGRES_USER=postgres
