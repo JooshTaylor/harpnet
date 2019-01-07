@@ -37,6 +37,11 @@ class App extends Component {
             this.props.getProfile(res.data.user_id, token);
             this.props.getFollowData(res.data.user_id, token);
           }
+        })
+        .catch(err => {
+          console.log(err);
+          window.localStorage.removeItem("token");
+          window.location.reload();
         });
     }
   }

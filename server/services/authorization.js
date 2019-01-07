@@ -1,6 +1,6 @@
-const redisClient = require("./api/auth").redisClient;
+const redisClient = require("../controllers/authControllers").redisClient;
 
-const requireAuth = (req, res, next) => {
+const authenticator = (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
     return res.status(401).json("Unauthorized");
@@ -14,6 +14,4 @@ const requireAuth = (req, res, next) => {
   });
 };
 
-module.exports = {
-  requireAuth
-};
+module.exports = { authenticator };

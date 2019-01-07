@@ -6,7 +6,7 @@ services:
   postgres:
     build:
       dockerfile: Dockerfile.dev
-      context: ./postgres
+      context: ../postgres
     environment:
       - POSTGRES_HOST=postgres
       - POSTGRES_USER=postgres
@@ -16,18 +16,18 @@ services:
   client:
     build:
       dockerfile: Dockerfile.dev
-      context: ./client
+      context: ../client
     volumes:
       - /app/node_modules
-      - ./client:/app
+      - ../client:/app
 
   api:
     build:
       dockerfile: Dockerfile.dev
-      context: ./server
+      context: ../server
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ../server:/app
     environment:
       - POSTGRES_HOST=postgres
       - POSTGRES_USER=postgres
@@ -40,6 +40,6 @@ services:
     restart: always
     build:
       dockerfile: Dockerfile.dev
-      context: ./nginx
+      context: ../nginx
     ports:
       - "3050:80"

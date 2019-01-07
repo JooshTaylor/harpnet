@@ -57,17 +57,17 @@ class Navigation extends Component {
     const navItems = !localStorage.getItem("token") ? (
       <ul className="nav__list nav__list--nologin">
         <li className="nav__item nav__item--home-1">
-          <Link className="nav__link nav__link--home" to="/">
+          <Link id="nav-home-1" className="nav__link nav__link--home" to="/">
             Home
           </Link>
         </li>
         <li className="nav__item">
-          <Link className="nav__link" to="/register">
+          <Link id="nav-register" className="nav__link" to="/register">
             Register
           </Link>
         </li>
         <li className="nav__item">
-          <Link className="nav__link" to="/login">
+          <Link id="nav-login" className="nav__link" to="/login">
             Login
           </Link>
         </li>
