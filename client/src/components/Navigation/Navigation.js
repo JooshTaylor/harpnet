@@ -8,13 +8,10 @@ import SearchBar from "../Search/SearchBar/SearchBar";
 import { logoutUser } from "../../actions/authActions";
 
 class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      //When true, this will show a dropdown below the "cogs" button
-      dropDown: false
-    };
-  }
+  state = {
+    //When true, this will show a dropdown below the "cogs" button
+    dropDown: false
+  };
 
   componentWillUnmount() {
     localStorage.removeItem("token");

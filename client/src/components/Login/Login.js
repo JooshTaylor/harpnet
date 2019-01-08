@@ -9,14 +9,11 @@ import PubAcc from "../Common/PubAcc/PubAcc";
 import { loginUser } from "../../actions/authActions";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      //Tracking input values
-      userOrEmail: "",
-      password: ""
-    };
-  }
+  state = {
+    //Tracking input values
+    userOrEmail: "",
+    password: ""
+  };
 
   //Updating input value states
   onChange = e => {

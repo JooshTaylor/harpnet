@@ -3,6 +3,7 @@ import "./Feed.css";
 import PropTypes from "prop-types";
 import Spinner from "../Common/Spinner";
 import { connect } from "react-redux";
+// import requireAuth from "../HOC/requireAuth";
 
 import FeedViewPosts from "./FeedViewPosts/FeedViewPosts";
 import FeedAddPosts from "./FeedAddPosts/FeedAddPosts";
@@ -10,13 +11,10 @@ import { resetSinglePost } from "../../actions/postActions";
 import { navigate } from "@reach/router";
 
 class Feed extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: -1,
-      token: ""
-    };
-  }
+  state = {
+    user: -1,
+    token: ""
+  };
 
   componentWillMount() {
     this.props.resetSinglePost();

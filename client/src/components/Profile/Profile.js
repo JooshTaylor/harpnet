@@ -34,15 +34,12 @@ const modalStyles = {
 Modal.setAppElement("#root");
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      view: "posts",
-      showModal: false,
-      deleteSubject: -1,
-      inactiveButtons: []
-    };
-  }
+  state = {
+    view: "posts",
+    showModal: false,
+    deleteSubject: -1,
+    inactiveButtons: []
+  };
 
   componentDidUpdate(prevProps) {
     if (
