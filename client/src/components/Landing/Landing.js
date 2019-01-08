@@ -9,16 +9,12 @@ import PubAcc from "../Common/PubAcc/PubAcc";
 import { registerUser } from "../../actions/authActions";
 
 class Landing extends Component {
-  constructor(props) {
-    super(props);
-    //This component as well as the official register page allows for registration. The state tracks input values.
-    this.state = {
-      email: "",
-      username: "",
-      password1: "",
-      password2: ""
-    };
-  }
+  state = {
+    email: "",
+    username: "",
+    password1: "",
+    password2: ""
+  };
 
   //Tracking input value changes
   onChange = e => {

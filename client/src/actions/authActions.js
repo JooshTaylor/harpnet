@@ -104,7 +104,17 @@ export const authenticateUser = data => {
   };
 };
 
-export const logoutUser = () => dispatch => {
+export const logoutUser = token => dispatch => {
+  axios.put(
+    "/api/auth/logout",
+    {},
+    {
+      headers: {
+        Authorization: token
+      }
+    }
+  );
+
   dispatch({
     type: SET_USER,
     payload: {}

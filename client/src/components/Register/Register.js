@@ -9,15 +9,12 @@ import PubAcc from "../Common/PubAcc/PubAcc";
 import { registerUser } from "../../actions/authActions";
 
 class Register extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      username: "",
-      password1: "",
-      password2: ""
-    };
-  }
+  state = {
+    email: "",
+    username: "",
+    password1: "",
+    password2: ""
+  };
 
   //Tracking input value changes
   onChange = e => {

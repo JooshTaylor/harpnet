@@ -22,13 +22,10 @@ const modalStyles = {
 Modal.setAppElement("#root");
 
 class PostViewComments extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false,
-      deleteSubject: -1 //The delete subject when not -1 holds the value of the post potentially being deleted
-    };
-  }
+  state = {
+    showModal: false,
+    deleteSubject: -1 //The delete subject when not -1 holds the value of the post potentially being deleted
+  };
 
   openModal = e => {
     this.setState({

@@ -6,12 +6,9 @@ import { connect } from "react-redux";
 import { searchUsers } from "../../../actions/searchActions";
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchfield: ""
-    };
-  }
+  state = {
+    searchfield: ""
+  };
 
   onChange = e => {
     this.setState({ searchfield: e.target.value });

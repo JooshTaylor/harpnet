@@ -12,6 +12,10 @@ module.exports = (app, db, authenticator) => {
     auth.handleLogin(req, res, db, bcrypt);
   });
 
+  app.put("/auth/logout", authenticator, (req, res) => {
+    auth.handleLogout(req, res, db);
+  });
+
   // Authenticate a user's JWT
   app.get("/auth/authenticate", (req, res) => {
     auth.handleAuthentication(req, res, db);

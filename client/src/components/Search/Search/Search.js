@@ -3,6 +3,7 @@ import "./Search.css";
 import PropTypes from "prop-types";
 import Spinner from "../../Common/Spinner";
 import { connect } from "react-redux";
+// import requireAuth from "../../HOC/requireAuth";
 
 import Button from "../../Common/Buttons/Button";
 import UserSearchInfo from "../UserSearchInfo/UserSearchInfo";
@@ -15,13 +16,10 @@ import {
 import { navigate, Link } from "@reach/router";
 
 class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchField: "",
-      inactiveButtons: []
-    };
-  }
+  state = {
+    searchField: "",
+    inactiveButtons: []
+  };
 
   componentDidUpdate(prevProps) {
     if (

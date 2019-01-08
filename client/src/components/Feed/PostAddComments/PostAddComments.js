@@ -7,12 +7,9 @@ import Button from "../../Common/Buttons/Button";
 import { makeComment } from "../../../actions/postActions";
 
 class PostAddComments extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      comment: ""
-    };
-  }
+  state = {
+    comment: ""
+  };
 
   onSubmit = e => {
     e.preventDefault();

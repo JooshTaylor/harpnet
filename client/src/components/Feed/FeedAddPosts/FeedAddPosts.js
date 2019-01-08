@@ -7,12 +7,9 @@ import Button from "../../Common/Buttons/Button";
 import { makePost } from "../../../actions/postActions";
 
 class FeedAddPosts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      post: ""
-    };
-  }
+  state = {
+    post: ""
+  };
 
   onSubmit = e => {
     e.preventDefault();

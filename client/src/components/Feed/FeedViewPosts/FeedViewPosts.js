@@ -24,14 +24,11 @@ const modalStyles = {
 Modal.setAppElement("#root");
 
 class FeedViewPosts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false,
-      deleteSubject: -1, //The delete subject when not -1 holds the value of the post potentially being deleted
-      iteration: 1
-    };
-  }
+  state = {
+    showModal: false,
+    deleteSubject: -1, //The delete subject when not -1 holds the value of the post potentially being deleted
+    iteration: 1
+  };
 
   //When this component mounts, we fetch the user's feed from the DB based on who they are following
   componentDidMount() {
