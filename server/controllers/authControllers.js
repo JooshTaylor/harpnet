@@ -147,26 +147,15 @@ const handleLogin = async (req, res, db, bcrypt) => {
   res.json(storeData);
 };
 
-// Creates a JWT, stores it in the Redis database with the user_id, then returns both token & ID.
-const createSession = id => {
-  const jwtPayload = {
-    user_id: id
-  };
+const handleLogout = (req, res, db) => {
+  const { authorization } = req.headers;
 
-  let token = jwt.sign(
-    jwtPayload,
-    process.env.JWT_SECRET || "production_jwt_secret",
-    { expiresIn: "1 day" }
-  );
+  console.log(authorization);
 
-  token = `Bearer ${token}`;
-
-  redisClient.set(token, id);
-
-  return {
-    id,
-    token
-  };
+  redisClient.del(authorization, (err, reply) => {
+    console.log(reply);
+    res.json({ success: true });
+  });
 };
 
 // Authenticates a JWT for each private interaction
@@ -230,9 +219,53 @@ const deleteAccount = async (req, res, db) => {
   res.json({ success: true });
 };
 
+// Creates a JWT, stores it in the Redis database with the user_id, then returns both token & ID.
+function createSession(id) {
+  const jwtPayload = {
+    user_id: id
+  };
+
+  let token = jwt.sign(
+    jwtPayload,
+    process.env.JWT_SECRET || "production_jwt_secret",
+    { expiresIn: "1 day" }
+  );
+
+  token = `Bearer ${token}`;
+
+  redisClient.set(token, id);
+
+  return {
+    id,
+    token
+  };
+}
+
+function endSession(id) {
+  const jwtPayload = {
+    user_id: id
+  };
+
+  let token = jwt.sign(
+    jwtPayload,
+    process.env.JWT_SECRET || "production_jwt_secret",
+    { expiresIn: "1 day" }
+  );
+
+  token = `Bearer ${token}`;
+
+  redisClient.set(token, id);
+
+  return {
+    id,
+    token
+  };
+}
+
 module.exports = {
   handleRegister,
   handleLogin,
+  handleLogout,
   handleAuthentication,
   deleteAccount,
   redisClient
