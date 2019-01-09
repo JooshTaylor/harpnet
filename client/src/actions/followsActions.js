@@ -3,14 +3,19 @@ import {
   RELOAD_SEARCH,
   FOLLOWS_LOADING,
   RELOAD_PROFILE,
-  RESET_PROFILE_RELOAD
+  RESET_PROFILE_RELOAD,
+  SET_FOLLOW_SUGGESTIONS,
+  RELOAD_FOLLOW_SUGGESTIONS,
+  RELOAD_FEED
 } from "./constants";
 import axios from "axios";
 
-export const getFollowData = (id, token) => dispatch => {
-  dispatch({
-    type: FOLLOWS_LOADING
-  });
+export const getFollowData = (id, token, location) => dispatch => {
+  if (location !== "suggestions") {
+    dispatch({
+      type: FOLLOWS_LOADING
+    });
+  }
 
   dispatch({
     type: RESET_PROFILE_RELOAD
@@ -59,7 +64,16 @@ export const followUser = (
           });
           break;
 
-        //case for feed
+        case "feed":
+          dispatch({
+            type: RELOAD_FOLLOW_SUGGESTIONS
+          });
+          setTimeout(() => {
+            dispatch({
+              type: RELOAD_FEED
+            });
+          }, 500);
+          break;
       }
     });
 };
@@ -71,16 +85,11 @@ export const unfollowUser = (
   location
 ) => dispatch => {
   axios
-    .delete(
-      `${
-        process.env.REACT_APP_API
-      }/api/follows/${unfollower_id}/${unfollowing_id}`,
-      {
-        headers: {
-          Authorization: token
-        }
+    .delete(`/api/follows/${unfollower_id}/${unfollowing_id}`, {
+      headers: {
+        Authorization: token
       }
-    )
+    })
     .then(res => {
       switch (location) {
         default:
@@ -97,10 +106,21 @@ export const unfollowUser = (
             type: RELOAD_PROFILE
           });
           break;
-
-        //case for follow prompt
-
-        //case for feed
       }
+    });
+};
+
+export const getSuggestedFollows = (id, token) => dispatch => {
+  axios
+    .get(`/api/follows/suggestions/${id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(res => {
+      dispatch({
+        type: SET_FOLLOW_SUGGESTIONS,
+        payload: res.data.suggestions
+      });
     });
 };

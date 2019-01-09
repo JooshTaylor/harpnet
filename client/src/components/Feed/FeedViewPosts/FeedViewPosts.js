@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./FeedViewPosts.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -126,7 +126,7 @@ class FeedViewPosts extends Component {
     });
 
     return (
-      <Fragment>
+      <div className="feed__container--left">
         <Modal
           isOpen={this.state.showModal}
           onAfterOpen={this.afterOpenModal}
@@ -164,7 +164,7 @@ class FeedViewPosts extends Component {
             />
           ) : null}
         </ul>
-      </Fragment>
+      </div>
     );
   }
 }

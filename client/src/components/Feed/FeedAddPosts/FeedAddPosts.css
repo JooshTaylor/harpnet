@@ -1,8 +1,9 @@
 .post-form {
   background-color: var(--color-white-darker);
   border-radius: 10px;
-  padding: 2rem;
-  width: 70rem;
+  padding: 1.5rem;
+  max-width: 70rem;
+  transform: translateX(4rem);
 }
 
 .post-field {
@@ -40,4 +41,37 @@
   color: red;
   text-align: left;
   padding-right: 35rem;
+}
+
+@media only screen and (max-width: 1400px) {
+  .post-form {
+    max-width: 60rem;
+    transform: translateX(6rem);
+  }
+
+  .post-field {
+    max-width: 50rem;
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .post-form {
+    max-width: 50rem;
+    transform: translateX(6rem);
+  }
+
+  .post-field {
+    max-width: 40rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .post-form {
+    max-width: 40rem;
+    transform: translateX(6rem);
+  }
+
+  .post-field {
+    max-width: 30rem;
+  }
 }
