@@ -78,8 +78,31 @@ const unfollowUser = async (req, res, db) => {
     });
 };
 
+const getFollowSuggestions = async (req, res, db) => {
+  const { id } = req.params;
+
+  const allUsers = await db("users")
+    .returning("*")
+    .where("user_id", "<>", id);
+
+  const usersFollowingData = await db("follows")
+    .returning("*")
+    .where("follower_id", "=", id);
+
+  const usersFollowing = usersFollowingData.map(
+    followPair => followPair.following_id
+  );
+
+  const suggestions = allUsers.filter(
+    user => !usersFollowing.includes(user.user_id)
+  );
+
+  res.json({ suggestions });
+};
+
 module.exports = {
   getFollows,
   followUser,
-  unfollowUser
+  unfollowUser,
+  getFollowSuggestions
 };

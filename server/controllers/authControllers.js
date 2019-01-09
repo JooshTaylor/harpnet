@@ -150,10 +150,7 @@ const handleLogin = async (req, res, db, bcrypt) => {
 const handleLogout = (req, res, db) => {
   const { authorization } = req.headers;
 
-  console.log(authorization);
-
   redisClient.del(authorization, (err, reply) => {
-    console.log(reply);
     res.json({ success: true });
   });
 };

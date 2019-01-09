@@ -68,7 +68,7 @@ class Search extends Component {
           btn => self.state.inactiveButtons.indexOf(btn) !== target
         )
       });
-    }, 1500);
+    }, 1000);
 
     const arg1 = { follower_id: this.props.auth.user }; // Follower ID
     const arg2 = [e.target.name]; // Following ID

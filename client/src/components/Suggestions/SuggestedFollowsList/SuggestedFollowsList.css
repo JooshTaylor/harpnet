@@ -1,0 +1,30 @@
+.feed__container--right {
+  flex: 1;
+  height: 30rem;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+.suggestions__title {
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 1000px) {
+  .feed__container--right {
+    height: 31.5rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .feed__container--right {
+    height: 35rem;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .feed__container--right {
+    display: none;
+  }
+}

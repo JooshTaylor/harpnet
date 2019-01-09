@@ -7,17 +7,37 @@ import { connect } from "react-redux";
 
 import FeedViewPosts from "./FeedViewPosts/FeedViewPosts";
 import FeedAddPosts from "./FeedAddPosts/FeedAddPosts";
+import FeedNoPosts from "./FeedNoPosts/FeedNoPosts";
 import { resetSinglePost } from "../../actions/postActions";
 import { navigate } from "@reach/router";
+import SuggestedFollowsList from "../Suggestions/SuggestedFollowsList/SuggestedFollowsList";
 
 class Feed extends Component {
-  state = {
-    user: -1,
-    token: ""
-  };
-
   componentWillMount() {
     this.props.resetSinglePost();
+  }
+
+  renderPosts() {
+    const { follows, post } = this.props;
+    if (follows.loading) {
+      return <Spinner />;
+    } else if (
+      !follows.loading &&
+      follows.following.length === 0 &&
+      post.posts.length === 0
+    ) {
+      return <FeedNoPosts />;
+    } else {
+      return (
+        <ul className="view__following">
+          <div className="feed__container--left">
+            <FeedAddPosts />
+            <FeedViewPosts />
+          </div>
+          <SuggestedFollowsList />
+        </ul>
+      );
+    }
   }
 
   render() {
@@ -25,39 +45,7 @@ class Feed extends Component {
       navigate("/login");
     }
 
-    const { follows, post } = this.props;
-    let postsCheck;
-
-    if (follows.loading) {
-      postsCheck = <Spinner />;
-    } else if (
-      !follows.loading &&
-      follows.following.length === 0 &&
-      post.posts.length === 0
-    ) {
-      postsCheck = (
-        <div className="view__no-following">
-          <h1 className="view__heading-1">
-            Uh Oh! It looks like you haven't followed anybody yet
-          </h1>
-          <div className="view__box">
-            <h2 className="view__heading-2">
-              Search for other users to follow in the searchbar! Hint: there
-              aren't very many users so just search for 'A'.
-            </h2>
-          </div>
-        </div>
-      );
-    } else {
-      postsCheck = (
-        <ul className="view__following">
-          <FeedAddPosts />
-          <FeedViewPosts />
-        </ul>
-      );
-    }
-
-    return <section className="feed">{postsCheck}</section>;
+    return <section className="feed">{this.renderPosts()}</section>;
   }
 }
 

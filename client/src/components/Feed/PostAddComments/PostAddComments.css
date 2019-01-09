@@ -45,3 +45,13 @@
   box-sizing: border-box;
   margin-right: 0.2rem;
 }
+
+@media only screen and (max-width: 900px) {
+  .comment-form {
+    width: 47rem;
+  }
+
+  .comment-field {
+    width: 35rem;
+  }
+}

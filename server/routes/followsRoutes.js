@@ -17,4 +17,8 @@ module.exports = (app, db, authenticator) => {
       follows.unfollowUser(req, res, db);
     }
   );
+
+  app.get("/follows/suggestions/:id", authenticator, (req, res) => {
+    follows.getFollowSuggestions(req, res, db);
+  });
 };
