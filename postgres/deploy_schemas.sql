@@ -3,3 +3,9 @@
 \i '/docker-entrypoint-initdb.d/tables/follows.sql'
 \i '/docker-entrypoint-initdb.d/tables/posts.sql'
 \i '/docker-entrypoint-initdb.d/tables/comments.sql'
+
+\i '/docker-entrypoint-initdb.d/seed/usersSeed.sql'
+\i '/docker-entrypoint-initdb.d/seed/loginSeed.sql'
+\i '/docker-entrypoint-initdb.d/seed/followsSeed.sql'
+\i '/docker-entrypoint-initdb.d/seed/postsSeed.sql'
+\i '/docker-entrypoint-initdb.d/seed/commentsSeed.sql'

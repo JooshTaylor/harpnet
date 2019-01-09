@@ -7,3 +7,5 @@
 /client/build
 
 /client/.env
+
+/postgres/passwords.txt

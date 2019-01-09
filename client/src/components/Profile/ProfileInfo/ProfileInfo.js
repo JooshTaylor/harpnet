@@ -13,7 +13,7 @@ const ProfileInfo = ({
   inactiveButtons
 }) => {
   const infoCheck =
-    !profile.viewProfile.profile.bio &&
+    !profile.viewProfile.profile.biography &&
     !profile.viewProfile.profile.first_name &&
     !profile.viewProfile.profile.last_name ? (
       <p>This user has not provided any personal information</p>
