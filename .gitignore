@@ -9,3 +9,4 @@
 /client/.env
 
 /postgres/passwords.txt
+/postgres/postgres-data
