@@ -7,9 +7,9 @@ import { navigate } from "@reach/router";
 
 import Form from "./Forms/Form";
 import PubAcc from "./Common/PubAcc/PubAcc";
-import { registerUser } from "../actions/authActions";
+import { loginUser } from "../actions/authActions";
 
-const RegisterStyles = styled.section`
+const LoginStyles = styled.section`
   display: flex;
   background-color: ${props => props.theme.white};
   color: ${props => props.theme.text};
@@ -19,45 +19,43 @@ const RegisterStyles = styled.section`
   text-align: center;
 `;
 
-class Register extends Component {
+class Login extends Component {
   //Runs on form submission
   onSubmit = e => {
     e.preventDefault();
 
-    const { email, username, password1, password2 } = this.state;
-    const userData = {
-      email: email.toLowerCase(),
-      username: username,
-      password1,
-      password2
+    const loginData = {
+      userOrEmail: this.state.userOrEmail,
+      password: this.state.password
     };
 
-    //Redux action for registering users. Takes form data and browser history.
-    this.props.registerUser(userData);
+    //Redux action for logging users in. Takes form data and browser history.
+    this.props.loginUser(loginData);
   };
 
   render() {
+    const { auth } = this.props;
     //If a users is logged in, they cannot access this page and are redirected to their feed.
-    if (this.props.auth.isLoggedIn) {
+    if (auth.isLoggedIn) {
       navigate("/feed");
       return null;
-    } else {
-      return (
-        <RegisterStyles>
-          <H1>Sign up for an account</H1>
-          <Form register />
-          <H2>Or use one of our public accounts</H2>
-          <PubAcc />
-        </RegisterStyles>
-      );
     }
+
+    return (
+      <LoginStyles>
+        <H1>Login To Your account</H1>
+        <Form login />
+        <H2>Or login to one of our public accounts</H2>
+        <PubAcc />
+      </LoginStyles>
+    );
   }
 }
 
-Register.propTypes = {
+Login.propTypes = {
   errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  registerUser: PropTypes.func.isRequired
+  loginUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -69,5 +67,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { registerUser }
-)(Register);
+  { loginUser }
+)(Login);

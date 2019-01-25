@@ -11,21 +11,6 @@ import PubAcc from "./Common/PubAcc/PubAcc";
 import { registerUser } from "./../actions/authActions";
 
 class Home extends Component {
-  state = {
-    email: "",
-    username: "",
-    password1: "",
-    password2: ""
-  };
-
-  //Tracking input value changes
-  onChange = e => {
-    this.setState({
-      //For cases where the input is not password, it will be converted to lowercase for DB storing. This makes input fields case insensitive (except for the passwords)
-      [e.target.name]: e.target.value
-    });
-  };
-
   //Runs on form submission
   onSubmit = e => {
     e.preventDefault();

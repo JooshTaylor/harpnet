@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import GlobalStyles from "./styles/Global";
 import { connect } from "react-redux";
 import { Router } from "@reach/router";
 
-import Login from "./components/Login/Login";
+import Login from "./components/Login";
 import Register from "./components/Register";
 import Feed from "./components/Feed/Feed";
 import Home from "./components/Home";
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./components/Navigation";
 import Search from "./components/Search/Search/Search";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
@@ -48,6 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <GlobalStyles />
         <ErrorBoundary>
           <Navigation />
         </ErrorBoundary>

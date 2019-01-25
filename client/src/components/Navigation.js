@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import "./Navigation.css";
+import { NavStyles } from "../styles/Navigation";
+import "./Navigation/Navigation.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, navigate } from "@reach/router";
 
-import SearchBar from "../Search/SearchBar/SearchBar";
-import { logoutUser } from "../../actions/authActions";
+import SearchBar from "./Search/SearchBar/SearchBar";
+import { logoutUser } from "../actions/authActions";
 
 class Navigation extends Component {
   state = {
@@ -140,12 +141,10 @@ class Navigation extends Component {
       ) : null;
 
     return (
-      <nav className="nav-fixed">
-        <div className="nav">
-          {navItems}
-          {navDropdown}
-        </div>
-      </nav>
+      <NavStyles>
+        {navItems}
+        {navDropdown}
+      </NavStyles>
     );
   }
 }

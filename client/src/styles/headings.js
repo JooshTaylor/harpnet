@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import color from "./colours";
 
 export const H1 = styled.h1`
   font-weight: 700;
@@ -7,8 +6,8 @@ export const H1 = styled.h1`
   align-self: center;
   background-image: linear-gradient(
     ${props => (props.reverse ? "to left" : "to right")},
-    ${color["primary-light"]},
-    ${color["primary-dark"]}
+    ${props => props.theme.primaryLight},
+    ${props => props.theme.primaryDark}
   );
   -webkit-background-clip: text;
   background-clip: text;

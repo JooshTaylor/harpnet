@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import GlobalStyles from "./styles/Global";
+import { ThemeProvider } from "styled-components";
+import colours from "./styles/colours";
 import App from "./App";
 import rootReducer from "./reducers";
 import { createStore, applyMiddleware } from "redux";
@@ -20,10 +21,11 @@ const store = createStore(
 
 ReactDOM.render(
   <>
-    <GlobalStyles />
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ThemeProvider theme={colours}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </>,
   document.getElementById("root")
 );

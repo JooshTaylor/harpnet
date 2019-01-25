@@ -14,7 +14,7 @@ export const ButtonStyles = styled.button`
         cursor: pointer;
         color: currentColor;
         font-weight: 700;
-        background-color: var(--color-white-darker);
+        background-color: ${props => props.theme.whiteDark};
         transition: all 0.2s;
         &:hover {
           transform: translateY(-3px);

@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import colours from "./colours";
 
 const GlobalStyles = createGlobalStyle`
   html {
@@ -13,12 +12,12 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     margin: 0;
     font-size: 1.6rem;
-    color: ${colours["text"]};
+    color: ${props => props.theme.text};
     font-family: 'Lato', sans-serif;
   }
   a {
     text-decoration: none;
-    color: ${colours["text"]};
+    color: ${props => props.theme.text};
   }
   ul {
     list-style: none;

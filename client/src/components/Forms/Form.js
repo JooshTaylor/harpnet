@@ -32,6 +32,7 @@ export default function Form(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    // redux actions
   };
 
   return (

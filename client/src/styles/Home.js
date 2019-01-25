@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import color from "./colours";
 
 const HomeStyles = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-  background-color: ${color["white"]};
-  color: ${color["text"]};
+  background-color: ${props => props.theme.white};
+  color: ${props => props.theme.text};
 
   .landing__info {
     padding: 8rem 5rem;
@@ -33,7 +32,7 @@ const HomeStyles = styled.section`
 
   .feature-icon {
     font-size: 6rem;
-    color: ${color["primary"]};
+    color: ${props => props.theme.primary};
   }
 
   .feature-heading {
@@ -44,7 +43,7 @@ const HomeStyles = styled.section`
   }
 
   .feature-info {
-    color: ${color["text-light"]};
+    color: ${props => props.theme.textLight};
     margin: 0;
     padding: 0;
   }
@@ -57,7 +56,7 @@ const HomeStyles = styled.section`
 
   .landing__register {
     padding: 8rem 5rem;
-    background-color: ${color["white-dark"]};
+    background-color: ${props => props.theme.whiteDark};
 
     display: flex;
     flex-direction: column;
