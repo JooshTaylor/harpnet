@@ -1,25 +1,20 @@
 /* Setting variables */
-:root {
+/* :root {
   --color-white: #f0f1f1;
-  --color-white-darker: #E8E9E9;
-  --color-white-darker-2: #CFD0D0;
-  
-  --color-bg: #444f57;
-  --color-bg-dark: #37424A;
+  --color-white-darker: #e8e9e9;
+  --color-white-darker-2: #cfd0d0;
 
-  --color-primary-light: #41DBAA;
+  --color-bg: #444f57;
+  --color-bg-dark: #37424a;
+
+  --color-primary-light: #41dbaa;
   --color-primary: #27c190;
-  --color-primary-dark: #0EA877;
+  --color-primary-dark: #0ea877;
 
   --color-text-dark: #333;
   --color-text: #525252;
   --color-text-light: #777;
-}
-
-/* Changing the root font size so that 1rem = 10px instead of 16px */
-html {
-  font-size: 62.5%;
-}
+} */
 
 @media screen and (max-width: 1000px) {
   html {
@@ -46,16 +41,11 @@ html {
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  box-sizing: border-box;
-  background-color: var(--color-white);
 }
 
 code {

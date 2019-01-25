@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import "./App.css";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Router } from "@reach/router";
 
 import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
+import Register from "./components/Register";
 import Feed from "./components/Feed/Feed";
-import Landing from "./components/Landing/Landing";
+import Home from "./components/Home";
 import Navigation from "./components/Navigation/Navigation";
 import Search from "./components/Search/Search/Search";
 import Profile from "./components/Profile/Profile";
@@ -55,7 +54,7 @@ class App extends Component {
         <ErrorBoundary>
           <main className="app__body">
             <Router>
-              <Landing path="/" />
+              <Home path="/" />
               <Login path="/login" />
               <Register path="/register" />
               <Feed path="/feed" />

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import "./Landing.css";
+import Form from "./Forms/Form";
+import HomeStyles from "../styles/Home";
+import { H1, H2 } from "../styles/headings";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { navigate } from "@reach/router";
 
-import FormText from "../Forms/FormText/FormText";
-import PubAcc from "../Common/PubAcc/PubAcc";
-import { registerUser } from "../../actions/authActions";
+// import FormText from "./Forms/FormText/FormText";
+import PubAcc from "./Common/PubAcc/PubAcc";
+import { registerUser } from "./../actions/authActions";
 
-class Landing extends Component {
+class Home extends Component {
   state = {
     email: "",
     username: "",
@@ -47,13 +49,11 @@ class Landing extends Component {
       return null;
     } else {
       return (
-        <section className="landing">
+        <HomeStyles>
           {/* Left side - information */}
           <div className="landing__info">
-            <h1 className="landing__heading-1">Welcome to Harpnet</h1>
-            <h2 className="landing__heading-2">
-              The hottest social networking website of 2019
-            </h2>
+            <H1>Welcome to Harpnet</H1>
+            <H2>The hottest social networking website of 2019</H2>
             <p className="landing__paragraph">
               Harpnet is a fast growing social networking website where you can
               connect with anybody from your friends and family to your
@@ -84,7 +84,7 @@ class Landing extends Component {
               </li>
             </ul>
 
-            <h2 className="landing__heading-2">What this actually is</h2>
+            <H2>What this actually is</H2>
             <p className="landing__paragraph">
               This website is actually just a development playground. I'm
               continuously developing this to practice creating larger scale
@@ -106,60 +106,18 @@ class Landing extends Component {
 
           {/* Right side - register */}
           <div className="landing__register">
-            <h1 className="landing__heading-1 landing__heading-1--reverse">
-              Sign up for an account
-            </h1>
-            <form noValidate onSubmit={this.onSubmit} className="landing__form">
-              <FormText
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                onChange={this.onChange}
-                value={this.state.email}
-                errors={this.props.errors}
-              />
-              <FormText
-                type="text"
-                name="username"
-                placeholder="Username"
-                onChange={this.onChange}
-                value={this.state.username}
-                errors={this.props.errors}
-              />
-              <FormText
-                type="password"
-                name="password1"
-                placeholder="Password"
-                onChange={this.onChange}
-                value={this.state.password1}
-                errors={this.props.errors}
-              />
-              <FormText
-                type="password"
-                name="password2"
-                placeholder="Password"
-                onChange={this.onChange}
-                value={this.state.password2}
-                errors={this.props.errors}
-              />
-              <input
-                type="submit"
-                className="landing__form-btn"
-                value="Register"
-              />
-            </form>
-            <h2 className="landing__heading-2">
-              Or use one of our public accounts
-            </h2>
+            <H1 reverse>Sign up for an account</H1>
+            <Form register />
+            <H2>Or use one of our public accounts</H2>
             <PubAcc />
           </div>
-        </section>
+        </HomeStyles>
       );
     }
   }
 }
 
-Landing.propTypes = {
+Home.propTypes = {
   errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   registerUser: PropTypes.func.isRequired
@@ -175,4 +133,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { registerUser }
-)(Landing);
+)(Home);

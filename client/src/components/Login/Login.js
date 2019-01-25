@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { navigate } from "@reach/router";
 
-import FormText from "../Forms/FormText/FormText";
+import Form from "../Forms/Form";
 import PubAcc from "../Common/PubAcc/PubAcc";
 import { loginUser } from "../../actions/authActions";
 
@@ -47,15 +47,9 @@ class Login extends Component {
     return (
       <section className="login">
         <h1 className="login__heading-1">Login To Your account</h1>
-        <form noValidate onSubmit={this.onSubmit} className="login__form">
-          <FormText
-            type="text"
-            name="userOrEmail"
-            placeholder="Email Address or Username"
-            onChange={this.onChange}
-            value={this.state.userOrEmail}
-            errors={this.props.errors}
-          />
+        <Form login />
+        {/* <form noValidate onSubmit={this.onSubmit} className="login__form">
+          
           <FormText
             type="password"
             name="password"
@@ -65,7 +59,7 @@ class Login extends Component {
             errors={this.props.errors}
           />
           <input type="submit" className="login__form-btn" value="Login" />
-        </form>
+        </form> */}
         <h2 className="login__heading-2">
           Or login to one of our public accounts
         </h2>

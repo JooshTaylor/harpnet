@@ -1,12 +1,12 @@
 import React from "react";
-import "./FormText.css";
+import { InputStyles } from "../../styles/Form";
 import PropTypes from "prop-types";
 
 const FormText = props => {
   const { name, placeholder, errors, type = "text", onChange, value } = props;
   return (
-    <div className="form-text">
-      <input
+    <>
+      <InputStyles
         formNoValidate
         type={type}
         placeholder={placeholder}
@@ -16,10 +16,10 @@ const FormText = props => {
         className="form-text__input"
       />
       <br />
-      {Object.keys(errors).length > 0 ? (
+      {/* {Object.keys(errors).length > 0 ? (
         <small className="form-text__errors">{errors.errors[name]}</small>
-      ) : null}
-    </div>
+      ) : null} */}
+    </>
   );
 };
 
