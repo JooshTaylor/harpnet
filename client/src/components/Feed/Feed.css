@@ -16,6 +16,12 @@
   flex: 0 0 70%;
 }
 
+@media only screen and (max-width: 720px) {
+  .feed__container--left {
+    flex: 1;
+  }
+}
+
 .fcl-nopost {
   display: flex;
   flex-direction: column;

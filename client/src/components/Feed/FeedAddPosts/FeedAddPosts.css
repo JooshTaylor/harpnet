@@ -75,3 +75,66 @@
     max-width: 30rem;
   }
 }
+
+@media only screen and (max-width: 720px) {
+  .post-form {
+    max-width: 55rem;
+    transform: translateX(5.5rem);
+  }
+
+  .post-field {
+    max-width: 45rem;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .post-form {
+    max-width: 55rem;
+    transform: translateX(2.5rem);
+  }
+
+  .post-field {
+    max-width: 45rem;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .post-form {
+    max-width: 70rem;
+    transform: translateX(8rem);
+  }
+
+  .post-field {
+    max-width: 60rem;
+  }
+}
+
+@media only screen and (min-width: 1650px) {
+  .post-form {
+    transform: translateX(10rem);
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  .post-form {
+    transform: translateX(12rem);
+  }
+}
+
+@media only screen and (min-width: 1800px) {
+  .post-form {
+    transform: translateX(15rem);
+  }
+}
+
+@media only screen and (min-width: 1930px) {
+  .post-form {
+    transform: translateX(18rem);
+  }
+}
+
+@media only screen and (min-width: 2000px) {
+  .post-form {
+    transform: translateX(22rem);
+  }
+}
