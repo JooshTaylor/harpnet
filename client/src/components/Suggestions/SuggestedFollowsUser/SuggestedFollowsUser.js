@@ -1,6 +1,6 @@
-import React from "react";
-import "./SuggestedFollowsUser.css";
-import Button from "../../Common/Buttons/Button";
+import React from 'react'
+import './SuggestedFollowsUser.css'
+import Button from '../../Button/Button'
 
 const SuggestedFollowsUser = ({ user, handleFollow }) => {
   return (
@@ -22,7 +22,7 @@ const SuggestedFollowsUser = ({ user, handleFollow }) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SuggestedFollowsUser;
+export default SuggestedFollowsUser

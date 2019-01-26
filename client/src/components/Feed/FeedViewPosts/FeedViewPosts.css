@@ -1,8 +1,8 @@
 .feed {
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   list-style: none;
-  transform: translateX(-2rem);
   position: relative;
+  max-width: 80%;
 }
 
 .post {

@@ -1,39 +1,39 @@
-import React, { useState } from "react";
-import FormText from "./FormText";
-import Button from "../Button/Button";
-import { FormStyles } from "../../styles/Form";
+import React, { useState } from 'react'
+import FormText from './FormText'
+import Button from '../Button/Button'
+import { FormStyles } from '../../styles/Form'
 
 const initialInputState = {
-  username: "",
-  email: "",
-  userOrEmail: "",
-  password: "",
-  passwordConfirm: ""
-};
+  username: '',
+  email: '',
+  userOrEmail: '',
+  password: '',
+  passwordConfirm: ''
+}
 
 export default function Form(props) {
-  const [inputs, setInputs] = useState(initialInputState);
+  const [inputs, setInputs] = useState(initialInputState)
 
   const buttonText = () => {
     if (props.register) {
-      return "Register";
+      return 'Register'
     }
     if (props.login) {
-      return "Login";
+      return 'Login'
     }
-  };
+  }
 
   const handleChange = e => {
     setInputs({
       ...inputs,
       [e.target.name]: e.target.value
-    });
-  };
+    })
+  }
 
   const handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     // redux actions
-  };
+  }
 
   return (
     <FormStyles noValidate onSubmit={handleSubmit}>
@@ -87,7 +87,9 @@ export default function Form(props) {
           // errors={null}
         />
       )}
-      <Button type="form" text={buttonText()} callback={handleSubmit} />
+      {(props.register || props.login) && (
+        <Button type="form" text={buttonText()} callback={handleSubmit} />
+      )}
     </FormStyles>
-  );
+  )
 }

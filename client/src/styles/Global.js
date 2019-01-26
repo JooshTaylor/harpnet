@@ -1,9 +1,10 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 62.5%;
+    background-color: ${props => props.theme.white};
   }
   *, *:before, *:after {
     box-sizing: inherit;
@@ -24,6 +25,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-`;
+`
 
-export default GlobalStyles;
+export default GlobalStyles

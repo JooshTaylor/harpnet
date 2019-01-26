@@ -1,7 +1,7 @@
-import React from "react";
-import FeedAddPosts from "../FeedAddPosts/FeedAddPosts";
-import SuggestedFollowsList from "../../Suggestions/SuggestedFollowsList/SuggestedFollowsList";
-import "../Feed.css";
+import React from 'react'
+import FeedAddPosts from '../FeedAddPosts'
+import SuggestedFollowsList from '../../Suggestions/SuggestedFollowsList/SuggestedFollowsList'
+import '../Feed.css'
 
 export default function FeedNoPosts() {
   return (
@@ -20,5 +20,5 @@ export default function FeedNoPosts() {
       </div>
       <SuggestedFollowsList />
     </div>
-  );
+  )
 }

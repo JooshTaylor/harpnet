@@ -1,42 +1,42 @@
-import React, { Component, Fragment } from "react";
-import "./Post.css";
-import PropTypes from "prop-types";
-import { navigate, Link } from "@reach/router";
-import { connect } from "react-redux";
+import React, { Component, Fragment } from 'react'
+import './Post.css'
+import PropTypes from 'prop-types'
+import { navigate, Link } from '@reach/router'
+import { connect } from 'react-redux'
 
-import Button from "../Common/Buttons/Button";
-import Modal from "react-modal";
-import PostAddComments from "../Feed/PostAddComments/PostAddComments";
-import PostViewComments from "../Feed/PostViewComments/PostViewComments";
-import Spinner from "../Common/Spinner";
+import Button from '../Button/Button'
+import Modal from 'react-modal'
+import PostAddComments from '../Feed/PostAddComments/PostAddComments'
+import PostViewComments from '../Feed/PostViewComments/PostViewComments'
+import Spinner from '../Spinner/Spinner'
 import {
   getPostById,
   deletePost,
   resetSinglePost
-} from "../../actions/postActions";
+} from '../../actions/postActions'
 
 const modalStyles = {
   content: {
-    width: "30%",
-    height: "20%",
-    position: "absolute",
-    top: "40%",
-    left: "50%",
-    transform: "translate(-50%, -50%)"
+    width: '30%',
+    height: '20%',
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
   }
-};
+}
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root')
 
 class Post extends Component {
   state = {
     showModal: false,
     deleteSubject: -1 //The delete subject when not -1 holds the value of the post potentially being deleted
-  };
+  }
 
   componentDidMount() {
-    if (this.props.id && localStorage.getItem("token")) {
-      this.props.getPostById(this.props.id, localStorage.getItem("token"));
+    if (this.props.id && localStorage.getItem('token')) {
+      this.props.getPostById(this.props.id, localStorage.getItem('token'))
     }
   }
 
@@ -45,57 +45,57 @@ class Post extends Component {
       prevProps.post.singleReload !== this.props.post.singleReload &&
       this.props.post.singleReload === true
     ) {
-      this.props.getPostById(this.props.id, localStorage.getItem("token"));
+      this.props.getPostById(this.props.id, localStorage.getItem('token'))
     }
   }
 
   componentWillUnmount() {
-    this.props.resetSinglePost();
+    this.props.resetSinglePost()
   }
 
   openModal = e => {
     this.setState({
       showModal: true,
       deleteSubject: [e.target.name]
-    });
-  };
+    })
+  }
 
   closeModal = () => {
     this.setState({
       showModal: false,
       deleteSubject: -1
-    });
-  };
+    })
+  }
 
   deletePost = () => {
     this.props.deletePost(
       this.state.deleteSubject,
-      localStorage.getItem("token"),
-      "feed"
-    );
-    this.closeModal();
-    navigate("/feed");
-  };
+      localStorage.getItem('token'),
+      'feed'
+    )
+    this.closeModal()
+    navigate('/feed')
+  }
 
   render() {
-    if (!localStorage.getItem("token")) {
-      navigate("/login");
+    if (!localStorage.getItem('token')) {
+      navigate('/login')
     }
 
-    const { fromFeed } = this.props;
+    const { fromFeed } = this.props
     if (!fromFeed && Object.keys(this.props.post.single).length === 0) {
-      return <Spinner />;
+      return <Spinner />
     } else if (fromFeed && Object.keys(this.props.singlePost).length === 0) {
-      return <Spinner />;
+      return <Spinner />
     } else {
-      let post;
-      let user_id;
+      let post
+      let user_id
       if (Object.keys(this.props.post.single).length > 0) {
-        post = this.props.post.single;
-        user_id = this.props.post.single.user_id.user_id;
+        post = this.props.post.single
+        user_id = this.props.post.single.user_id.user_id
       } else {
-        post = this.props.singlePost;
-        user_id = this.props.user_id;
+        post = this.props.singlePost
+        user_id = this.props.user_id
       }
       // This renders the post with different styles based on if it's viewed on its own or in the feed/profile. This is a lazy solution that will be fixed up later.
       if (fromFeed) {
@@ -122,17 +122,17 @@ class Post extends Component {
                   className="post__details-date"
                 >
                   {post.post_date
-                    .split(" ")
+                    .split(' ')
                     .slice(0, 3)
-                    .join(" ")}
+                    .join(' ')}
                   <br />
                   {post.post_date
-                    .split(" ")
+                    .split(' ')
                     .slice(3, 4)
                     .toString()
-                    .split(":")
+                    .split(':')
                     .slice(0, 2)
-                    .join(":")}
+                    .join(':')}
                 </Link>
               </div>
               {post.creator_id === user_id ? (
@@ -150,7 +150,7 @@ class Post extends Component {
             </div>
             <div className="post__features-box">{post.score} points</div>
           </div>
-        );
+        )
       } else {
         return (
           <Fragment>
@@ -176,17 +176,17 @@ class Post extends Component {
                     </h2>
                     <h3 className="post__details-date">
                       {post.post_date
-                        .split(" ")
+                        .split(' ')
                         .slice(0, 3)
-                        .join(" ")}
+                        .join(' ')}
                       <br />
                       {post.post_date
-                        .split(" ")
+                        .split(' ')
                         .slice(3, 4)
                         .toString()
-                        .split(":")
+                        .split(':')
                         .slice(0, 2)
-                        .join(":")}
+                        .join(':')}
                     </h3>
                   </div>
                   {post.creator_id === user_id ? (
@@ -242,7 +242,7 @@ class Post extends Component {
               </div>
             </Modal>
           </Fragment>
-        );
+        )
       }
     }
   }
@@ -251,8 +251,8 @@ class Post extends Component {
 const mapStateToProps = state => {
   return {
     post: state.post
-  };
-};
+  }
+}
 
 Post.propTypes = {
   post: PropTypes.object.isRequired,
@@ -263,9 +263,9 @@ Post.propTypes = {
   user_id: PropTypes.number,
   singlePost: PropTypes.object,
   id: PropTypes.string
-};
+}
 
 export default connect(
   mapStateToProps,
   { getPostById, deletePost, resetSinglePost }
-)(Post);
+)(Post)

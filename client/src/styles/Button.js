@@ -1,8 +1,8 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 export const ButtonStyles = styled.button`
   ${({ type }) => {
-    if (type === "form") {
+    if (type === 'form') {
       return css`
         margin-top: 2rem;
         border: none;
@@ -27,7 +27,21 @@ export const ButtonStyles = styled.button`
         &:focus {
           outline: none;
         }
-      `;
+      `
+    }
+    if (type === 'post') {
+      return css`
+        background-color: ${props => props.theme.primary};
+        border: none;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        padding: 1rem;
+        cursor: pointer;
+        width: 8rem;
+        font-size: 1.6rem;
+        transition: all 0.2s;
+        box-sizing: border-box;
+      `
     }
   }}
-`;
+`

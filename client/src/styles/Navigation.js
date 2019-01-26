@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const NavStyles = styled.nav`
   position: fixed;
@@ -196,4 +196,4 @@ export const NavStyles = styled.nav`
     padding-bottom: 0.7rem;
     border-bottom: 1px solid #ccc;
   }
-`;
+`

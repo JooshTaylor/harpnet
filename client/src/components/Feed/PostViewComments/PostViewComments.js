@@ -1,54 +1,54 @@
-import React, { Component, Fragment } from "react";
-import "./PostViewComments.css";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component, Fragment } from 'react'
+import './PostViewComments.css'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import Button from "../../Common/Buttons/Button";
-import Modal from "react-modal";
-import { deleteComment } from "../../../actions/postActions";
-import { navigate } from "../../../../node_modules/@reach/router";
+import Button from '../../Button/Button'
+import Modal from 'react-modal'
+import { deleteComment } from '../../../actions/postActions'
+import { navigate } from '../../../../node_modules/@reach/router'
 
 const modalStyles = {
   content: {
-    width: "30%",
-    height: "20%",
-    position: "absolute",
-    top: "40%",
-    left: "50%",
-    transform: "translate(-50%, -50%)"
+    width: '30%',
+    height: '20%',
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
   }
-};
+}
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root')
 
 class PostViewComments extends Component {
   state = {
     showModal: false,
     deleteSubject: -1 //The delete subject when not -1 holds the value of the post potentially being deleted
-  };
+  }
 
   openModal = e => {
     this.setState({
       showModal: true,
       deleteSubject: [e.target.name]
-    });
-  };
+    })
+  }
 
   closeModal = () => {
     this.setState({
       showModal: false,
       deleteSubject: -1
-    });
-  };
+    })
+  }
 
   deleteComment = () => {
     this.props.deleteComment(
       this.state.deleteSubject,
-      localStorage.getItem("token"),
+      localStorage.getItem('token'),
       this.props.single
-    );
-    this.closeModal();
-  };
+    )
+    this.closeModal()
+  }
 
   render() {
     const commentsWidget = this.props.comments.map(comment => {
@@ -59,7 +59,7 @@ class PostViewComments extends Component {
           className="comments__comment"
         >
           <img
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             className="comments__dp"
             alt="Commenter"
             src={`https://robohash.org/${comment.creator_username}/?200x200`}
@@ -67,7 +67,7 @@ class PostViewComments extends Component {
           />
           <div className="comments__content-box">
             <h2
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className="comments__name"
               onClick={() => navigate(`/profile/${comment.creator_id}`)}
             >
@@ -85,8 +85,8 @@ class PostViewComments extends Component {
             ) : null}
           </div>
         </li>
-      );
-    });
+      )
+    })
 
     return (
       <Fragment>
@@ -118,7 +118,7 @@ class PostViewComments extends Component {
         </Modal>
         <ul className="comments">{commentsWidget}</ul>
       </Fragment>
-    );
+    )
   }
 }
 
@@ -127,15 +127,15 @@ PostViewComments.propTypes = {
   comments: PropTypes.array.isRequired,
   deleteComment: PropTypes.func.isRequired,
   single: PropTypes.bool
-};
+}
 
 const mapStateToProps = state => {
   return {
     auth: state.auth
-  };
-};
+  }
+}
 
 export default connect(
   mapStateToProps,
   { deleteComment }
-)(PostViewComments);
+)(PostViewComments)

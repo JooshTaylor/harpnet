@@ -1,58 +1,57 @@
-import React, { Component } from "react";
-import { NavStyles } from "../styles/Navigation";
-import "./Navigation/Navigation.css";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Link, navigate } from "@reach/router";
+import React, { Component } from 'react'
+import { NavStyles } from '../styles/Navigation'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { Link, navigate } from '@reach/router'
 
-import SearchBar from "./Search/SearchBar/SearchBar";
-import { logoutUser } from "../actions/authActions";
+import SearchBar from './Search/SearchBar'
+import { logoutUser } from '../actions/authActions'
 
 class Navigation extends Component {
   state = {
     //When true, this will show a dropdown below the "cogs" button
     dropDown: false
-  };
+  }
 
   componentWillUnmount() {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token')
   }
 
   //Event listener callback to toggle the dropdown menu
   toggleDropdown = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     this.setState({
       dropDown: !this.state.dropDown
-    });
+    })
 
     //Each menu button in the dropdown both toggles it and has an additional function. They are distinguished by their name value
     switch (e.target.name) {
       default:
-        return null;
+        return null
 
-      case "logout":
-        this.logout();
-        break;
+      case 'logout':
+        this.logout()
+        break
 
-      case "settings":
-        navigate("/settings");
-        break;
+      case 'settings':
+        navigate('/settings')
+        break
     }
-  };
+  }
 
   //Will log a user out and redirect them to the homepage
   logout = e => {
-    this.props.logoutUser(localStorage.getItem("token"));
-    localStorage.removeItem("token");
-    navigate("/");
-  };
+    this.props.logoutUser(localStorage.getItem('token'))
+    localStorage.removeItem('token')
+    navigate('/')
+  }
 
   render() {
-    const { profile, auth } = this.props;
+    const { profile, auth } = this.props
 
     // The navigation bar will change depending on whether the user is logged in or not.
-    const navItems = !localStorage.getItem("token") ? (
+    const navItems = !localStorage.getItem('token') ? (
       <ul className="nav__list nav__list--nologin">
         <li className="nav__item nav__item--home-1">
           <Link id="nav-home-1" className="nav__link nav__link--home" to="/">
@@ -89,7 +88,7 @@ class Navigation extends Component {
               src={`https://robohash.org/${profile.profile.username}/?200x200`}
               className="nav__img"
               alt="profile"
-            />{" "}
+            />{' '}
             {profile.profile.username}
           </Link>
         </li>
@@ -114,7 +113,7 @@ class Navigation extends Component {
           </button>
         </li>
       </ul>
-    );
+    )
     //The nav dropdown will only show for users that are logged in and when the dropDown state is true
     const navDropdown =
       auth.isLoggedIn && this.state.dropDown ? (
@@ -138,14 +137,14 @@ class Navigation extends Component {
             </button>
           </li>
         </ul>
-      ) : null;
+      ) : null
 
     return (
       <NavStyles>
         {navItems}
         {navDropdown}
       </NavStyles>
-    );
+    )
   }
 }
 
@@ -153,16 +152,16 @@ Navigation.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   logoutUser: PropTypes.func.isRequired
-};
+}
 
 const mapStateToProps = state => {
   return {
     auth: state.auth,
     profile: state.profile
-  };
-};
+  }
+}
 
 export default connect(
   mapStateToProps,
   { logoutUser }
-)(Navigation);
+)(Navigation)

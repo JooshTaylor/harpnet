@@ -1,39 +1,40 @@
-import React, { Component } from "react";
-import "./PubAcc.css";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../../actions/authActions";
+import React, { Component } from 'react'
+// import "./PubAcc.css";
+import PubAccStyles from '../styles/PubAcc'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { loginUser } from '../actions/authActions'
 
 class PubAcc extends Component {
   publicAccount = e => {
-    const botInfo = {};
+    const botInfo = {}
 
     switch (e) {
       default:
-        return null;
-      case "account-1":
-        botInfo.userOrEmail = "Harper";
-        botInfo.password = "harperpassword";
-        break;
-      case "account-2":
-        botInfo.userOrEmail = "Harphene";
-        botInfo.password = "harphenepassword";
-        break;
-      case "account-3":
-        botInfo.userOrEmail = "Bailey";
-        botInfo.password = "baileypassword";
-        break;
+        return null
+      case 'account-1':
+        botInfo.userOrEmail = 'Harper'
+        botInfo.password = 'harperpassword'
+        break
+      case 'account-2':
+        botInfo.userOrEmail = 'Harphene'
+        botInfo.password = 'harphenepassword'
+        break
+      case 'account-3':
+        botInfo.userOrEmail = 'Bailey'
+        botInfo.password = 'baileypassword'
+        break
     }
 
-    this.props.loginUser(botInfo);
-  };
+    this.props.loginUser(botInfo)
+  }
 
   render() {
     return (
-      <div className="public">
+      <PubAccStyles>
         <div className="account">
           <button
-            onClick={() => this.publicAccount("account-1")}
+            onClick={() => this.publicAccount('account-1')}
             type="button"
             className="account-link"
           >
@@ -48,7 +49,7 @@ class PubAcc extends Component {
 
         <div className="account">
           <button
-            onClick={() => this.publicAccount("account-2")}
+            onClick={() => this.publicAccount('account-2')}
             type="button"
             className="account-link"
           >
@@ -63,7 +64,7 @@ class PubAcc extends Component {
 
         <div className="account">
           <button
-            onClick={() => this.publicAccount("account-3")}
+            onClick={() => this.publicAccount('account-3')}
             type="button"
             className="account-link"
           >
@@ -75,16 +76,16 @@ class PubAcc extends Component {
           </button>
           <h2 className="account-name">Bailey</h2>
         </div>
-      </div>
-    );
+      </PubAccStyles>
+    )
   }
 }
 
 PubAcc.propTypes = {
   loginUser: PropTypes.func.isRequired
-};
+}
 
 export default connect(
   null,
   { loginUser }
-)(PubAcc);
+)(PubAcc)
