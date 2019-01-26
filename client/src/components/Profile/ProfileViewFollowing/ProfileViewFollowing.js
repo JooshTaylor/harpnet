@@ -1,10 +1,10 @@
-import React from 'react'
-import './ProfileViewFollowing.css'
-import PropTypes from 'prop-types'
-import { navigate, Link } from '@reach/router'
+import React from "react";
+import "./ProfileViewFollowing.css";
+import PropTypes from "prop-types";
+import { navigate, Link } from "@reach/router";
 
-import Button from '../../Button/Button'
-import UserSearchInfo from '../../Search/UserSearchInfo/UserSearchInfo'
+import Button from "../../Common/Buttons/Button";
+import UserSearchInfo from "../../Search/UserSearchInfo/UserSearchInfo";
 
 const ProfileViewFollowing = ({
   followings,
@@ -22,14 +22,14 @@ const ProfileViewFollowing = ({
             className="following__img"
             src={`https://robohash.org/${following.username}/?200x200`}
             alt="profile"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             onClick={() => {
-              navigate(`/profile/${following.user_id}`)
+              navigate(`/profile/${following.user_id}`);
             }}
           />
           <figcaption className="following__img-caption">
             <Link
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
               className="following__username"
               to={`/profile/${following.user_id}`}
             >
@@ -80,16 +80,16 @@ const ProfileViewFollowing = ({
           <Button
             text="View Profile"
             callback={() => {
-              navigate(`/profile/${following.user_id}`)
+              navigate(`/profile/${following.user_id}`);
             }}
             className="edit-profile-btn"
           />
         </div>
       </li>
-    )
-  })
-  return <ul className="followings">{followingsWidget}</ul>
-}
+    );
+  });
+  return <ul className="followings">{followingsWidget}</ul>;
+};
 
 ProfileViewFollowing.propTypes = {
   handleFollow: PropTypes.func.isRequired,
@@ -98,6 +98,6 @@ ProfileViewFollowing.propTypes = {
   clientId: PropTypes.number.isRequired,
   followings: PropTypes.array.isRequired,
   inactiveButtons: PropTypes.array.isRequired
-}
+};
 
-export default ProfileViewFollowing
+export default ProfileViewFollowing;

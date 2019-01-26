@@ -1,33 +1,33 @@
-import React, { Component } from 'react'
-import SearchStyles from '../../styles/Search'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import "./SearchBar.css";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import { searchUsers } from '../../actions/searchActions'
+import { searchUsers } from "../../../actions/searchActions";
 
 class SearchBar extends Component {
   state = {
-    searchfield: ''
-  }
+    searchfield: ""
+  };
 
   onChange = e => {
-    this.setState({ searchfield: e.target.value })
-  }
+    this.setState({ searchfield: e.target.value });
+  };
 
   onSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
 
     this.props.searchUsers(
       this.state.searchfield,
-      localStorage.getItem('token')
-    )
+      localStorage.getItem("token")
+    );
 
-    this.setState({ searchfield: '' })
-  }
+    this.setState({ searchfield: "" });
+  };
 
   render() {
     return (
-      <SearchStyles onSubmit={this.onSubmit} noValidate className="searchbar">
+      <form onSubmit={this.onSubmit} noValidate className="searchbar">
         <input
           className="searchbar__input"
           type="text"
@@ -38,16 +38,16 @@ class SearchBar extends Component {
         <button className="searchbar__button">
           <i className="fas fa-search" />
         </button>
-      </SearchStyles>
-    )
+      </form>
+    );
   }
 }
 
 SearchBar.propTypes = {
   searchUsers: PropTypes.func.isRequired
-}
+};
 
 export default connect(
   null,
   { searchUsers }
-)(SearchBar)
+)(SearchBar);

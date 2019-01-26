@@ -1,127 +1,127 @@
-import React, { Component, Fragment } from 'react'
-import './Settings.css'
-import PropTypes from 'prop-types'
-import { navigate } from '@reach/router'
-import { connect } from 'react-redux'
+import React, { Component, Fragment } from "react";
+import "./Settings.css";
+import PropTypes from "prop-types";
+import { navigate } from "@reach/router";
+import { connect } from "react-redux";
 
-import Modal from 'react-modal'
-import Button from '../Button/Button'
-import Spinner from '../Spinner/Spinner'
-import { deleteAccount, logoutUser } from '../../actions/authActions'
+import Modal from "react-modal";
+import Button from "../Common/Buttons/Button";
+import Spinner from "../Common/Spinner";
+import { deleteAccount, logoutUser } from "../../actions/authActions";
 import {
   getProfile,
   changePrivacy,
   updateBio,
   updateFirstName,
   updateLastName
-} from '../../actions/profileActions'
+} from "../../actions/profileActions";
 
 const modalStyles = {
   content: {
-    width: '30%',
-    height: '20%',
-    position: 'absolute',
-    top: '40%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
+    width: "30%",
+    height: "20%",
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   }
-}
+};
 
 class Settings extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     // Privacy states: 1 = public, 2 = public to followers only, 3 = private to all.
     this.state = {
       privacy: 1,
-      bio: '',
-      firstName: '',
-      lastName: '',
+      bio: "",
+      firstName: "",
+      lastName: "",
       loading: false,
       showModal: false
-    }
+    };
   }
 
   componentDidMount() {
-    const { profile } = this.props.profile
+    const { profile } = this.props.profile;
     this.setState({
       privacy: profile.privacy,
       bio: profile.biography,
       firstName: profile.first_name,
       lastName: profile.last_name
-    })
+    });
   }
 
   componentDidUpdate(prevProps) {
-    const { profile } = this.props.profile
+    const { profile } = this.props.profile;
     if (prevProps.profile.profile.privacy !== profile.privacy) {
       this.setState({
         privacy: profile.privacy
-      })
+      });
     }
     if (prevProps.profile.profile.first_name !== profile.first_name) {
       this.setState({
         firstName: profile.first_name
-      })
+      });
     }
     if (prevProps.profile.profile.last_name !== profile.last_name) {
       this.setState({
         lastName: profile.last_name
-      })
+      });
     }
     if (prevProps.profile.profile.biography !== profile.biography) {
       this.setState({
-        bio: profile.biography === null ? '' : profile.biography
-      })
+        bio: profile.biography === null ? "" : profile.biography
+      });
     }
   }
 
   openModal = e => {
     this.setState({
       showModal: true
-    })
-  }
+    });
+  };
 
   closeModal = () => {
     this.setState({
       showModal: false
-    })
-  }
+    });
+  };
 
   togglePrivacy = e => {
-    this.setState({ privacy: Number([e.target.name]) })
-  }
+    this.setState({ privacy: Number([e.target.name]) });
+  };
 
   handleFNameChange = e => {
-    this.setState({ firstName: e.target.value })
-  }
+    this.setState({ firstName: e.target.value });
+  };
 
   handleLNameChange = e => {
-    this.setState({ lastName: e.target.value })
-  }
+    this.setState({ lastName: e.target.value });
+  };
 
   handleBioChange = e => {
-    this.setState({ bio: e.target.value })
-  }
+    this.setState({ bio: e.target.value });
+  };
 
   deleteAccount = () => {
     // console.log(this.props.auth.user);
     this.props.deleteAccount(
       this.props.auth.user,
-      localStorage.getItem('token')
-    )
-    this.props.logoutUser()
-  }
+      localStorage.getItem("token")
+    );
+    this.props.logoutUser();
+  };
 
   saveChanges = () => {
-    const { auth, profile } = this.props
-    const token = localStorage.getItem('token')
+    const { auth, profile } = this.props;
+    const token = localStorage.getItem("token");
 
     if (this.state.privacy !== profile.profile.private) {
-      this.props.changePrivacy({ state: this.state.privacy }, auth.user, token)
+      this.props.changePrivacy({ state: this.state.privacy }, auth.user, token);
     }
 
     if (this.state.bio !== profile.profile.biography) {
-      this.props.updateBio({ bio: this.state.bio }, auth.user, token)
+      this.props.updateBio({ bio: this.state.bio }, auth.user, token);
     }
 
     if (this.state.firstName !== profile.profile.first_name) {
@@ -129,7 +129,7 @@ class Settings extends Component {
         { fname: this.state.firstName },
         auth.user,
         token
-      )
+      );
     }
 
     if (this.state.lastName !== profile.profile.last_name) {
@@ -137,39 +137,39 @@ class Settings extends Component {
         { lname: this.state.lastName },
         auth.user,
         token
-      )
+      );
     }
 
     this.setState({
       loading: true
-    })
-    const self = this
+    });
+    const self = this;
     setTimeout(function() {
-      self.setState({ loading: false })
-      self.props.getProfile(self.props.auth.user, token)
-      navigate(`/profile/${auth.user}`)
-    }, 3000)
-  }
+      self.setState({ loading: false });
+      self.props.getProfile(self.props.auth.user, token);
+      navigate(`/profile/${auth.user}`);
+    }, 3000);
+  };
 
   render() {
-    if (!localStorage.getItem('token')) {
-      navigate('/login')
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
     }
 
     if (this.props.auth.user !== -1 && !this.props.auth.isLoggedIn) {
-      localStorage.removeItem('token')
-      navigate('/login')
+      localStorage.removeItem("token");
+      navigate("/login");
     }
 
-    let settingsWidget
+    let settingsWidget;
 
     if (
       Object.keys(this.props.profile.profile).length === 0 ||
       this.state.loading
     ) {
-      return <Spinner />
+      return <Spinner />;
     } else if (
-      ['Harper', 'Harphene', 'Bailey'].includes(
+      ["Harper", "Harphene", "Bailey"].includes(
         this.props.profile.profile.username
       )
     ) {
@@ -182,13 +182,13 @@ class Settings extends Component {
             deleted from this same page later).
           </h2>
         </div>
-      )
+      );
     } else {
       if (this.props.profile.reload) {
         this.props.getProfile(
           this.props.auth.user,
-          localStorage.getItem('token')
-        )
+          localStorage.getItem("token")
+        );
       }
 
       settingsWidget = (
@@ -203,7 +203,7 @@ class Settings extends Component {
                 text="Public"
                 name="1"
                 className={
-                  this.state.privacy === 1 ? 'follow' : 'edit-profile-btn'
+                  this.state.privacy === 1 ? "follow" : "edit-profile-btn"
                 }
                 callback={this.togglePrivacy}
               />
@@ -216,7 +216,7 @@ class Settings extends Component {
                 text="Semi-Private"
                 name="2"
                 className={
-                  this.state.privacy === 2 ? 'follow' : 'edit-profile-btn'
+                  this.state.privacy === 2 ? "follow" : "edit-profile-btn"
                 }
                 callback={this.togglePrivacy}
               />
@@ -229,7 +229,7 @@ class Settings extends Component {
                 text="Private"
                 name="3"
                 className={
-                  this.state.privacy === 3 ? 'follow' : 'edit-profile-btn'
+                  this.state.privacy === 3 ? "follow" : "edit-profile-btn"
                 }
                 callback={this.togglePrivacy}
               />
@@ -244,7 +244,7 @@ class Settings extends Component {
             />
           </div>
         </div>
-      )
+      );
     }
     return (
       <Fragment>
@@ -316,7 +316,7 @@ class Settings extends Component {
           </div>
         </Modal>
       </Fragment>
-    )
+    );
   }
 }
 
@@ -324,8 +324,8 @@ const mapStateToProps = state => {
   return {
     auth: state.auth,
     profile: state.profile
-  }
-}
+  };
+};
 
 Settings.propTypes = {
   auth: PropTypes.object.isRequired,
@@ -337,7 +337,7 @@ Settings.propTypes = {
   updateBio: PropTypes.func.isRequired,
   updateFirstName: PropTypes.func.isRequired,
   updateLastName: PropTypes.func.isRequired
-}
+};
 
 export default connect(
   mapStateToProps,
@@ -350,4 +350,4 @@ export default connect(
     updateFirstName,
     updateLastName
   }
-)(Settings)
+)(Settings);

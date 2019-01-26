@@ -1,45 +1,45 @@
-import React, { Component } from 'react'
-import './Profile.css'
-import PropTypes from 'prop-types'
-import { navigate } from '@reach/router'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import "./Profile.css";
+import PropTypes from "prop-types";
+import { navigate } from "@reach/router";
+import { connect } from "react-redux";
 
-import Button from '../Button/Button'
-import Modal from 'react-modal'
-import Spinner from '../Spinner/Spinner'
-import ProfileInfo from './ProfileInfo/ProfileInfo'
-import ProfileSwitch from './ProfileSwitch/ProfileSwitch'
-import ProfileViewPosts from './ProfileViewPosts/ProfileViewPosts'
-import ProfileViewFollowing from './ProfileViewFollowing/ProfileViewFollowing'
-import ProfileViewFollowers from './ProfileViewFollowers/ProfileViewFollowers'
-import { getViewProfile, clearViewProfile } from '../../actions/profileActions'
-import { deletePost } from '../../actions/postActions'
+import Button from "../Common/Buttons/Button";
+import Modal from "react-modal";
+import Spinner from "../Common/Spinner";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import ProfileSwitch from "./ProfileSwitch/ProfileSwitch";
+import ProfileViewPosts from "./ProfileViewPosts/ProfileViewPosts";
+import ProfileViewFollowing from "./ProfileViewFollowing/ProfileViewFollowing";
+import ProfileViewFollowers from "./ProfileViewFollowers/ProfileViewFollowers";
+import { getViewProfile, clearViewProfile } from "../../actions/profileActions";
+import { deletePost } from "../../actions/postActions";
 import {
   followUser,
   unfollowUser,
   getFollowData
-} from '../../actions/followsActions'
+} from "../../actions/followsActions";
 
 const modalStyles = {
   content: {
-    width: '30%',
-    height: '20%',
-    position: 'absolute',
-    top: '40%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
+    width: "30%",
+    height: "20%",
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
   }
-}
+};
 
-Modal.setAppElement('#root')
+Modal.setAppElement("#root");
 
 class Profile extends Component {
   state = {
-    view: 'posts',
+    view: "posts",
     showModal: false,
     deleteSubject: -1,
     inactiveButtons: []
-  }
+  };
 
   componentDidUpdate(prevProps) {
     if (
@@ -48,120 +48,120 @@ class Profile extends Component {
     ) {
       this.props.getFollowData(
         this.props.auth.user,
-        localStorage.getItem('token')
-      )
+        localStorage.getItem("token")
+      );
     }
     if (this.props.id !== prevProps.id) {
-      this.props.getViewProfile(this.props.id, localStorage.getItem('token'))
+      this.props.getViewProfile(this.props.id, localStorage.getItem("token"));
     }
   }
 
   componentDidMount() {
     if (this.props.id) {
-      this.props.getViewProfile(this.props.id, localStorage.getItem('token'))
+      this.props.getViewProfile(this.props.id, localStorage.getItem("token"));
     } else {
-      const self = this
+      const self = this;
       setTimeout(function() {
         self.props.getViewProfile(
           self.props.auth.user,
-          localStorage.getItem('token')
-        )
-      }, 1000)
+          localStorage.getItem("token")
+        );
+      }, 1000);
     }
   }
 
   componentWillUnmount() {
-    this.props.clearViewProfile()
+    this.props.clearViewProfile();
   }
 
   handleFollow = e => {
     // Logic to handle buttons being disabled after click
-    const btn = Number([e.target.name])
+    const btn = Number([e.target.name]);
     this.setState({
       inactiveButtons: [...this.state.inactiveButtons, btn]
-    })
-    const self = this
+    });
+    const self = this;
     setTimeout(function() {
-      const target = self.state.inactiveButtons.indexOf(btn)
+      const target = self.state.inactiveButtons.indexOf(btn);
       self.setState({
         inactiveButtons: self.state.inactiveButtons.filter(
           btn => self.state.inactiveButtons.indexOf(btn) !== target
         )
-      })
-    }, 1500)
+      });
+    }, 1500);
 
     // Actual following functionality
-    const arg1 = { follower_id: this.props.auth.user } // Follower ID
-    const arg2 = [e.target.name] // Following ID
+    const arg1 = { follower_id: this.props.auth.user }; // Follower ID
+    const arg2 = [e.target.name]; // Following ID
 
     this.props.followUser(
       arg1,
       Number(arg2[0]),
-      localStorage.getItem('token'),
-      'profile'
-    )
-  }
+      localStorage.getItem("token"),
+      "profile"
+    );
+  };
 
   handleUnfollow = e => {
     // Logic to handle buttons being disabled after click
-    const btn = Number([e.target.name])
+    const btn = Number([e.target.name]);
     this.setState({
       inactiveButtons: [...this.state.inactiveButtons, btn]
-    })
-    const self = this
+    });
+    const self = this;
     setTimeout(function() {
-      const target = self.state.inactiveButtons.indexOf(btn)
+      const target = self.state.inactiveButtons.indexOf(btn);
       self.setState({
         inactiveButtons: self.state.inactiveButtons.filter(
           btn => self.state.inactiveButtons.indexOf(btn) !== target
         )
-      })
-    }, 1500)
+      });
+    }, 1500);
 
-    const arg1 = this.props.auth.user // Unfollower ID
-    const arg2 = [e.target.name] // Unfollowee ID
+    const arg1 = this.props.auth.user; // Unfollower ID
+    const arg2 = [e.target.name]; // Unfollowee ID
 
     this.props.unfollowUser(
       arg1,
       Number(arg2[0]),
-      localStorage.getItem('token'),
-      'profile'
-    )
-  }
+      localStorage.getItem("token"),
+      "profile"
+    );
+  };
 
   changeView = view => {
     this.setState({
       view: view
-    })
-  }
+    });
+  };
 
   openModal = e => {
     this.setState({
       showModal: true,
       deleteSubject: [e.target.name]
-    })
-  }
+    });
+  };
 
   closeModal = () => {
     this.setState({
       showModal: false,
       deleteSubject: -1
-    })
-  }
+    });
+  };
 
   deletePost = () => {
     this.props.deletePost(
       this.state.deleteSubject,
-      localStorage.getItem('token'),
-      'profile'
-    )
-    this.closeModal()
-  }
+      localStorage.getItem("token"),
+      "profile"
+    );
+    this.closeModal();
+  };
 
   render() {
-    const { auth, profile, follows } = this.props
-    if (!localStorage.getItem('token')) {
-      navigate('/')
+    const { auth, profile, follows } = this.props;
+    if (!localStorage.getItem("token")) {
+      navigate("/");
     }
 
     if (profile.loading || Object.keys(profile.viewProfile).length === 0) {
@@ -169,7 +169,7 @@ class Profile extends Component {
         <div className="profile-spinner">
           <Spinner />
         </div>
-      )
+      );
     } else if (
       (profile.viewProfile.profile.privacy === 3 &&
         profile.viewProfile.profile.user_id !== auth.user) ||
@@ -179,33 +179,33 @@ class Profile extends Component {
     ) {
       return (
         <div className="profile">
-          <h1 style={{ textAlign: 'center' }}>
+          <h1 style={{ textAlign: "center" }}>
             Sorry, this user's profile is private.
           </h1>
-          <div style={{ width: '130px', margin: '0 auto' }}>
+          <div style={{ width: "130px", margin: "0 auto" }}>
             <Button
-              callback={() => navigate('/feed')}
+              callback={() => navigate("/feed")}
               className="edit-profile-btn"
               text="Go To Feed"
             />
           </div>
         </div>
-      )
+      );
     } else {
       if (profile.viewReload) {
-        this.props.getViewProfile(this.props.id, localStorage.getItem('token'))
+        this.props.getViewProfile(this.props.id, localStorage.getItem("token"));
       }
 
-      let viewWidget = <Spinner />
-      if (this.state.view === 'posts') {
+      let viewWidget = <Spinner />;
+      if (this.state.view === "posts") {
         viewWidget = (
           <ProfileViewPosts
             openModal={this.openModal}
             posts={profile.viewProfile.post}
             user_id={auth.user}
           />
-        )
-      } else if (this.state.view === 'following') {
+        );
+      } else if (this.state.view === "following") {
         viewWidget = (
           <ProfileViewFollowing
             handleFollow={this.handleFollow}
@@ -215,8 +215,8 @@ class Profile extends Component {
             followings={profile.viewProfile.follows.following}
             inactiveButtons={this.state.inactiveButtons}
           />
-        )
-      } else if (this.state.view === 'followers') {
+        );
+      } else if (this.state.view === "followers") {
         viewWidget = (
           <ProfileViewFollowers
             handleFollow={this.handleFollow}
@@ -227,7 +227,7 @@ class Profile extends Component {
             followings={follows.following}
             inactiveButtons={this.state.inactiveButtons}
           />
-        )
+        );
       }
 
       return (
@@ -273,7 +273,7 @@ class Profile extends Component {
             </div>
           </Modal>
         </div>
-      )
+      );
     }
   }
 }
@@ -289,7 +289,7 @@ Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
   follows: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => {
   return {
@@ -297,8 +297,8 @@ const mapStateToProps = state => {
     auth: state.auth,
     post: state.post,
     follows: state.follows
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,
@@ -310,4 +310,4 @@ export default connect(
     clearViewProfile,
     deletePost
   }
-)(Profile)
+)(Profile);

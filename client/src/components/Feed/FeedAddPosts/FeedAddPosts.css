@@ -1,0 +1,77 @@
+.post-form {
+  background-color: var(--color-white-darker);
+  border-radius: 10px;
+  padding: 1.5rem;
+  max-width: 70rem;
+  transform: translateX(4rem);
+}
+
+.post-field {
+  width: 60rem;
+  padding: 1rem;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 1.6rem;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.post-field:focus {
+  outline: none;
+  border-top: 2px solid var(--color-bg);
+  border-left: 2px solid var(--color-bg);
+  border-bottom: 2px solid var(--color-bg);
+  border-right: 1px solid var(--color-bg);
+}
+
+.post-field:focus + .post-btn {
+  background-color: var(--color-primary-light);
+  border-top: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  border-left: 1px solid var(--color-primary);
+}
+
+.post-btn:focus {
+  outline: none;
+}
+
+.post-errors {
+  color: red;
+  text-align: left;
+  padding-right: 35rem;
+}
+
+@media only screen and (max-width: 1400px) {
+  .post-form {
+    max-width: 60rem;
+    transform: translateX(6rem);
+  }
+
+  .post-field {
+    max-width: 50rem;
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .post-form {
+    max-width: 50rem;
+    transform: translateX(6rem);
+  }
+
+  .post-field {
+    max-width: 40rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .post-form {
+    max-width: 40rem;
+    transform: translateX(6rem);
+  }
+
+  .post-field {
+    max-width: 30rem;
+  }
+}

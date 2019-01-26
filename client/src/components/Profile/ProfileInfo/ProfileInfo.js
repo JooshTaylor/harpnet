@@ -1,9 +1,9 @@
-import React from 'react'
-import './ProfileInfo.css'
-import PropTypes from 'prop-types'
-import { navigate } from '@reach/router'
+import React from "react";
+import "./ProfileInfo.css";
+import PropTypes from "prop-types";
+import { navigate } from "@reach/router";
 
-import Button from '../../Button/Button'
+import Button from "../../Common/Buttons/Button";
 
 const ProfileInfo = ({
   profile,
@@ -17,7 +17,7 @@ const ProfileInfo = ({
     !profile.viewProfile.profile.first_name &&
     !profile.viewProfile.profile.last_name ? (
       <p>This user has not provided any personal information</p>
-    ) : null
+    ) : null;
   return (
     <div className="info__top">
       <div className="info__img-box">
@@ -36,7 +36,7 @@ const ProfileInfo = ({
         {profile.viewProfile.profile.first_name &&
         profile.viewProfile.profile.last_name ? (
           <p className="info__name">
-            <strong>Name:</strong> {profile.viewProfile.profile.first_name}{' '}
+            <strong>Name:</strong> {profile.viewProfile.profile.first_name}{" "}
             {profile.viewProfile.profile.last_name}
           </p>
         ) : null}
@@ -55,7 +55,7 @@ const ProfileInfo = ({
       </div>
       <div className="info__actions">
         {profile.viewProfile.profile.username === profile.profile.username ? (
-          <button onClick={() => navigate('/settings')} className="info__btn">
+          <button onClick={() => navigate("/settings")} className="info__btn">
             Edit Profile
           </button>
         ) : null}
@@ -92,8 +92,8 @@ const ProfileInfo = ({
         ) : null}
       </div>
     </div>
-  )
-}
+  );
+};
 
 ProfileInfo.propTypes = {
   profile: PropTypes.object.isRequired,
@@ -101,6 +101,6 @@ ProfileInfo.propTypes = {
   handleFollow: PropTypes.func.isRequired,
   handleUnfollow: PropTypes.func.isRequired,
   inactiveButtons: PropTypes.array.isRequired
-}
+};
 
-export default ProfileInfo
+export default ProfileInfo;
