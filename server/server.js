@@ -2,18 +2,23 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const knex = require("knex");
+const helmet = require("helmet");
+const compression = require("compression");
 const { authenticator } = require("./services/authorization");
 const keys = require("./config/keys");
 const authRoutes = require("./routes/authRoutes");
 const profileRoutes = require("./routes/profileRoutes");
-const followsRoutes = require("./routes/followsRoutes");
 const postRoutes = require("./routes/postRoutes");
+const followsRoutes = require("./routes/followsRoutes");
 const searchRoutes = require("./routes/searchRoutes");
 
 // Setting up express server
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(helmet());
+app.use(compression());
 
 // Using the knex library to connect our Postgres database to the server
 const db = knex({
