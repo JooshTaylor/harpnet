@@ -6,12 +6,12 @@ const validatePostData = data => {
 
   data.content = isEmpty(data.content) ? "" : data.content;
 
-  if (validator.isEmpty(data.content)) {
-    errors.post = "You cannot submit an empty post!";
-  }
-
   if (!validator.isLength(data.content, { max: 300, min: 1 })) {
     errors.post = "Your post must be between 1 and 300 characters long";
+  }
+
+  if (validator.isEmpty(data.content)) {
+    errors.post = "You cannot submit an empty post!";
   }
 
   return {

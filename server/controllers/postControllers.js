@@ -1,4 +1,4 @@
-const validatePostData = require("../validation/post");
+const validatePostData = require("../validation/post.validation");
 const { mergeSort } = require("../services/mergeSort");
 
 // Gets all posts required to load the feed

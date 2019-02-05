@@ -1,5 +1,5 @@
-const validateRegister = require("../validation/register");
-const validateLogin = require("../validation/login");
+const validateRegister = require("../validation/register.validation");
+const validateLogin = require("../validation/login.validation");
 const jwt = require("jsonwebtoken");
 const redis = require("redis");
 const keys = require("../config/keys");
