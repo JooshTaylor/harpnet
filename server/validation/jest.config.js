@@ -1,4 +1,4 @@
 module.exports = {
-  displayName: "mocks",
-  testEnvironment: "node"
-};
+  displayName: 'mocks',
+  testEnvironment: 'node'
+}

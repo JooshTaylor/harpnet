@@ -7,19 +7,19 @@ import {
   SET_FOLLOW_SUGGESTIONS,
   RELOAD_FOLLOW_SUGGESTIONS,
   RELOAD_FEED
-} from "./constants";
-import axios from "axios";
+} from './constants'
+import axios from 'axios'
 
 export const getFollowData = (id, token, location) => dispatch => {
-  if (location !== "suggestions") {
+  if (location !== 'suggestions') {
     dispatch({
       type: FOLLOWS_LOADING
-    });
+    })
   }
 
   dispatch({
     type: RESET_PROFILE_RELOAD
-  });
+  })
 
   axios
     .get(`/api/follows/${id}`, {
@@ -31,9 +31,9 @@ export const getFollowData = (id, token, location) => dispatch => {
       dispatch({
         type: SET_FOLLOWS,
         payload: res.data
-      });
-    });
-};
+      })
+    })
+}
 
 export const followUser = (
   follower_id,
@@ -50,33 +50,33 @@ export const followUser = (
     .then(res => {
       switch (location) {
         default:
-          return null;
-        case "search":
+          return null
+        case 'search':
           dispatch({
             type: RELOAD_SEARCH
-          });
-          break;
+          })
+          break
 
         //case for profiles
-        case "profile":
+        case 'profile':
           dispatch({
             type: RELOAD_PROFILE
-          });
-          break;
+          })
+          break
 
-        case "feed":
+        case 'feed':
           dispatch({
             type: RELOAD_FOLLOW_SUGGESTIONS
-          });
+          })
           setTimeout(() => {
             dispatch({
               type: RELOAD_FEED
-            });
-          }, 500);
-          break;
+            })
+          }, 500)
+          break
       }
-    });
-};
+    })
+}
 
 export const unfollowUser = (
   unfollower_id,
@@ -93,22 +93,22 @@ export const unfollowUser = (
     .then(res => {
       switch (location) {
         default:
-          return null;
-        case "search":
+          return null
+        case 'search':
           dispatch({
             type: RELOAD_SEARCH
-          });
-          break;
+          })
+          break
 
         //case for profiles
-        case "profile":
+        case 'profile':
           dispatch({
             type: RELOAD_PROFILE
-          });
-          break;
+          })
+          break
       }
-    });
-};
+    })
+}
 
 export const getSuggestedFollows = (id, token) => dispatch => {
   axios
@@ -121,6 +121,6 @@ export const getSuggestedFollows = (id, token) => dispatch => {
       dispatch({
         type: SET_FOLLOW_SUGGESTIONS,
         payload: res.data.suggestions
-      });
-    });
-};
+      })
+    })
+}

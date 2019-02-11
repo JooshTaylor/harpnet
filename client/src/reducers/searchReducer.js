@@ -1,8 +1,13 @@
-import { SEARCH_LOADING, SEARCH_COMPLETE, RESET_SEARCH, RELOAD_SEARCH } from '../actions/constants';
+import {
+  SEARCH_LOADING,
+  SEARCH_COMPLETE,
+  RESET_SEARCH,
+  RELOAD_SEARCH
+} from '../actions/constants'
 
 const initialState = {
   loading: false,
-  searchField: "",
+  searchField: '',
   searchResults: [],
   reload: false
 }
@@ -10,7 +15,7 @@ const initialState = {
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
-      return state;
+      return state
 
     case SEARCH_LOADING:
       return {
@@ -32,7 +37,7 @@ export const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        searchField: "",
+        searchField: '',
         searchResults: [],
         reload: false
       }

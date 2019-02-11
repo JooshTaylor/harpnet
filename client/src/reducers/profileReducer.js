@@ -8,7 +8,7 @@ import {
   RESET_PROFILE_RELOAD,
   RELOAD_VIEW_PROFILE,
   END_VIEW_PROFILE_RELOAD
-} from "../actions/constants";
+} from '../actions/constants'
 
 const initialState = {
   profile: {},
@@ -16,12 +16,12 @@ const initialState = {
   loading: false,
   reload: false,
   viewReload: false
-};
+}
 
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
-      return state;
+      return state
 
     case CLEAR_PROFILE:
       return {
@@ -31,7 +31,7 @@ export const profileReducer = (state = initialState, action) => {
         loading: false,
         reload: false,
         viewReload: false
-      };
+      }
 
     case CLEAR_VIEW_PROFILE:
       return {
@@ -40,7 +40,7 @@ export const profileReducer = (state = initialState, action) => {
         viewProfile: {},
         reload: false,
         viewReload: false
-      };
+      }
 
     case SET_PROFILE:
       return {
@@ -49,7 +49,7 @@ export const profileReducer = (state = initialState, action) => {
         loading: false,
         reload: false,
         viewReload: false
-      };
+      }
 
     case SET_VIEW_PROFILE:
       return {
@@ -58,7 +58,7 @@ export const profileReducer = (state = initialState, action) => {
         loading: false,
         reload: false,
         viewReload: false
-      };
+      }
 
     case PROFILE_LOADING:
       return {
@@ -66,32 +66,32 @@ export const profileReducer = (state = initialState, action) => {
         loading: true,
         reload: false,
         viewReload: false
-      };
+      }
 
     case RELOAD_PROFILE:
       return {
         ...state,
         reload: true,
         viewReload: false
-      };
+      }
 
     case RESET_PROFILE_RELOAD:
       return {
         ...state,
         reload: false,
         viewReload: false
-      };
+      }
 
     case RELOAD_VIEW_PROFILE:
       return {
         ...state,
         viewReload: true
-      };
+      }
 
     case END_VIEW_PROFILE_RELOAD:
       return {
         ...state,
         viewReload: false
-      };
+      }
   }
-};
+}

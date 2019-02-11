@@ -1,21 +1,21 @@
-const isEmpty = require("./is-empty");
+const isEmpty = require('./is-empty')
 
 const validateLogin = data => {
-  let { userOrEmail, password } = data;
+  let { userOrEmail, password } = data
 
-  const inputErrors = {};
+  const inputErrors = {}
 
   isEmpty(userOrEmail)
-    ? (inputErrors.userOrEmail = "Please enter your email address or username")
-    : null;
+    ? (inputErrors.userOrEmail = 'Please enter your email address or username')
+    : null
   isEmpty(password)
-    ? (inputErrors.password = "Please enter your password")
-    : null;
+    ? (inputErrors.password = 'Please enter your password')
+    : null
 
   return {
     isValid: isEmpty(inputErrors),
     inputErrors
-  };
-};
+  }
+}
 
-module.exports = validateLogin;
+module.exports = validateLogin

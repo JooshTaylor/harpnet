@@ -7,13 +7,13 @@ import {
   RELOAD_PROFILE,
   RESET_PROFILE_RELOAD,
   END_VIEW_PROFILE_RELOAD
-} from "./constants";
-import axios from "axios";
+} from './constants'
+import axios from 'axios'
 
 export const getProfile = (id, token) => dispatch => {
   dispatch({
     type: RESET_PROFILE_RELOAD
-  });
+  })
 
   axios
     .get(`/api/profile/${id}`, {
@@ -32,17 +32,17 @@ export const getProfile = (id, token) => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    );
-};
+    )
+}
 
 export const getViewProfile = (id, token) => dispatch => {
   dispatch({
     type: PROFILE_LOADING
-  });
+  })
 
   dispatch({
     type: END_VIEW_PROFILE_RELOAD
-  });
+  })
 
   axios
     .get(`/api/profile/view/${id}`, {
@@ -55,14 +55,14 @@ export const getViewProfile = (id, token) => dispatch => {
         type: SET_VIEW_PROFILE,
         payload: profile.data
       })
-    );
-};
+    )
+}
 
 export const clearViewProfile = () => {
   return {
     type: CLEAR_VIEW_PROFILE
-  };
-};
+  }
+}
 
 export const changePrivacy = (state, id, token) => dispatch => {
   axios
@@ -74,9 +74,9 @@ export const changePrivacy = (state, id, token) => dispatch => {
     .then(() => {
       dispatch({
         type: RELOAD_PROFILE
-      });
-    });
-};
+      })
+    })
+}
 
 export const updateBio = (bio, id, token) => dispatch => {
   axios
@@ -88,9 +88,9 @@ export const updateBio = (bio, id, token) => dispatch => {
     .then(() => {
       dispatch({
         type: RELOAD_PROFILE
-      });
-    });
-};
+      })
+    })
+}
 
 export const updateFirstName = (fname, id, token) => dispatch => {
   axios
@@ -102,9 +102,9 @@ export const updateFirstName = (fname, id, token) => dispatch => {
     .then(() => {
       dispatch({
         type: RELOAD_PROFILE
-      });
-    });
-};
+      })
+    })
+}
 
 export const updateLastName = (lname, id, token) => dispatch => {
   axios
@@ -116,6 +116,6 @@ export const updateLastName = (lname, id, token) => dispatch => {
     .then(() => {
       dispatch({
         type: RELOAD_PROFILE
-      });
-    });
-};
+      })
+    })
+}

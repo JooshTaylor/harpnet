@@ -1,6 +1,6 @@
-import React from "react";
-import "./Button.css";
-import PropTypes from "prop-types";
+import React from 'react'
+import './Button.css'
+import PropTypes from 'prop-types'
 
 const Button = ({ className, name, callback, text, id, active = true }) => {
   return (
@@ -15,8 +15,8 @@ const Button = ({ className, name, callback, text, id, active = true }) => {
         </button>
       )}
     </React.Fragment>
-  );
-};
+  )
+}
 
 Button.propTypes = {
   className: PropTypes.string,
@@ -25,6 +25,6 @@ Button.propTypes = {
   text: PropTypes.string,
   id: PropTypes.string,
   active: PropTypes.bool
-};
+}
 
-export default Button;
+export default Button

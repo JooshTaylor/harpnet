@@ -9,13 +9,13 @@
 
 // let utils;
 
-describe("testing navigation buttons when not logged in", () => {
+describe('testing navigation buttons when not logged in', () => {
   //   beforeEach(() => {
   //     cleanup();
   //     utils = renderWithRouter(<App />);
   //   });
 
-  test("Login button takes to /login route", async () => {
+  test('Login button takes to /login route', async () => {
     //     const { getByText, getByTestId } = utils;
     //     await wait(() => expect(getByText("Home")).not.toBeNull());
     //     const loginNavButton = getByText("Login");
@@ -24,5 +24,5 @@ describe("testing navigation buttons when not logged in", () => {
     //     const heading = getByTestId("login-heading");
     //     expect(heading).not.toBeNull();
     //     // expect(heading.placeholder).toMatch("Login To Your account");
-  });
-});
+  })
+})

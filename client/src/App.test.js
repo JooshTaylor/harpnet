@@ -1,8 +1,8 @@
-import React from "react";
-import App from "./App";
-import { renderWithRedux, fireEvent, wait } from "./test/hn-test-utils";
+import React from 'react'
+import App from './App'
+import { renderWithRedux, fireEvent, wait } from './test/hn-test-utils'
 
-test("renders without crashing", async () => {
+test('renders without crashing', async () => {
   // const { getByText, getByTestId, queryByTestId } = renderWithRedux(<App />);
   // const homeButton = getByText("Home");
   // const secondHeadingNode = getByText("Sign up for an account");
@@ -13,4 +13,4 @@ test("renders without crashing", async () => {
   // expect(window.location.href).toContain("login");
   // const headingNode = getByTestId("login-heading");
   // expect(headingNode.textContent).toMatch("Login To Your account");
-});
+})
