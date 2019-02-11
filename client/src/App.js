@@ -1,24 +1,26 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Router } from "@reach/router";
 
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
-import Feed from "./components/Feed/Feed";
-import Landing from "./components/Landing/Landing";
+import Home from "./components/Home/Home";
 import Navigation from "./components/Navigation/Navigation";
-import Search from "./components/Search/Search/Search";
-import Profile from "./components/Profile/Profile";
-import Settings from "./components/Settings/Settings";
-import Post from "./components/Post/Post";
 import ErrorBoundary from "./components/Common/ErrorBoundary";
 
 import { authenticateUser } from "./actions/authActions";
 import { getProfile } from "./actions/profileActions";
 import { getFollowData } from "./actions/followsActions";
+
+// Lazy loaded component imports
+const Register = lazy(() => import("./components/Register/Register"));
+const Login = lazy(() => import("./components/Login/Login"));
+const Feed = lazy(() => import("./components/Feed/Feed"));
+const Search = lazy(() => import("./components/Search/Search/Search"));
+const Profile = lazy(() => import("./components/Profile/Profile"));
+const Settings = lazy(() => import("./components/Settings/Settings"));
+const Post = lazy(() => import("./components/Post/Post"));
 
 class App extends Component {
   //Validating the auth token
@@ -54,17 +56,19 @@ class App extends Component {
         </ErrorBoundary>
         <ErrorBoundary>
           <main className="app__body">
-            <Router>
-              <Landing path="/" />
-              <Login path="/login" />
-              <Register path="/register" />
-              <Feed path="/feed" />
-              <Search path="/search/:params" />
-              <Profile path="/profile" />
-              <Profile path="/profile/:id" />
-              <Settings path="/settings" />
-              <Post path="/post/:id" />
-            </Router>
+            <Suspense fallback={<div>loading...</div>}>
+              <Router>
+                <Home path="/" />
+                <Login path="/login" />
+                <Register path="/register" />
+                <Feed path="/feed" />
+                <Search path="/search/:params" />
+                <Profile path="/profile" />
+                <Profile path="/profile/:id" />
+                <Settings path="/settings" />
+                <Post path="/post/:id" />
+              </Router>
+            </Suspense>
           </main>
         </ErrorBoundary>
       </div>
