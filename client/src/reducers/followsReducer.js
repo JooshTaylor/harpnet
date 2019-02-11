@@ -4,7 +4,7 @@ import {
   CLEAR_FOLLOWS,
   SET_FOLLOW_SUGGESTIONS,
   RELOAD_FOLLOW_SUGGESTIONS
-} from "../actions/constants";
+} from '../actions/constants'
 
 const initialState = {
   following: [],
@@ -13,19 +13,19 @@ const initialState = {
   reloadSuggestions: false,
   loading: true,
   reduxLoaded: false
-};
+}
 
 export const followsReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
-      return state;
+      return state
 
     case FOLLOWS_LOADING:
       return {
         ...state,
         loading: true,
         reduxLoaded: true
-      };
+      }
 
     case CLEAR_FOLLOWS:
       return {
@@ -33,7 +33,7 @@ export const followsReducer = (state = initialState, action) => {
         following: [],
         followers: [],
         loading: false
-      };
+      }
 
     case SET_FOLLOWS:
       return {
@@ -41,7 +41,7 @@ export const followsReducer = (state = initialState, action) => {
         following: action.payload.following,
         followers: action.payload.followers,
         loading: false
-      };
+      }
 
     case SET_FOLLOW_SUGGESTIONS:
       return {
@@ -49,13 +49,13 @@ export const followsReducer = (state = initialState, action) => {
         suggestions: action.payload,
         reloadSuggestions: false,
         loading: false
-      };
+      }
 
     case RELOAD_FOLLOW_SUGGESTIONS:
       return {
         ...state,
         reloadSuggestions: true,
         loading: false
-      };
+      }
   }
-};
+}

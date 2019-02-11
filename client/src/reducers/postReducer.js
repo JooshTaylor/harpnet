@@ -8,7 +8,7 @@ import {
   RESET_SINGLE_POST,
   RELOAD_SINGLE_POST,
   END_RELOAD_SINGLE_POST
-} from "../actions/constants";
+} from '../actions/constants'
 
 const initialState = {
   posts: [],
@@ -21,19 +21,19 @@ const initialState = {
   single: {},
   singleReload: false,
   profile: []
-};
+}
 
 export const postReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
-      return state;
+      return state
 
     case FEED_LOADING:
       return {
         ...state,
         loading: true,
         reload: false
-      };
+      }
 
     case GET_POSTS:
       return {
@@ -43,7 +43,7 @@ export const postReducer = (state = initialState, action) => {
         reload: false,
         loading: false,
         reduxLoaded: true
-      };
+      }
 
     case CLEAR_POSTS:
       return {
@@ -54,7 +54,7 @@ export const postReducer = (state = initialState, action) => {
         morePosts: false,
         loading: false,
         reduxLoaded: true
-      };
+      }
 
     case GET_COMMENTS:
       return {
@@ -63,7 +63,7 @@ export const postReducer = (state = initialState, action) => {
         reload: false,
         loading: false,
         reduxLoaded: true
-      };
+      }
 
     case RELOAD_FEED:
       return {
@@ -71,7 +71,7 @@ export const postReducer = (state = initialState, action) => {
         reload: true,
         loading: false,
         reduxLoaded: true
-      };
+      }
 
     case SET_SINGLE_POST:
       return {
@@ -79,24 +79,24 @@ export const postReducer = (state = initialState, action) => {
         reload: false,
         reduxLoaded: true,
         single: action.payload
-      };
+      }
 
     case RESET_SINGLE_POST:
       return {
         ...state,
         single: {}
-      };
+      }
 
     case RELOAD_SINGLE_POST:
       return {
         ...state,
         singleReload: true
-      };
+      }
 
     case END_RELOAD_SINGLE_POST:
       return {
         ...state,
         singleReload: false
-      };
+      }
   }
-};
+}

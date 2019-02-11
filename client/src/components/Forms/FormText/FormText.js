@@ -1,11 +1,11 @@
-import React from "react";
-import "./FormText.css";
-import PropTypes from "prop-types";
+import React from 'react'
+import './FormText.css'
+import PropTypes from 'prop-types'
 
 const FormText = props => {
-  const { name, placeholder, errors, type = "text", onChange, value } = props;
+  const { name, placeholder, errors, type = 'text', onChange, value } = props
   return (
-    <div className="form-text">
+    <div className='form-text'>
       <input
         formNoValidate
         type={type}
@@ -13,15 +13,15 @@ const FormText = props => {
         onChange={onChange}
         value={value}
         name={name}
-        className="form-text__input"
+        className='form-text__input'
       />
       <br />
       {Object.keys(errors).length > 0 ? (
-        <small className="form-text__errors">{errors.errors[name]}</small>
+        <small className='form-text__errors'>{errors.errors[name]}</small>
       ) : null}
     </div>
-  );
-};
+  )
+}
 
 FormText.propTypes = {
   name: PropTypes.string.isRequired,
@@ -30,6 +30,6 @@ FormText.propTypes = {
   value: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired
-};
+}
 
-export default FormText;
+export default FormText

@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import "./PostAddComments.css";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component } from 'react'
+import './PostAddComments.css'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import Button from "../../Common/Buttons/Button";
-import { makeComment } from "../../../actions/postActions";
+import Button from '../../Common/Buttons/Button'
+import { makeComment } from '../../../actions/postActions'
 
 class PostAddComments extends Component {
   state = {
-    comment: ""
-  };
+    comment: ''
+  }
 
   onSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     const commentData = {
       post_id: this.props.post_id,
@@ -21,49 +21,49 @@ class PostAddComments extends Component {
       text: this.state.comment,
       comment_date: new Date()
         .toString()
-        .split(" ")
+        .split(' ')
         .slice(1, 5)
-        .join(" ")
-    };
+        .join(' ')
+    }
 
     // If the comment was made from the /post/id route, single===true
-    const single = this.props.single;
+    const single = this.props.single
 
-    this.props.makeComment(commentData, localStorage.getItem("token"), single);
-    this.setState({ comment: "" });
-  };
+    this.props.makeComment(commentData, localStorage.getItem('token'), single)
+    this.setState({ comment: '' })
+  }
 
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    });
-  };
+    })
+  }
 
   render() {
     return (
-      <form className="comment-form" noValidate>
+      <form className='comment-form' noValidate>
         <img
-          alt="Commenter"
-          className="comment-user-pic"
+          alt='Commenter'
+          className='comment-user-pic'
           src={`https://robohash.org/${
             this.props.profile.profile.username
           }/?200x200`}
         />
         <input
-          type="text"
-          className="comment-field"
-          name="comment"
-          placeholder="Write a comment.."
+          type='text'
+          className='comment-field'
+          name='comment'
+          placeholder='Write a comment..'
           onChange={this.onChange}
           value={this.state.comment}
         />
         <Button
-          className="comment-btn"
-          text="Submit"
+          className='comment-btn'
+          text='Submit'
           callback={this.onSubmit}
         />
       </form>
-    );
+    )
   }
 }
 
@@ -74,17 +74,17 @@ PostAddComments.propTypes = {
   post_id: PropTypes.number.isRequired,
   follows: PropTypes.object.isRequired,
   single: PropTypes.bool
-};
+}
 
 const mapStateToProps = state => {
   return {
     auth: state.auth,
     profile: state.profile,
     follows: state.follows
-  };
-};
+  }
+}
 
 export default connect(
   mapStateToProps,
   { makeComment }
-)(PostAddComments);
+)(PostAddComments)
