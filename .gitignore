@@ -10,3 +10,5 @@
 
 /postgres/passwords.txt
 /postgres/postgres-data
+
+/docker-compose-dev

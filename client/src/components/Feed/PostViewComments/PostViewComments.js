@@ -18,8 +18,8 @@ const modalStyles = {
     transform: "translate(-50%, -50%)"
   }
 };
-
-Modal.setAppElement("#root");
+if (process.env.NODE_ENV === "test") Modal.setAppElement("body");
+else Modal.setAppElement("#root");
 
 class PostViewComments extends Component {
   state = {

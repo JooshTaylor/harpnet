@@ -26,7 +26,8 @@ const modalStyles = {
   }
 };
 
-Modal.setAppElement("#root");
+if (process.env.NODE_ENV === "test") Modal.setAppElement("body");
+else Modal.setAppElement("#root");
 
 class Post extends Component {
   state = {

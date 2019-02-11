@@ -21,7 +21,8 @@ const modalStyles = {
   }
 };
 
-Modal.setAppElement("#root");
+if (process.env.NODE_ENV === "test") Modal.setAppElement("body");
+else Modal.setAppElement("#root");
 
 class FeedViewPosts extends Component {
   state = {
