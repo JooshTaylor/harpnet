@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Landing.css";
+import "./Home.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { navigate } from "@reach/router";
@@ -8,7 +8,7 @@ import FormText from "../Forms/FormText/FormText";
 import PubAcc from "../Common/PubAcc/PubAcc";
 import { registerUser } from "../../actions/authActions";
 
-class Landing extends Component {
+class Home extends Component {
   state = {
     email: "",
     username: "",
@@ -159,7 +159,7 @@ class Landing extends Component {
   }
 }
 
-Landing.propTypes = {
+Home.propTypes = {
   errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   registerUser: PropTypes.func.isRequired
@@ -175,4 +175,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { registerUser }
-)(Landing);
+)(Home);

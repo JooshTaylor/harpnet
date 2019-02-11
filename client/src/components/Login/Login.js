@@ -46,7 +46,9 @@ class Login extends Component {
 
     return (
       <section className="login">
-        <h1 className="login__heading-1">Login To Your account</h1>
+        <h1 className="login__heading-1" data-testid="login-heading">
+          Login To Your account
+        </h1>
         <form noValidate onSubmit={this.onSubmit} className="login__form">
           <FormText
             type="text"

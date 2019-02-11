@@ -31,7 +31,8 @@ const modalStyles = {
   }
 };
 
-Modal.setAppElement("#root");
+if (process.env.NODE_ENV === "test") Modal.setAppElement("body");
+else Modal.setAppElement("#root");
 
 class Profile extends Component {
   state = {
