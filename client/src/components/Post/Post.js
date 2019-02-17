@@ -6,25 +6,15 @@ import { connect } from 'react-redux'
 
 import Button from '../Common/Buttons/Button'
 import Modal from 'react-modal'
+import modalStyles from '../Common/Modal/modalStyles'
 import PostAddComments from '../Feed/PostAddComments/PostAddComments'
 import PostViewComments from '../Feed/PostViewComments/PostViewComments'
-import Spinner from '../Common/Spinner'
+import Spinner from '../Common/Spinner/Spinner'
 import {
   getPostById,
   deletePost,
   resetSinglePost
 } from '../../actions/postActions'
-
-const modalStyles = {
-  content: {
-    width: '30%',
-    height: '20%',
-    position: 'absolute',
-    top: '40%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  }
-}
 
 if (process.env.NODE_ENV === 'test') Modal.setAppElement('body')
 else Modal.setAppElement('#root')

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Feed.css'
 import PropTypes from 'prop-types'
-import Spinner from '../Common/Spinner'
+import Spinner from '../Common/Spinner/Spinner'
 import { connect } from 'react-redux'
 // import requireAuth from "../HOC/requireAuth";
 

@@ -5,19 +5,10 @@ import { connect } from 'react-redux'
 
 import Button from '../../Common/Buttons/Button'
 import Modal from 'react-modal'
+import modalStyles from '../../Common/Modal/modalStyles'
 import { deleteComment } from '../../../actions/postActions'
 import { navigate } from '../../../../node_modules/@reach/router'
 
-const modalStyles = {
-  content: {
-    width: '30%',
-    height: '20%',
-    position: 'absolute',
-    top: '40%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  }
-}
 if (process.env.NODE_ENV === 'test') Modal.setAppElement('body')
 else Modal.setAppElement('#root')
 

@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 
 import Button from '../Common/Buttons/Button'
 import Modal from 'react-modal'
-import Spinner from '../Common/Spinner'
+import modalStyles from '../Common/Modal/modalStyles'
+import Spinner from '../Common/Spinner/Spinner'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import ProfileSwitch from './ProfileSwitch/ProfileSwitch'
 import ProfileViewPosts from './ProfileViewPosts/ProfileViewPosts'
@@ -19,17 +20,6 @@ import {
   unfollowUser,
   getFollowData
 } from '../../actions/followsActions'
-
-const modalStyles = {
-  content: {
-    width: '30%',
-    height: '20%',
-    position: 'absolute',
-    top: '40%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  }
-}
 
 if (process.env.NODE_ENV === 'test') Modal.setAppElement('body')
 else Modal.setAppElement('#root')
